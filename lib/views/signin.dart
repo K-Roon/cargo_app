@@ -41,6 +41,7 @@ class _SignInState extends State<SignIn> {
                     key: signinFormKey,
                     child: Column(
                       children: [
+                        Container(height: 20),
                         ///화물선생 로고
                         Center(
                           child: Column(
@@ -56,13 +57,13 @@ class _SignInState extends State<SignIn> {
                             ],
                           ),
                         ),
-
+                        Container(height: 30),
                         ///아이디 및 비밀번호 입력 창
                         TextFormField(
                             decoration: textFieldInputDecoration("아이디"),
                             style: TextStyle(
                                 color: Color(0xFF0073FF), fontSize: 16)),
-
+                        Container(height: 15),
                         TextFormField(
                           style:
                               TextStyle(color: Color(0xFF0073FF), fontSize: 16),
