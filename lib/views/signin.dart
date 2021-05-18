@@ -59,13 +59,14 @@ class _SignInState extends State<SignIn> {
 
                         ///아이디 및 비밀번호 입력 창
                         TextFormField(
-                          style: formTextStyle(),
-                          decoration: textFieldInputDecoration("아이디"),
+                            decoration: textFieldInputDecoration("아이디"),
+                            style: TextStyle(
+                                color: Color(0xFF0073FF), fontSize: 16)),
 
-                        ),TextFormField(
-                          style: formTextStyle(),
+                        TextFormField(
+                          style:
+                              TextStyle(color: Color(0xFF0073FF), fontSize: 16),
                           decoration: textFieldInputDecoration("비밀번호"),
-
                         ),
                       ],
                     ),
