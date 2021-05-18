@@ -3,22 +3,21 @@ import 'package:flutter/widgets.dart';
 
 InputDecoration textFieldInputDecoration(String hintText) {
   return InputDecoration(
-    hintText: hintText,
-    hintStyle: TextStyle(color: Colors.black26),
-    focusColor: Color(0xFF0073FF),
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(5)),
-    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF0073FF))),
-    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
-  );
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.black26),
+      focusColor: Color(0xFF0073FF),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF0073FF)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black26),
+        borderRadius: BorderRadius.circular(10),
+      ));
 }
 
 TextStyle simpleTextStyle() {
   return TextStyle(color: Colors.white, fontSize: 16);
-}
-
-TextStyle formTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 16);
 }
 
 TextStyle biggerTextStyle() {
