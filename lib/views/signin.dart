@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: Container(
                 decoration: BoxDecoration(
-                    color: Color(0xff0055ff),
+                    color: Color(0xFF0073FF),
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(10))),
                 padding: EdgeInsets.all(10),
@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                        color: Color(0xff0055ff),
+                        color: Color(0xFF0073FF),
                         borderRadius: BorderRadius.circular(3)),
                     child: Text(
                       "확인",
