@@ -19,9 +19,9 @@ class _SignInState extends State<SignIn> {
   bool isAvailable = false;
 
   signIn() async {
-    if(idController.text.isEmpty) {
+    if (idController.text.isEmpty) {
       showErrorAlertDialog(context, "ID를 입력해주세요");
-    } else if(passwordController.text.isEmpty) {
+    } else if (passwordController.text.isEmpty) {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요");
     }
   }
