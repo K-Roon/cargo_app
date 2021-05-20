@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+final TextEditingController idController = new TextEditingController();
+final TextEditingController passwordController = new TextEditingController();
+
 class SignIn extends StatefulWidget {
   SignIn();
 
@@ -10,17 +13,17 @@ class SignIn extends StatefulWidget {
   _SignInState createState() => _SignInState();
 }
 
-TextEditingController idTextEditingController = new TextEditingController();
-TextEditingController passwordTextEditingController =
-    new TextEditingController();
-
 class _SignInState extends State<SignIn> {
   final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
 
   signIn() async {
-    if (signinFormKey.currentState.validate()) {}
+    if(idController.text.isEmpty) {
+      showErrorAlertDialog(context, "ID를 입력해주세요");
+    } else if(passwordController.text.isEmpty) {
+      showErrorAlertDialog(context, "비밀번호를 입력해주세요");
+    }
   }
 
   void showErrorAlertDialog(BuildContext context, String errorText) async {
@@ -88,164 +91,162 @@ class _SignInState extends State<SignIn> {
           ? Container(
               child: Center(child: CircularProgressIndicator()),
             )
-          : Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+          : SingleChildScrollView(
               child: Column(
-                children: [
-                  Container(height: 50),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          Container(height: 50),
 
-                  ///화물선생 로고
-                  Center(
-                    child: Column(
-                      children: [
-                        Text("스마트한 화물 배차의 시작"),
-                        Text(
-                          "화물선생",
-                          style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF0073FF)),
-                        )
-                      ],
+                          ///화물선생 로고
+                          Center(
+                            child: Column(
+                              children: [
+                                Text("스마트한 화물 배차의 시작"),
+                                Text(
+                                  "화물선생",
+                                  style: TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF0073FF)),
+                                )
+                              ],
+                            ),
+                          ),
+
+                          Container(height: 50),
+
+                          ///아이디 및 비밀번호 입력 창(폼)
+                          Form(
+                            key: signinFormKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  decoration: textFieldInputDecoration("아이디"),
+                                  style: TextStyle(
+                                      color: Color(0xFF0073FF), fontSize: 16),
+                                  textInputAction: TextInputAction.next,
+                                  controller: idController,
+                                ),
+                                Container(height: 15),
+                                TextFormField(
+                                  obscureText: true,
+                                  textInputAction: TextInputAction.go,
+                                  controller: passwordController,
+                                  style: TextStyle(
+                                      color: Color(0xFF0073FF), fontSize: 16),
+                                  decoration: textFieldInputDecoration("비밀번호"),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          Container(height: 10),
+
+                          ///(가로정렬)아이디 및 비밀번호 찾기, 회원가입
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                child: Text("아이디 찾기"),
+                                onPressed: () {
+                                  print("Find My ID");
+                                },
+                              ),
+                              Text(" | ",
+                                  style: TextStyle(color: Colors.black26)),
+                              TextButton(
+                                child: Text("비밀번호 찾기"),
+                                onPressed: () {
+                                  print("Find My PW");
+                                },
+                              ),
+                              Text(" | ",
+                                  style: TextStyle(color: Colors.black26)),
+                              TextButton(
+                                child: Text("회원가입 하기"),
+                                onPressed: () {
+                                  print("Join");
+                                },
+                              ),
+                            ],
+                          ),
+
+                          Container(height: 10),
+
+                          GestureDetector(
+                              onTap: () {
+                                print("카카오톡으로 로그인");
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 1, color: Colors.black26)),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(CupertinoIcons.chat_bubble),
+                                    Container(width: 5),
+                                    Text(
+                                      "카카오톡으로 로그인",
+                                      style: buttonTextStyle(),
+                                    )
+                                  ],
+                                ),
+                              )),
+
+                          Container(height: 20),
+
+                          ///네이버로 로그인
+                          GestureDetector(
+                              onTap: () {
+                                print("네이버로 로그인");
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 12),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 1, color: Colors.black26)),
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(CupertinoIcons.chat_bubble),
+                                    Container(width: 5),
+                                    Text(
+                                      "네이버로 로그인",
+                                      style: buttonTextStyle(),
+                                    )
+                                  ],
+                                ),
+                              )),
+                          Container(height: 50),
+                        ],
+                      ),
                     ),
-                  ),
-
-                  Container(height: 50),
-
-                  ///아이디 및 비밀번호 입력 창(폼)
-                  Form(
-                    key: signinFormKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          decoration: textFieldInputDecoration("아이디"),
-                          validator: (val) {
-                            if (val.isEmpty) {
-                              return "아이디를 입력해주세요.";
-                            } else {
-                              return null;
-                            }
-                          },
-                          style:
-                              TextStyle(color: Color(0xFF0073FF), fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          controller: idTextEditingController,
-                        ),
-                        Container(height: 15),
-                        TextFormField(
-                          obscureText: true,
-                          validator: (val) {
-                            if (val.isEmpty) {
-                              return "비밀번호를 입력해주세요.";
-                            } else {
-                              return null;
-                            }
-                          },
-                          style:
-                              TextStyle(color: Color(0xFF0073FF), fontSize: 16),
-                          decoration: textFieldInputDecoration("비밀번호"),
-                          textInputAction: TextInputAction.go,
-                          controller: passwordTextEditingController,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Container(height: 10),
-
-                  ///(가로정렬)아이디 및 비밀번호 찾기, 회원가입
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: Text("아이디 찾기"),
-                        onPressed: () {
-                          print("Find My ID");
-                        },
-                      ),
-                      Text(" | ", style: TextStyle(color: Colors.black26)),
-                      TextButton(
-                        child: Text("비밀번호 찾기"),
-                        onPressed: () {
-                          print("Find My PW");
-                        },
-                      ),
-                      Text(" | ", style: TextStyle(color: Colors.black26)),
-                      TextButton(
-                        child: Text("회원가입 하기"),
-                        onPressed: () {
-                          print("Join");
-                        },
-                      ),
-                    ],
-                  ),
-
-                  Container(height: 10),
-
-                  GestureDetector(
-                      onTap: () {
-                        print("카카오톡으로 로그인");
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border:
-                                Border.all(width: 1, color: Colors.black26)),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(CupertinoIcons.chat_bubble),
-                            Container(width: 5),
-                            Text(
-                              "카카오톡으로 로그인",
-                              style: buttonTextStyle(),
-                            )
-                          ],
-                        ),
-                      )),
-
-                  Container(height: 20),
-
-                  ///네이버로 로그인
-                  GestureDetector(
-                      onTap: () {
-                        print("네이버로 로그인");
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border:
-                                Border.all(width: 1, color: Colors.black26)),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(CupertinoIcons.chat_bubble),
-                            Container(width: 5),
-                            Text(
-                              "네이버로 로그인",
-                              style: buttonTextStyle(),
-                            )
-                          ],
-                        ),
-                      )),
-                ],
-              ),
+                  ]),
             ),
-      bottomNavigationBar: GestureDetector(
-        onTap: () {
-          if (isAvailable) {
-            print("로그인 버튼 누름");
-          } else {
-            showErrorAlertDialog(context, "아이디나 비밀번호를 써주세요.");
-          }
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          signIn();
         },
+        style: ElevatedButton.styleFrom(
+          primary: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),
+          alignment: Alignment.center,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0))),
+        ),
         child: Container(
             height: 80,
-            color: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),
             alignment: Alignment.center,
             child: Text(
               "로그인",
