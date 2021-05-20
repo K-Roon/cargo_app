@@ -43,15 +43,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chatting Us',
+      title: 'Cargo App',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: ThemeData(
-        primaryColor: Color(0xffEFEFEF),
+        primaryColor: Color(0xFFFFFFFF),
         primaryColorBrightness: Brightness.light,
-        scaffoldBackgroundColor: Color(0xFFEFEFEF),
+        scaffoldBackgroundColor: Color(0xFFFFFFFF),
         bottomAppBarColor: Color(0xFFEFEFEF),
-        primaryColorDark: Color(0xffBFBFBF),
+        primaryColorDark: Color(0xffCFCFCF),
         accentColor: Color(0xff0076FF),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
