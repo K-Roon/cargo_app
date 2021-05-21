@@ -1,3 +1,4 @@
+import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -186,6 +187,10 @@ class _SignInState extends State<SignIn> {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           signIn();
+        },
+        ///TODO: 개발 완료시 제거 필요
+        onLongPress: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
         },
         style: ElevatedButton.styleFrom(
           primary: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),
