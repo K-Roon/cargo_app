@@ -1,18 +1,18 @@
 import 'package:cargo_app/helper/helper_purpose.dart';
-import 'package:cargo_app/views/phone_auth.dart';
+import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class JoinStep1 extends StatefulWidget {
+class Signin_Step1 extends StatefulWidget {
   ///test
-  JoinStep1();
+  Signin_Step1();
 
   @override
-  _JoinStep1State createState() => _JoinStep1State();
+  _Signin_Step1State createState() => _Signin_Step1State();
 }
 
-class _JoinStep1State extends State<JoinStep1> {
+class _Signin_Step1State extends State<Signin_Step1> {
   bool isLoading = false;
 
   @override
