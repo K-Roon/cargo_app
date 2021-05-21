@@ -1,6 +1,6 @@
 import 'package:cargo_app/helper/helper_purpose.dart';
-import 'package:cargo_app/views/join_step1.dart';
-import 'package:cargo_app/views/phone_auth.dart';
+import 'package:cargo_app/views/signin_step1.dart';
+import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +120,7 @@ class _SignInState extends State<SignIn> {
                                 child: Text("회원가입 하기"),
                                 onPressed: () {
                                   print("Join");
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => JoinStep1()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Signin_Step1()));
                                 },
                               ),
                             ],
