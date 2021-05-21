@@ -4,15 +4,17 @@ import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Signin_Step1 extends StatefulWidget {
+// ignore: camel_case_types
+class SignUp_Step1 extends StatefulWidget {
   ///test
-  Signin_Step1();
+  SignUp_Step1();
 
   @override
-  _Signin_Step1State createState() => _Signin_Step1State();
+  _SignUp_Step1State createState() => _SignUp_Step1State();
 }
 
-class _Signin_Step1State extends State<Signin_Step1> {
+// ignore: camel_case_types
+class _SignUp_Step1State extends State<SignUp_Step1> {
   bool isLoading = false;
 
   @override
