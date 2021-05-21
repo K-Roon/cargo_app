@@ -3,6 +3,7 @@
 //import 'package:chat_app/views/chat_rooms_screen.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cargo_app/views/signin.dart';
+import 'package:cargo_app/views/signup/signup_step3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
