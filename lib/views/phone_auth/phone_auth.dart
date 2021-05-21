@@ -1,4 +1,3 @@
-import 'package:cargo_app/helper/helper_purpose.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +13,7 @@ class PhoneAuth extends StatefulWidget {
   _PhoneAuthState createState() => _PhoneAuthState(purpose);
 }
 
+// ignore: non_constant_identifier_names
 TextEditingController phone_num = new TextEditingController();
 
 class _PhoneAuthState extends State<PhoneAuth> {

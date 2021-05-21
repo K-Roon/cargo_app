@@ -1,5 +1,6 @@
-import 'package:cargo_app/helper/helper_purpose.dart';
+import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/signin.dart';
+import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,24 +33,19 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   ///반환값은 String Type의 변수 1개 뿐입니다.
   ///
   ///이 반환값은 서버에서 보낸 인증번호와 동일한지 확인하기 위해 필요합니다.
-  Future<String> getOTP(String phoneNum) async {
+  void getOTP(String phoneNum) {
     print("서버에서 인증번호를 보내게 요청함");
     //여기에 인증번호 요청메서드 입력
 
     ///보내어진 인증번호를 받아와서 맞는지 확인해야합니다.
     ///
     ///예를 들어, 보내어진 인증번호가 0000인 경우 반환값을 0000으로 해야합니다.
-    return "0000";
+    otpNum = "0000";
   }
 
   @override
   Widget build(BuildContext context) {
-    getOTP(getPhoneNum).then((value) =>
-    {
-      setState(() {
-        otpNum = value;
-      })
-    });
+    getOTP(getPhoneNum);
     return Scaffold(
       appBar: appBar_custom(context, ""),
       body: Container(
@@ -82,7 +78,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
           isCorrectOTP();
         },
         style: ElevatedButton.styleFrom(
-          primary: Color(0xff0055ff),
+          primary: Color(0xff0055dd),
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -104,8 +100,11 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       showErrorAlertDialog(context, "OTP 번호를 입력해주세요.");
     } else if (otp_num.text == otpNum) {
       print("인증확인");
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SignIn()));
+      if(purpose2 == Purpose_Helper.signup_personal) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignUp_Step2()));
+      }
+
     } else {
       showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
     }

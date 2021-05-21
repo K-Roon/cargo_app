@@ -1,18 +1,20 @@
-import 'package:cargo_app/helper/helper_purpose.dart';
+import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Signin_Step1 extends StatefulWidget {
+// ignore: camel_case_types
+class SignUp_Step1 extends StatefulWidget {
   ///test
-  Signin_Step1();
+  SignUp_Step1();
 
   @override
-  _Signin_Step1State createState() => _Signin_Step1State();
+  _SignUp_Step1State createState() => _SignUp_Step1State();
 }
 
-class _Signin_Step1State extends State<Signin_Step1> {
+// ignore: camel_case_types
+class _SignUp_Step1State extends State<SignUp_Step1> {
   bool isLoading = false;
 
   @override
@@ -30,12 +32,12 @@ class _Signin_Step1State extends State<Signin_Step1> {
             children: [
               OutlinedButton(
                 onPressed: () {
-                  print(Helper_Purpose.signup_personal);
+                  print(Purpose_Helper.signup_personal);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              PhoneAuth(Helper_Purpose.signup_personal)));
+                              PhoneAuth(Purpose_Helper.signup_personal)));
                 },
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
@@ -63,12 +65,12 @@ class _Signin_Step1State extends State<Signin_Step1> {
               Container(width: 30),
               OutlinedButton(
                 onPressed: () {
-                  print(Helper_Purpose.signup_personal);
+                  print(Purpose_Helper.signup_biz);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              PhoneAuth(Helper_Purpose.signup_biz)));
+                              PhoneAuth(Purpose_Helper.signup_biz)));
                 },
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
