@@ -1,6 +1,4 @@
-import 'package:cargo_app/helper/helper_purpose.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

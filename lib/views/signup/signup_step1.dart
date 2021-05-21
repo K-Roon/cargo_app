@@ -1,4 +1,4 @@
-import 'package:cargo_app/helper/helper_purpose.dart';
+import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,12 +32,12 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
             children: [
               OutlinedButton(
                 onPressed: () {
-                  print(Helper_Purpose.signup_personal);
+                  print(Purpose_Helper.signup_personal);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              PhoneAuth(Helper_Purpose.signup_personal)));
+                              PhoneAuth(Purpose_Helper.signup_personal)));
                 },
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
@@ -65,12 +65,12 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
               Container(width: 30),
               OutlinedButton(
                 onPressed: () {
-                  print(Helper_Purpose.signup_personal);
+                  print(Purpose_Helper.signup_biz);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              PhoneAuth(Helper_Purpose.signup_biz)));
+                              PhoneAuth(Purpose_Helper.signup_biz)));
                 },
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
