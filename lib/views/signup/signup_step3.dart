@@ -1,5 +1,4 @@
-import 'package:cargo_app/helper/purpose_helper.dart';
-import 'package:cargo_app/views/signup/signup_step3.dart';
+import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +7,19 @@ import 'package:flutter/painting.dart';
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
 
-class SignUp_Step2 extends StatefulWidget {
-  SignUp_Step2();
+class SignUp_Step3 extends StatefulWidget {
+  final String purpose;
+
+  SignUp_Step3(this.purpose);
 
   @override
-  _SignUp_Step2State createState() => _SignUp_Step2State();
+  _SignUp_Step3State createState() => _SignUp_Step3State();
 }
 
-class _SignUp_Step2State extends State<SignUp_Step2> {
-  final register_FormKey = GlobalKey<FormState>();
-  TextEditingController name = new TextEditingController();
-  TextEditingController identify = new TextEditingController();
-  TextEditingController email = new TextEditingController();
+class _SignUp_Step3State extends State<SignUp_Step3> {
+  final pwRegister_FormKey = GlobalKey<FormState>();
+  TextEditingController pw = new TextEditingController();
+  TextEditingController pw_confirm = new TextEditingController();
 
   bool isLoading = false;
   bool isAvailable = false;
@@ -50,12 +50,12 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
               height: 10,
             ),
             Form(
-              key: register_FormKey,
+              key: pwRegister_FormKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "이름",
+                    "비밀번호 입력",
                     style: mediumTextStyle(),
                     textAlign: TextAlign.left,
                   ),
@@ -63,48 +63,24 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
                     height: 10,
                   ),
                   TextFormField(
-                    decoration: textFieldInputDecoration("이름"),
+                    obscureText: true,
+                    decoration: textFieldInputDecoration("비밀번호"),
                     style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
                     textInputAction: TextInputAction.next,
-                    controller: name,
+                    controller: pw,
                     keyboardType: TextInputType.text,
                   ),
                   Container(
                     height: 15,
                   ),
-                  Text(
-                    "아이디",
-                    style: mediumTextStyle(),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 10,
-                  ),
                   TextFormField(
-                    decoration: textFieldInputDecoration("아이디"),
+                    obscureText: true,
+                    decoration: textFieldInputDecoration("비밀번호 확인"),
                     style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
                     textInputAction: TextInputAction.next,
-                    controller: identify,
+                    controller: pw_confirm,
                     keyboardType: TextInputType.text,
                   ),
-                  Container(
-                    height: 15,
-                  ),
-                  Text(
-                    "이메일 주소",
-                    style: mediumTextStyle(),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: textFieldInputDecoration("이메일 주소"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
-                    textInputAction: TextInputAction.go,
-                    controller: email,
-                    keyboardType: TextInputType.emailAddress,
-                  )
                 ],
               ),
             ),
@@ -135,16 +111,13 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
   }
 
   void Confirm() {
-    if (name.text.isEmpty) {
-      showErrorAlertDialog(context, "이름을 입력해주세요.");
-    } else if (identify.text.isEmpty) {
-      showErrorAlertDialog(context, "아이디를 입력해주세요.");
-    } else if (email.text.isEmpty) {
-      showErrorAlertDialog(context, "이메일를 입력해주세요.");
-    } else {Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                SignUp_Step3(Purpose_Helper.signup_personal)));}
+    if (pw.text.isEmpty) {
+      showErrorAlertDialog(context, "비밀번호를 입력해주세요.");
+    } else if (pw.text != pw_confirm.text) {
+      showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
+    } else {
+      showErrorAlertDialog(context, "회원가입이 성공적으로 완료되었습니다.");
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
   }
 }
