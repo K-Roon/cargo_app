@@ -20,11 +20,7 @@ class _HomeState extends State<Home> {
   bool isAvailable = false;
 
   Home() async {
-    if (idController.text.isEmpty) {
-      showErrorAlertDialog(context, "ID를 입력해주세요");
-    } else if (passwordController.text.isEmpty) {
-      showErrorAlertDialog(context, "비밀번호를 입력해주세요");
-    }
+
   }
 
   @override
