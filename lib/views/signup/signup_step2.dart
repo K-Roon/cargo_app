@@ -1,5 +1,3 @@
-import 'package:cargo_app/helper/purpose_helper.dart';
-import 'package:cargo_app/views/signup/signup_step3.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -141,10 +139,6 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
       showErrorAlertDialog(context, "아이디를 입력해주세요.");
     } else if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일를 입력해주세요.");
-    } else {Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                SignUp_Step3(Purpose_Helper.signup_personal)));}
+    } else {}
   }
 }
