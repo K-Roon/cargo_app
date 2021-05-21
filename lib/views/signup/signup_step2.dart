@@ -1,3 +1,5 @@
+import 'package:cargo_app/helper/purpose_helper.dart';
+import 'package:cargo_app/views/signup/signup_step3.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,20 +9,24 @@ final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
 
 class SignUp_Step2 extends StatefulWidget {
-  SignUp_Step2();
+  final String phone_num;
+  SignUp_Step2(this.phone_num);
 
   @override
-  _SignUp_Step2State createState() => _SignUp_Step2State();
+  _SignUp_Step2State createState() => _SignUp_Step2State(phone_num);
 }
 
 class _SignUp_Step2State extends State<SignUp_Step2> {
   final register_FormKey = GlobalKey<FormState>();
+  final String phone;
   TextEditingController name = new TextEditingController();
   TextEditingController identify = new TextEditingController();
   TextEditingController email = new TextEditingController();
 
   bool isLoading = false;
   bool isAvailable = false;
+
+  _SignUp_Step2State(this.phone);
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -139,6 +145,12 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
       showErrorAlertDialog(context, "아이디를 입력해주세요.");
     } else if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일를 입력해주세요.");
-    } else {}
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SignUp_Step3(Purpose_Helper.signup_personal, name.text, identify.text, email.text, phone, "null")));
+    }
   }
 }

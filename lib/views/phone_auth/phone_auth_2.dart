@@ -1,6 +1,7 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/signin.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
+import 'package:cargo_app/views/signup/signup_step2_Biz.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,13 +59,14 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
-            Container(height: 50,),
+            Container(
+              height: 50,
+            ),
             Form(
               key: otpFormKey,
               child: TextFormField(
                 decoration: textFieldInputDecoration_center("예)1234"),
-                style: TextStyle(
-                    color: Color(0xFF0073FF), fontSize: 16),
+                style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: otp_num,
               ),
@@ -100,11 +102,18 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       showErrorAlertDialog(context, "OTP 번호를 입력해주세요.");
     } else if (otp_num.text == otpNum) {
       print("인증확인");
-      if(purpose2 == Purpose_Helper.signup_personal) {
+      if (purpose2 == Purpose_Helper.signup_personal) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum)));
+      } else if (purpose2 == Purpose_Helper.signup_biz) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUp_Step2()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => SignUp_Step2_Biz(getPhoneNum)));
+      } else {
+        showErrorAlertDialog(
+            context, "죄송합니다만, 어디선가 접근방식이 잘못되었습니다. 앱 종료 후 다시 시도해주세요.");
       }
-
     } else {
       showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
     }
