@@ -18,9 +18,7 @@ class _JoinStep1State extends State<JoinStep1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
+      appBar: appBar_custom(context, ""),
       //resizeToAvoidBottomInset: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

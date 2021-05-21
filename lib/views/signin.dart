@@ -29,59 +29,6 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  void showErrorAlertDialog(BuildContext context, String errorText) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            elevation: 0.0,
-            titlePadding: EdgeInsets.zero,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            title: Container(
-                decoration: BoxDecoration(
-                    color: Color(0xFF0073FF),
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(10))),
-                padding: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: Text(
-                  "안내",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
-                )),
-            contentPadding: EdgeInsets.only(top: 10),
-            content: Text(
-              errorText,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: 15),
-            ),
-            actionsPadding: EdgeInsets.all(10),
-            actions: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        color: Color(0xFF0073FF),
-                        borderRadius: BorderRadius.circular(3)),
-                    child: Text(
-                      "확인",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    )),
-              )
-            ],
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

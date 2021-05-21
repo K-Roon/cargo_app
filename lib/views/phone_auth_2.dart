@@ -3,19 +3,19 @@ import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PhoneAuth extends StatefulWidget {
+class PhoneAuth2 extends StatefulWidget {
   final String purpose;
 
   ///test
-  PhoneAuth(this.purpose);
+  PhoneAuth2(this.purpose);
 
   @override
-  _PhoneAuthState createState() => _PhoneAuthState();
+  _PhoneAuth2State createState() => _PhoneAuth2State();
 }
 
-TextEditingController phone_num = new TextEditingController();
+TextEditingController otp_num = new TextEditingController();
 
-class _PhoneAuthState extends State<PhoneAuth> {
+class _PhoneAuth2State extends State<PhoneAuth2> {
   final phoneFormKey = GlobalKey<FormState>();
   bool isLoading = false;
 
@@ -33,7 +33,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "휴대전화 번호를\n입력해주세요.",
+              "인증번호를\n입력해주세요.",
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
@@ -45,7 +45,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 style: TextStyle(
                     color: Color(0xFF0073FF), fontSize: 16),
                 textInputAction: TextInputAction.next,
-                controller: phone_num,
+                controller: otp_num,
               ),
             ),
           ],
@@ -75,8 +75,8 @@ class _PhoneAuthState extends State<PhoneAuth> {
   }
 
   void getAuthOTP() {
-    if(phone_num.text.isEmpty) {
-      showErrorAlertDialog(context, "전화번호를 입력해주세요.");
+    if(otp_num.text.isEmpty) {
+      showErrorAlertDialog(context, "OTP 번호를 입력해주세요.");
     } else {
       print("인증번호 전송");
     }
