@@ -26,17 +26,19 @@ class _PhoneAuthState extends State<PhoneAuth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(elevation: 0,),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          "휴대전화 번호를\n입력해주세요.",
+          textAlign: TextAlign.left,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       //resizeToAvoidBottomInset: false,
       body: Container(
         child: Row(
           children: [
-            OutlinedButton.icon(
-                onPressed: () {
-                  print(Helper_Purpose.join_personal);
-                },
-                style: OutlinedButton.styleFrom(alignment: Alignment.center),
-                )
+
           ],
         ),
       ),

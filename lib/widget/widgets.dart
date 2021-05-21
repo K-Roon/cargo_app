@@ -17,6 +17,12 @@ InputDecoration textFieldInputDecoration(String hintText) {
       ));
 }
 
+AppBar appBar_apple() {
+  return AppBar(
+
+  );
+}
+
 TextStyle simpleTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 16);
 }
