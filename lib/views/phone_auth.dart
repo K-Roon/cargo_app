@@ -1,3 +1,4 @@
+import 'package:cargo_app/helper/helper_purpose.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
           children: [
             OutlinedButton.icon(
                 onPressed: () {
-                  print("Personal");
+                  print(Helper_Purpose.join_personal);
                 },
                 style: OutlinedButton.styleFrom(alignment: Alignment.center),
                 )
