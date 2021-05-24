@@ -79,7 +79,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                   TextFormField(
                     obscureText: true,
                     decoration: textFieldInputDecoration("비밀번호"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
                     textInputAction: TextInputAction.next,
                     controller: pw,
                     keyboardType: TextInputType.text,
@@ -90,7 +90,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                   TextFormField(
                     obscureText: true,
                     decoration: textFieldInputDecoration("비밀번호 확인"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
                     textInputAction: TextInputAction.next,
                     controller: pw_confirm,
                     keyboardType: TextInputType.text,
@@ -141,7 +141,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               title: Container(
                   decoration: BoxDecoration(
-                      color: Color(0xFF0073FF),
+                      color: Colors.blue,
                       borderRadius:
                       BorderRadius.vertical(top: Radius.circular(10))),
                   padding: EdgeInsets.all(10),
@@ -173,7 +173,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                           .width,
                       padding: EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                          color: Color(0xFF0073FF),
+                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(3)),
                       child: Text(
                         "확인",

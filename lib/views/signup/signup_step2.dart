@@ -68,7 +68,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
                   ),
                   TextFormField(
                     decoration: textFieldInputDecoration("이름"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
                     textInputAction: TextInputAction.next,
                     controller: name,
                     keyboardType: TextInputType.text,
@@ -86,7 +86,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
                   ),
                   TextFormField(
                     decoration: textFieldInputDecoration("아이디"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
                     textInputAction: TextInputAction.next,
                     controller: identify,
                     keyboardType: TextInputType.text,
@@ -104,7 +104,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
                   ),
                   TextFormField(
                     decoration: textFieldInputDecoration("이메일 주소"),
-                    style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
                     textInputAction: TextInputAction.go,
                     controller: email,
                     keyboardType: TextInputType.emailAddress,

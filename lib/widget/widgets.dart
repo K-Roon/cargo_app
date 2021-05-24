@@ -6,10 +6,10 @@ InputDecoration textFieldInputDecoration(String hintText) {
   return InputDecoration(
       hintText: hintText,
       hintStyle: TextStyle(color: Colors.black26),
-      focusColor: Color(0xFF0073FF),
+      focusColor: Colors.blue,
       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xFF0073FF)),
+        borderSide: BorderSide(color: Colors.blue),
         borderRadius: BorderRadius.circular(10),
       ),
       enabledBorder: OutlineInputBorder(
@@ -18,14 +18,28 @@ InputDecoration textFieldInputDecoration(String hintText) {
       ));
 }
 
+InputDecoration textField_Underline(String hintText) {
+  return InputDecoration(
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.black26),
+      focusColor: Colors.blue,
+      suffixIcon: Icon(Icons.search, size: 20),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.black26),
+      ));
+}
+
 InputDecoration textFieldInputDecoration_center(String hintText) {
   return InputDecoration(
       hintText: hintText,
       hintStyle: TextStyle(color: Colors.black26),
-      focusColor: Color(0xFF0073FF),
+      focusColor: Colors.blue,
       contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Color(0xFF0073FF)),
+        borderSide: BorderSide(color: Colors.blue),
         borderRadius: BorderRadius.circular(10),
       ),
       enabledBorder: OutlineInputBorder(
@@ -84,7 +98,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Container(
               decoration: BoxDecoration(
-                  color: Color(0xFF0073FF),
+                  color: Colors.blue,
                   borderRadius:
                   BorderRadius.vertical(top: Radius.circular(10))),
               padding: EdgeInsets.all(10),
@@ -113,7 +127,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
-                      color: Color(0xFF0073FF),
+                      color: Colors.blue,
                       borderRadius: BorderRadius.circular(3)),
                   child: Text(
                     "확인",

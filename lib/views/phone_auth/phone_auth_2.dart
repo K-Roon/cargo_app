@@ -66,7 +66,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
               key: otpFormKey,
               child: TextFormField(
                 decoration: textFieldInputDecoration_center("예)1234"),
-                style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                style: TextStyle(color: Colors.blue, fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: otp_num,
               ),

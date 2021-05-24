@@ -49,7 +49,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
               key: phoneFormKey,
               child: TextFormField(
                 decoration: textFieldInputDecoration("전화번호"),
-                style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                style: TextStyle(color: Colors.blue, fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: phone_num,
               ),
