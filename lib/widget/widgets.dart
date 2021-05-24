@@ -73,6 +73,7 @@ AppBar appBar_subs(BuildContext context, String title) {
       },
     ),
     title: Text(title),
+    centerTitle: true,
     automaticallyImplyLeading: false,
     elevation: 0.0,
   );
@@ -82,7 +83,13 @@ TextStyle simpleTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 16);
 }
 
+///btnTextStyle로 대체되었다.
+@deprecated
 TextStyle buttonTextStyle() {
+  return TextStyle(color: Colors.black, fontSize: 16);
+}
+
+TextStyle btnTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 16);
 }
 
