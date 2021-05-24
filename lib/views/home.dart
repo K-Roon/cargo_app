@@ -1,4 +1,5 @@
 import 'package:cargo_app/views/signup/signup_step1.dart';
+import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -197,7 +198,7 @@ class _HomeState extends State<Home> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Recommend()));
                   },
                 ),
                 ListTile(

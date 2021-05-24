@@ -1,3 +1,4 @@
+import 'package:cargo_app/views/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -59,6 +60,20 @@ AppBar appBar_custom(BuildContext context, String title) {
     ),
     title: Text(title),
     automaticallyImplyLeading: true,
+    elevation: 0.0,
+  );
+}
+
+AppBar appBar_subs(BuildContext context, String title) {
+  return AppBar(
+    leading: TextButton(
+      child: Icon(Icons.home_rounded, color: Colors.black,),
+      onPressed: () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+      },
+    ),
+    title: Text(title),
+    automaticallyImplyLeading: false,
     elevation: 0.0,
   );
 }
