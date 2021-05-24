@@ -5,6 +5,7 @@
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signin.dart';
 import 'package:cargo_app/views/signup/signup_step3.dart';
+import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,7 +59,7 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
       ),
-      home: SignIn()
+      home: Recommend()
     );
   }
 }
