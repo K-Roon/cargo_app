@@ -39,23 +39,30 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       print("I LOVE U");
                     },
-                    child: Icon(Icons.menu, color: Colors.black, size: 25,),
+                    child: Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                      size: 25,
+                    ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
-                    )
-                ),TextButton(
+                    )),
+                TextButton(
                     onPressed: () {
                       print("I LOVE U");
                     },
-                    child: Icon(Icons.gps_not_fixed, color: Colors.black, size: 25,),
+                    child: Icon(
+                      Icons.gps_not_fixed,
+                      color: Colors.black,
+                      size: 25,
+                    ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
-                    )
-                )
+                    ))
               ],
             ),
           ],
@@ -72,7 +79,8 @@ class _HomeState extends State<Home> {
                     child: Text("This is the Widget behind the sliding panel"),
                   ),
                   SlidingUpPanel(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(30)),
                     panel: Container(
                       margin: EdgeInsets.only(top: 20),
                       child: Row(
@@ -84,7 +92,8 @@ class _HomeState extends State<Home> {
                             height: 5,
                             decoration: BoxDecoration(
                                 color: Colors.black54,
-                                borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12.0))),
                           ),
                         ],
                       ),
