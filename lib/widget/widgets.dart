@@ -33,6 +33,22 @@ InputDecoration textField_Underline(String hintText) {
       ));
 }
 
+InputDecoration textField_square(String hintText) {
+  return InputDecoration(
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.black26),
+      focusColor: Colors.blue,
+      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.circular(0),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black26),
+        borderRadius: BorderRadius.circular(0),
+      ));
+}
+
 InputDecoration textFieldInputDecoration_center(String hintText) {
   return InputDecoration(
       hintText: hintText,
@@ -49,6 +65,8 @@ InputDecoration textFieldInputDecoration_center(String hintText) {
       ));
 }
 
+
+
 // ignore: non_constant_identifier_names
 AppBar appBar_custom(BuildContext context, String title) {
   return AppBar(
@@ -64,7 +82,7 @@ AppBar appBar_custom(BuildContext context, String title) {
   );
 }
 
-AppBar appBar_subs(BuildContext context, String title) {
+AppBar appBar_sub(BuildContext context, String title) {
   return AppBar(
     leading: TextButton(
       child: Icon(Icons.home_rounded, color: Colors.black,),
