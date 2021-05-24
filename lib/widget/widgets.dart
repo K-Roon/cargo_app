@@ -65,6 +65,10 @@ TextStyle mediumTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 15);
 }
 
+TextStyle biggerTextStyle_flexible(Color color) {
+  return TextStyle(color: color, fontSize: 20);
+}
+
 TextStyle smallTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 10);
 }
