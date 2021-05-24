@@ -70,7 +70,7 @@ class _SignUp_Step2_BizState extends State<SignUp_Step2_Biz> {
                     ),
                     TextFormField(
                       decoration: textFieldInputDecoration("회사 이름"),
-                      style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       controller: name,
                       keyboardType: TextInputType.text,
@@ -88,7 +88,7 @@ class _SignUp_Step2_BizState extends State<SignUp_Step2_Biz> {
                     ),
                     TextFormField(
                       decoration: textFieldInputDecoration("아이디"),
-                      style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       controller: identify,
                       keyboardType: TextInputType.text,
@@ -106,7 +106,7 @@ class _SignUp_Step2_BizState extends State<SignUp_Step2_Biz> {
                     ),
                     TextFormField(
                       decoration: textFieldInputDecoration("이메일 주소"),
-                      style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       controller: email,
                       keyboardType: TextInputType.emailAddress,
@@ -124,7 +124,7 @@ class _SignUp_Step2_BizState extends State<SignUp_Step2_Biz> {
                     ),
                     TextFormField(
                       decoration: textFieldInputDecoration("사업자등록번호"),
-                      style: TextStyle(color: Color(0xFF0073FF), fontSize: 16),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.go,
                       controller: biz_num,
                       keyboardType: TextInputType.text,

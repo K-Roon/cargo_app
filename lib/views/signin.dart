@@ -60,7 +60,7 @@ class _SignInState extends State<SignIn> {
                                   style: TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFF0073FF)),
+                                      color: Colors.blue),
                                 )
                               ],
                             ),
@@ -76,7 +76,7 @@ class _SignInState extends State<SignIn> {
                                 TextFormField(
                                   decoration: textFieldInputDecoration("아이디"),
                                   style: TextStyle(
-                                      color: Color(0xFF0073FF), fontSize: 16),
+                                      color: Colors.blue, fontSize: 16),
                                   textInputAction: TextInputAction.next,
                                   controller: idController,
                                 ),
@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                                   textInputAction: TextInputAction.go,
                                   controller: passwordController,
                                   style: TextStyle(
-                                      color: Color(0xFF0073FF), fontSize: 16),
+                                      color: Colors.blue, fontSize: 16),
                                   decoration: textFieldInputDecoration("비밀번호"),
                                 ),
                               ],
