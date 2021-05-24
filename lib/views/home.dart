@@ -35,7 +35,8 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        leading: FloatingActionButton(
+        leading: new FloatingActionButton(
+          heroTag: "OpenDrawer",
           onPressed: () {
             _ScaffoldState.currentState.openDrawer();
           },
@@ -50,7 +51,8 @@ class _HomeState extends State<Home> {
         actions: [
           Row(
             children: [
-              FloatingActionButton(
+              new FloatingActionButton(
+                heroTag: "getPosition",
                 onPressed: () {
                   print("GPS POSITION");
                 },
