@@ -1,5 +1,6 @@
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
+import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ class _HomeState extends State<Home> {
             Container(
               width: 100,
               height: 5,
-              margin: EdgeInsets.only(top: 10, bottom: 10),
+              margin: EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                   color: Colors.black54,
                   borderRadius: BorderRadius.all(Radius.circular(12.0))),
@@ -121,7 +122,11 @@ class _HomeState extends State<Home> {
                         padding: EdgeInsets.symmetric(vertical: 12),
                         width: MediaQuery.of(context).size.width,
                         child: Row(
+<<<<<<< Updated upstream
                           mainAxisAlignment: MainAxisAlignment.center,
+=======
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+>>>>>>> Stashed changes
                           children: [
                             Text(
                               "출발지 주소",
@@ -132,6 +137,30 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       )),
+<<<<<<< Updated upstream
+=======
+                  MarginBar.marginBar(context),
+                  GestureDetector(
+                      onTap: () {
+                        print("카카오톡으로 로그인");
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              "출발지 주소",
+                              style: btnTxtStyle(),
+                            ),
+                            Container(width: 5),
+                            Icon(Icons.search),
+                          ],
+                        ),
+                      )),
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                   Container(height: 15),
                 ],
               ),
