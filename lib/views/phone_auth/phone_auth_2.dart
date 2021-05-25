@@ -2,6 +2,7 @@ import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/signin.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/views/signup/signup_step2_Biz.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
             Form(
               key: otpFormKey,
               child: TextFormField(
-                decoration: textFieldInputDecoration_center("예)1234"),
+                decoration: TextInputDeco.default_value("예)1234"),
                 style: TextStyle(color: Colors.blue, fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: otp_num,

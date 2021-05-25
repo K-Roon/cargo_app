@@ -1,5 +1,6 @@
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,7 @@ class _SignInState extends State<SignIn> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  decoration: textFieldInputDecoration("아이디"),
+                                  decoration: TextInputDeco.default_value("아이디"),
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16),
                                   textInputAction: TextInputAction.next,
@@ -87,7 +88,7 @@ class _SignInState extends State<SignIn> {
                                   controller: passwordController,
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16),
-                                  decoration: textFieldInputDecoration("비밀번호"),
+                                  decoration: TextInputDeco.default_value("비밀번호"),
                                 ),
                               ],
                             ),
@@ -145,7 +146,7 @@ class _SignInState extends State<SignIn> {
                                     Container(width: 5),
                                     Text(
                                       "카카오톡으로 로그인",
-                                      style: buttonTextStyle(),
+                                      style: btnTxtStyle(),
                                     )
                                   ],
                                 ),
@@ -172,7 +173,7 @@ class _SignInState extends State<SignIn> {
                                     Container(width: 5),
                                     Text(
                                       "네이버로 로그인",
-                                      style: buttonTextStyle(),
+                                      style: btnTxtStyle(),
                                     )
                                   ],
                                 ),
