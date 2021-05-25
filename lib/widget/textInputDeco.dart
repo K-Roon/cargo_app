@@ -17,6 +17,22 @@ class TextInputDeco {
         ));
   }
 
+  static InputDecoration elevation_only(String hintText) {
+    return InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.black26),
+        fillColor: Colors.white,
+        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black26, width: 0.1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black26, width: 0.1),
+          borderRadius: BorderRadius.circular(10),
+        ));
+  }
+
   static InputDecoration defalut_center(String hintText) {
     return InputDecoration(
         hintText: hintText,
