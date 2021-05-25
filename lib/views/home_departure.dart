@@ -1,7 +1,7 @@
-import 'package:cargo_app/views/home_departure.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,28 +12,33 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
 
-class Home extends StatefulWidget {
-  Home();
+class Home_departure extends StatefulWidget {
+  final bool isDeparture;
+
+  Home_departure(this.isDeparture);
 
   @override
-  _HomeState createState() => _HomeState();
+  _Home_departureState createState() => _Home_departureState(this.isDeparture);
 }
 
-class _HomeState extends State<Home> {
+class _Home_departureState extends State<Home_departure> {
   final _ScaffoldState = GlobalKey<ScaffoldState>();
+  final bool isDeparture;
   bool isLoading = false;
   bool isAvailable = false;
   int point = 0;
 
-  Home() async {}
+  final List<Tab> myTabs = <Tab>[
+    Tab(text: '최근 주소'),
+    Tab(text: '즐겨찾는 주소'),
+  ];
 
-  @override
-  void initState() {
-  }
+  _Home_departureState(this.isDeparture);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: _ScaffoldState,
       drawer: drawer_as_info(),
       endDrawerEnableOpenDragGesture: false,
@@ -98,7 +103,7 @@ class _HomeState extends State<Home> {
       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       defaultPanelState: PanelState.OPEN,
       minHeight: 25,
-      maxHeight: 200,
+      maxHeight: 500,
       panel: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -113,63 +118,59 @@ class _HomeState extends State<Home> {
                   color: Colors.black54,
                   borderRadius: BorderRadius.all(Radius.circular(12.0))),
             ),
-            slide_main()
+            isDeparture ? pg1() : pg2()
           ],
         ),
       ),
     );
   }
 
-  Widget slide_main() {
-    return Column(
-      children: [
-        GestureDetector(
-            onTap: () {
-              print("출발지 주소 검색");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_departure(true)));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "출발지 주소",
-                    style: btnTxtStyle(color: Colors.grey),
-                  ),
-                  Icon(Icons.search, color: Colors.grey),
-                ],
-              ),
-            )),
-        MarginBar.marginBar(context),
-        GestureDetector(
-            onTap: () {
-              print("카카오톡으로 로그인");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_departure(false)));
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "도착지 주소",
-                    style: btnTxtStyle(color: Colors.grey),
-                  ),
-                  Icon(Icons.search, color: Colors.grey),
-                ],
-              ),
-            )),
-        Container(height: 15),
-      ],
-    );
-  }
-
   Widget pg1() {
     return Column(
-      children: [Text("무~야~호")],
+      children: [
+        Container(
+          height: 30,
+        ),
+        Form(
+          child: Material(
+            elevation: 20,
+            shadowColor: Colors.black54,
+            borderRadius: BorderRadius.circular(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  hintText: "출발지 주소 검색",
+                  prefixIcon: Icon(Icons.search,
+                      size: 20, color: Colors.blueAccent),
+                  hintStyle: TextStyle(color: Colors.black26),
+                  fillColor: Colors.white,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black26, width: 0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black26, width: 0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ),
+          ),
+        ),
+        DefaultTabController(
+          length: myTabs.length,
+          child: Column(children: [
+            TabBar(tabs: myTabs),
+            TabBarView(
+              children: myTabs.map((Tab tab) {
+                final String label = tab.text;
+                return Center(child: Text(label));
+              }).toList(growable: false),
+            ),
+          ]),
+        ),
+      ],
     );
   }
 

@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Color(0xFFFFFFFF),
         bottomAppBarColor: Color(0xFFEFEFEF),
         primaryColorDark: Color(0xffCFCFCF),
-        accentColor: Color(0xff0076FF),
+        accentColor: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
       ),

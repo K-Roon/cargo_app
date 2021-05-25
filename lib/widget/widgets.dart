@@ -61,8 +61,8 @@ TextStyle buttonTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 16);
 }
 
-TextStyle btnTxtStyle() {
-  return TextStyle(color: Colors.black, fontSize: 16);
+TextStyle btnTxtStyle({Color color}) {
+  return TextStyle(color: color != null ? color : Colors.black, fontSize: 16);
 }
 
 TextStyle biggerTextStyle() {
@@ -73,8 +73,8 @@ TextStyle mediumTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 15);
 }
 
-TextStyle biggerTextStyle_flexible(Color color) {
-  return TextStyle(color: color, fontSize: 20);
+TextStyle txtStyle_flexible(Color color, double fontSize) {
+  return TextStyle(color: color, fontSize: fontSize);
 }
 
 TextStyle smallTextStyle() {
