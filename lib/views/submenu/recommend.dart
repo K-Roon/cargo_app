@@ -1,3 +1,4 @@
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
@@ -83,7 +84,7 @@ class _RecommendState extends State<Recommend> {
                     width: 200,
                     child: TextFormField(
                       controller: box_horizonal,
-                      decoration: textField_square(""),
+                      decoration: TextInputDeco.square(""),
                     )),
                 Text("  cm")
               ]),
@@ -93,7 +94,7 @@ class _RecommendState extends State<Recommend> {
                     width: 200,
                     child: TextFormField(
                       controller: box_vertical,
-                      decoration: textField_square(""),
+                      decoration: TextInputDeco.square(""),
                     )),
                 Text("  cm")
               ]),
@@ -103,7 +104,7 @@ class _RecommendState extends State<Recommend> {
                     width: 200,
                     child: TextFormField(
                       controller: box_height,
-                      decoration: textField_square(""),
+                      decoration: TextInputDeco.square(""),
                     )),
                 Text("  cm")
               ]),
@@ -113,7 +114,7 @@ class _RecommendState extends State<Recommend> {
                     width: 200,
                     child: TextFormField(
                       controller: box_per_weight,
-                      decoration: textField_square(""),
+                      decoration: TextInputDeco.square(""),
                     )),
                 Text("  kg")
               ]),
@@ -123,7 +124,7 @@ class _RecommendState extends State<Recommend> {
                     width: 200,
                     child: TextFormField(
                       controller: box_count,
-                      decoration: textField_square(""),
+                      decoration: TextInputDeco.square(""),
                     )),
                 Text("  박스/파렛트/벌")
               ]),

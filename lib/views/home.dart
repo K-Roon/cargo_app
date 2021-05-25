@@ -113,21 +113,26 @@ class _HomeState extends State<Home> {
             Form(
               child: Column(
                 children: [
-                  TextFormField(
-                    decoration: textField_Underline("출발지 주소"),
-                    style: TextStyle(
-                        color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: startArea,
-                  ),
+                  GestureDetector(
+                      onTap: () {
+                        print("카카오톡으로 로그인");
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 12),
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "출발지 주소",
+                              style: btnTxtStyle(),
+                            ),
+                            Container(width: 5),
+                            Icon(Icons.search),
+                          ],
+                        ),
+                      )),
                   Container(height: 15),
-                  TextFormField(
-                    textInputAction: TextInputAction.go,
-                    controller: endArea,
-                    style: TextStyle(
-                        color: Colors.blue, fontSize: 16),
-                    decoration: textField_Underline("도착지 주소"),
-                  ),
                 ],
               ),
             ),
