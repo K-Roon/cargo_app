@@ -78,7 +78,7 @@ TextStyle txtStyle_flexible(Color color, double fontSize) {
 }
 
 TextStyle smallTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 10);
+  return TextStyle(color: Colors.black, fontSize: 11);
 }
 
 void showErrorAlertDialog(BuildContext context, String errorText) async {
