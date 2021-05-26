@@ -1,5 +1,6 @@
 import 'package:cargo_app/views/home_departure.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
+import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -28,8 +29,7 @@ class _HomeState extends State<Home> {
   Home() async {}
 
   @override
-  void initState() {
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,10 @@ class _HomeState extends State<Home> {
         GestureDetector(
             onTap: () {
               print("출발지 주소 검색");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_departure(true)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home_departure(true)));
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
@@ -146,7 +149,10 @@ class _HomeState extends State<Home> {
         GestureDetector(
             onTap: () {
               print("카카오톡으로 로그인");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_departure(false)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home_departure(false)));
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
@@ -233,7 +239,10 @@ class _HomeState extends State<Home> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Insert_cargo_info()));
                   },
                 ),
                 ListTile(
@@ -243,7 +252,7 @@ class _HomeState extends State<Home> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Recommend()));
                   },
                 ),
