@@ -31,7 +31,7 @@ class TextInputDeco {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black26),
           borderRadius: BorderRadius.circular(5),
-        ));
+        ),);
   }
 
   static InputDecoration elevation_only(String hintText) {
