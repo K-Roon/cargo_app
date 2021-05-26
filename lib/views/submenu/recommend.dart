@@ -1,3 +1,4 @@
+import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
@@ -78,6 +79,7 @@ class _RecommendState extends State<Recommend> {
                 ],
               ),
               Text("사이즈를 입력하세요."),
+              MarginBar.bold(context),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text("가로     "),
                 Container(
@@ -88,6 +90,7 @@ class _RecommendState extends State<Recommend> {
                     )),
                 Text("  cm")
               ]),
+              MarginBar.marginBar(context),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text("세로     "),
                 Container(
@@ -98,6 +101,7 @@ class _RecommendState extends State<Recommend> {
                     )),
                 Text("  cm")
               ]),
+              MarginBar.marginBar(context),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text("높이     "),
                 Container(
@@ -108,6 +112,7 @@ class _RecommendState extends State<Recommend> {
                     )),
                 Text("  cm")
               ]),
+              MarginBar.marginBar(context),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text("개당     \n무게     "),
                 Container(
@@ -118,6 +123,7 @@ class _RecommendState extends State<Recommend> {
                     )),
                 Text("  kg")
               ]),
+              MarginBar.marginBar(context),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text("개수     "),
                 Container(
@@ -128,6 +134,7 @@ class _RecommendState extends State<Recommend> {
                     )),
                 Text("  박스/파렛트/벌")
               ]),
+              MarginBar.marginBar(context),
               Text(
                 "주의사항",
                 style: TextStyle(fontWeight: FontWeight.bold),
