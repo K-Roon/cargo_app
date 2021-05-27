@@ -2,7 +2,9 @@
 //import 'package:chat_app/helper/helperfunctions.dart';
 //import 'package:chat_app/views/chat_rooms_screen.dart';
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signin.dart';
+import 'package:cargo_app/views/submenu/myInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
       ),
-      home: SignIn()
+      home: Home()
     );
   }
 }
