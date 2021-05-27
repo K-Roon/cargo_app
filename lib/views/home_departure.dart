@@ -1,4 +1,6 @@
 import 'package:cargo_app/views/signup/signup_step1.dart';
+import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
+import 'package:cargo_app/views/submenu/my_deliver.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
@@ -263,7 +265,10 @@ class _Home_departureState extends State<Home_departure> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Insert_cargo_info()));
                   },
                 ),
                 ListTile(
@@ -273,7 +278,7 @@ class _Home_departureState extends State<Home_departure> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Recommend()));
                   },
                 ),
@@ -284,7 +289,8 @@ class _Home_departureState extends State<Home_departure> {
                     // Update the state of the app
                     // ...
                     // Then close the drawer
-                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Mydeliver()));
                   },
                 ),
                 ListTile(
@@ -299,7 +305,7 @@ class _Home_departureState extends State<Home_departure> {
                 ),
                 ListTile(
                   title:
-                      Text('공지사항', style: txtStyle_flexible(Colors.white, 20)),
+                  Text('공지사항', style: txtStyle_flexible(Colors.white, 20)),
                   onTap: () {
                     // Update the state of the app
                     // ...
@@ -309,7 +315,7 @@ class _Home_departureState extends State<Home_departure> {
                 ),
                 ListTile(
                   title:
-                      Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
+                  Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
                   onTap: () {
                     // Update the state of the app
                     // ...
@@ -319,7 +325,7 @@ class _Home_departureState extends State<Home_departure> {
                 ),
                 ListTile(
                   title:
-                      Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
+                  Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
                   onTap: () {
                     // Update the state of the app
                     // ...
