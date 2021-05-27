@@ -48,7 +48,7 @@ class _Home_departureState extends State<Home_departure> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _ScaffoldState,
-      drawer: drawer_as_info(),
+      drawer: homeDrawer(context),
       endDrawerEnableOpenDragGesture: false,
       appBar: AppBar(
         elevation: 0.0,

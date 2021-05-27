@@ -1,8 +1,4 @@
 import 'package:cargo_app/views/home_departure.dart';
-import 'package:cargo_app/views/signup/signup_step1.dart';
-import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
-import 'package:cargo_app/views/submenu/my_deliver.dart';
-import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +21,7 @@ class _HomeState extends State<Home> {
   final _ScaffoldState = GlobalKey<ScaffoldState>();
   bool isLoading = false;
   bool isAvailable = false;
-  int point = 0;
+
 
   Home() async {}
 
@@ -36,7 +32,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _ScaffoldState,
-      drawer: drawer_as_info(),
+      drawer: homeDrawer(context),
       endDrawerEnableOpenDragGesture: false,
       appBar: AppBar(
         elevation: 0.0,
@@ -187,132 +183,5 @@ class _HomeState extends State<Home> {
   }
 
 // ignore: non_constant_identifier_names
-  Widget drawer_as_info() {
-    return Drawer(
-      elevation: 0.0,
-      semanticLabel: "FLUTTER",
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            padding: EdgeInsets.only(left: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(10),
-                      primary: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100)),
-                    ),
-                    onPressed: () {
-                      print("PUSHED");
-                    },
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    )),
-                Text("   포인트 "),
-                Text(
-                  "  $point 원",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ListTile(
-                  title: Text('화물차 부르기',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Insert_cargo_info()));
-                  },
-                ),
-                ListTile(
-                  title: Text('화물차 추천받기',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Recommend()));
-                  },
-                ),
-                ListTile(
-                  title: Text('내 운송 조회',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Mydeliver()));
-                  },
-                ),
-                ListTile(
-                  title: Text('내 정보 관리',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                      Text('공지사항', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                      Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                      Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }
