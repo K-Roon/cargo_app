@@ -54,7 +54,11 @@ class _MyInfoState extends State<MyInfo> {
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(width: 1, color: Colors.black26)),
                 child: Table(
-                  columnWidths: {0: FractionColumnWidth(.3),1: FractionColumnWidth(.6),2: FractionColumnWidth(.1)},
+                  columnWidths: {
+                    0: FractionColumnWidth(.3),
+                    1: FractionColumnWidth(.6),
+                    2: FractionColumnWidth(.1)
+                  },
                   children: [
                     TableRow(
                       children: [
@@ -111,8 +115,9 @@ class _MyInfoState extends State<MyInfo> {
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
+            paymentTool(context),
             Container(
-              height: 10,
+              height: 15,
             ),
             Text(
               "마케팅 정보 수신 동의",
@@ -120,7 +125,7 @@ class _MyInfoState extends State<MyInfo> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
+              margin: EdgeInsets.symmetric(vertical: 10),
               padding: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
