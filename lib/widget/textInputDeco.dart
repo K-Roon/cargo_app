@@ -59,15 +59,15 @@ class TextInputDeco {
         fillColor: Colors.white,
         contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.1),
+          borderSide: BorderSide(color: Colors.black26, width: 0.0),
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.1),
+          borderSide: BorderSide(color: Colors.black26, width: 0.0),
           borderRadius: BorderRadius.circular(10),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.1),
+          borderSide: BorderSide(color: Colors.black26, width: 0.0),
           borderRadius: BorderRadius.circular(10),
         ));
   }
