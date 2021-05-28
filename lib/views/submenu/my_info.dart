@@ -20,7 +20,7 @@ class _MyInfoState extends State<MyInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_sub(context, ""),
+      appBar: appBarSub(context, ""),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(

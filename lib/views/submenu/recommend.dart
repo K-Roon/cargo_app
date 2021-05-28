@@ -32,7 +32,7 @@ class _RecommendState extends State<Recommend> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_sub(context, "화물차 추천 받기"),
+      appBar: appBarSub(context, "화물차 추천 받기"),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Form(
