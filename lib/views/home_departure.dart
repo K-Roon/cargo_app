@@ -148,12 +148,17 @@ class _Home_departureState extends State<Home_departure> {
                             vertical: 0.0, horizontal: 20.0),
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.black26, width: 0.1),
+                              BorderSide(color: Colors.black26, width: 0.0),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                          BorderSide(color: Colors.black26, width: 0.0),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         border: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.black26, width: 0.1),
+                              BorderSide(color: Colors.black26, width: 0.0),
                           borderRadius: BorderRadius.circular(10),
                         )),
                   ),
@@ -211,133 +216,4 @@ class _Home_departureState extends State<Home_departure> {
     );
   }
 
-// ignore: non_constant_identifier_names
-  Widget drawer_as_info() {
-    return Drawer(
-      elevation: 0.0,
-      semanticLabel: "FLUTTER",
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            padding: EdgeInsets.only(left: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.all(10),
-                      primary: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100)),
-                    ),
-                    onPressed: () {
-                      print("PUSHED");
-                    },
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    )),
-                Text("   포인트 "),
-                Text(
-                  "  $point 원",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ListTile(
-                  title: Text('화물차 부르기',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Insert_cargo_info()));
-                  },
-                ),
-                ListTile(
-                  title: Text('화물차 추천받기',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Recommend()));
-                  },
-                ),
-                ListTile(
-                  title: Text('내 운송 조회',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Mydeliver()));
-                  },
-                ),
-                ListTile(
-                  title: Text('내 정보 관리',
-                      style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                  Text('공지사항', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                  Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title:
-                  Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
