@@ -2,6 +2,7 @@ import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
 import 'package:cargo_app/views/submenu/my_deliver.dart';
 import 'package:cargo_app/views/submenu/my_info.dart';
+import 'package:cargo_app/views/submenu/notice.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ AppBar appBar_custom(BuildContext context, String title) {
   );
 }
 
-AppBar appBar_sub(BuildContext context, String title) {
+AppBar appBarSub(BuildContext context, String title) {
   return AppBar(
     leading: TextButton(
       child: Icon(
@@ -297,7 +298,8 @@ Widget homeDrawer(BuildContext context) {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Notice()));
                 },
               ),
               ListTile(
