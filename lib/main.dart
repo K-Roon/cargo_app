@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
       ),
-      home: Home()
+      home: SignIn()
     );
   }
 }
