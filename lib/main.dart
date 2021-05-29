@@ -1,16 +1,13 @@
-//import 'package:chat_app/helper/authenticate.dart';
-//import 'package:chat_app/helper/helperfunctions.dart';
-//import 'package:chat_app/views/chat_rooms_screen.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signin.dart';
-import 'package:cargo_app/views/submenu/my_info.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(MyApp());
   print("IT'S RUNNING...\n애플리케이션의 작동을 시작합니다.");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -27,12 +24,11 @@ class _MyAppState extends State<MyApp> {
   bool userIsLoggedIn = false;
   @override
   void initState() {
-    //getLoggedInState();
+    getLoggedInState();
     super.initState();
   }
 
   ///로그인 여부를 구합니다. 로그인/아웃의 여부는 Auth.dart 에서 다룹니다.
-  /*
   getLoggedInState() async {
     await HelperFunctions.getUserLoggedInSharedPreference().then((value){
       setState(() {
@@ -40,7 +36,6 @@ class _MyAppState extends State<MyApp> {
       });
     });
   }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +53,12 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(brightness: Brightness.light),
       ),
-      home: SignIn()
+      home: userIsLoggedIn != null ?  userIsLoggedIn ? Home() : SignIn()
+          : Container(
+        child: Center(
+          child: SignIn(),
+        ),
+      ),
     );
   }
 }
