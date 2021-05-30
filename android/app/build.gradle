@@ -26,11 +26,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+<<<<<<< HEAD
 rootProject.ext {
     set('FlutterFire', [
             FirebaseSDKVersion: '26.3.0'
     ])
 }
+=======
+>>>>>>> parent of af29372 (FIX : AUTH 문제 수정)
 android {
     compileSdkVersion 26
 

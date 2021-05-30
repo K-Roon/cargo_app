@@ -5,8 +5,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        tools:replace="android:requestLegacyExternalStorage"
         android:icon="@mipmap/ic_launcher"
-        android:label="cargo_app">
+        android:label="cargo_app"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

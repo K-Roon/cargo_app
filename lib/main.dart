@@ -1,12 +1,15 @@
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signin.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+<<<<<<< HEAD
+=======
+  //await Firebase.initializeApp();
+>>>>>>> parent of af29372 (FIX : AUTH 문제 수정)
   runApp(MyApp());
   print("IT'S RUNNING...\n애플리케이션의 작동을 시작합니다.");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
