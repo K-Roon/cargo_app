@@ -6,10 +6,7 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-<<<<<<< HEAD
-=======
   //await Firebase.initializeApp();
->>>>>>> parent of af29372 (FIX : AUTH 문제 수정)
   runApp(MyApp());
   print("IT'S RUNNING...\n애플리케이션의 작동을 시작합니다.");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -25,6 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _initialized = false;
   bool _error = false;
+  /*
   void initializeFlutterFire() async {
     try {
       // Wait for Firebase to initialize and set `_initialized` state to true
@@ -39,11 +37,12 @@ class _MyAppState extends State<MyApp> {
       });
     }
   }
+  */
 
   bool userIsLoggedIn = false;
   @override
   void initState() {
-    initializeFlutterFire();
+    //initializeFlutterFire();
     getLoggedInState();
     super.initState();
   }
