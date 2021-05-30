@@ -70,7 +70,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   ),
                   onChanged: (String newValue) {
                     setState(() {
-                      drdn_reserve_when = newValue;
+                      drdn_departureWay = newValue;
                     });
                   },
                   items: <String>['지금 바로', '예약 하기']
@@ -110,7 +110,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   ),
                   onChanged: (String newValue) {
                     setState(() {
-                      drdn_arrival_when = newValue;
+                      drdn_departureWay = newValue;
                     });
                   },
                   items: <String>['바로 도착', '예약 하기']
