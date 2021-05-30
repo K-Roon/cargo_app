@@ -28,12 +28,19 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 rootProject.ext {
     set('FlutterFire', [
-            FirebaseSDKVersion: '25.12.0'
+            FirebaseSDKVersion: '26.3.0'
     ])
 }
-
 android {
     compileSdkVersion 26
+
+    dependencies {
+        // Import the Firebase BoM
+        implementation platform('com.google.firebase:firebase-bom:26.8.0')
+
+        // Add the dependencies for the desired Firebase products
+        // https://firebase.google.com/docs/android/setup#available-librarie
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -64,7 +71,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
-    implementation 'com.google.firebase:firebase-auth'
     implementation 'com.android.support:multidex:1.0.3'
 }
