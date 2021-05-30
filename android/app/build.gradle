@@ -21,39 +21,28 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-<<<<<<< HEAD
-rootProject.ext {
-    set('FlutterFire', [
-            FirebaseSDKVersion: '26.3.0'
-    ])
-}
-=======
->>>>>>> parent of af29372 (FIX : AUTH 문제 수정)
+
 android {
-    compileSdkVersion 26
-
-    dependencies {
-        // Import the Firebase BoM
-        implementation platform('com.google.firebase:firebase-bom:26.8.0')
-
-        // Add the dependencies for the desired Firebase products
-        // https://firebase.google.com/docs/android/setup#available-librarie
-    }
+    compileSdkVersion 28
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.kroon.cargo_app.cargo_app"
         minSdkVersion 24
-        targetSdkVersion 26
+        targetSdkVersion 28
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -73,6 +62,19 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31"
     implementation 'com.android.support:multidex:1.0.3'
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+}
+
+rootProject.ext {
+    set('FlutterFire', [
+            FirebaseSDKVersion: '25.12.0'
+    ])
 }

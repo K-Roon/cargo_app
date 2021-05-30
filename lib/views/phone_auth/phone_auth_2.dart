@@ -38,7 +38,6 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   void getOTP(String phoneNum) {
     print("서버에서 인증번호를 보내게 요청함");
     //여기에 인증번호 요청메서드 입력
-    print('+82 ${phoneNum.replaceFirst("0", "", 0)}');
 
     ///보내어진 인증번호를 받아와서 맞는지 확인해야합니다.
     ///
