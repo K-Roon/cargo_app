@@ -1,4 +1,5 @@
 import 'package:cargo_app/views/home.dart';
+import 'package:cargo_app/views/payment_list.dart';
 import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
 import 'package:cargo_app/views/submenu/my_deliver.dart';
 import 'package:cargo_app/views/submenu/my_info.dart';
@@ -339,14 +340,22 @@ Widget paymentTool(BuildContext context) {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "결제 수단 등록",
-          style: TextStyle(color: Colors.grey),
-          textAlign: TextAlign.left,
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaymentList()));
+          },
+          child: Text(
+            "결제 수단 등록",
+            style: TextStyle(color: Colors.grey),
+            textAlign: TextAlign.left,
+          ),
         ),
         GestureDetector(
           onTap: () {
             print("결제 수단 등록 버튼누름");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaymentList()));
           },
           child: Text(
             "등록",
