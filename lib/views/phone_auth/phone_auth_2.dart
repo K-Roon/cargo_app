@@ -1,9 +1,7 @@
-import 'package:cargo_app/helper/purpose_helper.dart';
-import 'package:cargo_app/views/signIn.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
-import 'package:cargo_app/views/signup/signup_step2_Biz.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,14 +33,40 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   ///반환값은 String Type의 변수 1개 뿐입니다.
   ///
   ///이 반환값은 서버에서 보낸 인증번호와 동일한지 확인하기 위해 필요합니다.
-  void getOTP(String phoneNum) {
+  Future<void> getOTP(String phoneNum) async {
     print("서버에서 인증번호를 보내게 요청함");
-    //여기에 인증번호 요청메서드 입력
+    print('+82 ${phoneNum.replaceFirst("0", "", 0)}');
+    FirebaseAuth auth = FirebaseAuth.instance;
+    /*
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+82 ${phoneNum.replaceFirst("0", "", 0)}',
+
+
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        //await auth.signInWithCredential(credential);
+        await print("LOG: VerificationCompleted");
+      },
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int resendToken) async {
+        String smsCode = otp_num.text;
+
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+
+        await print("LOG: CODESENT: ${smsCode}");
+        //await auth.signInWithCredential(credential);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
+*/
 
     ///보내어진 인증번호를 받아와서 맞는지 확인해야합니다.
     ///
     ///예를 들어, 보내어진 인증번호가 0000인 경우 반환값을 0000으로 해야합니다.
-    otpNum = "0000";
+    if (otp_num.text == "0000") {
+      compelete();
+    } else {
+      showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
+    }
   }
 
   @override
@@ -66,7 +90,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
             Form(
               key: otpFormKey,
               child: TextFormField(
-                decoration: TextInputDeco.default_value("예)1234"),
+                decoration: TextInputDeco.default_value("문자인증 API 적용 전 인증번호는 0000 입니다."),
                 style: TextStyle(color: Colors.blue, fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: otp_num,
@@ -99,6 +123,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   }
 
   void isCorrectOTP() {
+    /*
     if (otp_num.text.isEmpty) {
       showErrorAlertDialog(context, "OTP 번호를 입력해주세요.");
     } else if (otp_num.text == otpNum) {
@@ -118,5 +143,12 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
     } else {
       showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
     }
+
+    */
+  }
+
+  void compelete() {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum, purpose2)));
   }
 }

@@ -10,15 +10,17 @@ final TextEditingController passwordController = new TextEditingController();
 
 class SignUp_Step2 extends StatefulWidget {
   final String phone_num;
-  SignUp_Step2(this.phone_num);
+  final String purpose;
+  SignUp_Step2(this.phone_num, this.purpose);
 
   @override
-  _SignUp_Step2State createState() => _SignUp_Step2State(phone_num);
+  _SignUp_Step2State createState() => _SignUp_Step2State(phone_num, purpose);
 }
 
 class _SignUp_Step2State extends State<SignUp_Step2> {
   final register_FormKey = GlobalKey<FormState>();
   final String phone;
+  final String purpose;
   TextEditingController name = new TextEditingController();
   TextEditingController identify = new TextEditingController();
   TextEditingController email = new TextEditingController();
@@ -26,7 +28,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
   bool isLoading = false;
   bool isAvailable = false;
 
-  _SignUp_Step2State(this.phone);
+  _SignUp_Step2State(this.phone, this.purpose);
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -40,85 +42,87 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar_custom(context, ""),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "회원 정보 입력\n",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            Container(
-              height: 10,
-            ),
-            Form(
-              key: register_FormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "이름",
-                    style: mediumTextStyle(),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: textFieldInputDecoration("이름"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: name,
-                    keyboardType: TextInputType.text,
-                  ),
-                  Container(
-                    height: 15,
-                  ),
-                  Text(
-                    "아이디",
-                    style: mediumTextStyle(),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: textFieldInputDecoration("아이디"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: identify,
-                    keyboardType: TextInputType.text,
-                  ),
-                  Container(
-                    height: 15,
-                  ),
-                  Text(
-                    "이메일 주소",
-                    style: mediumTextStyle(),
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    decoration: textFieldInputDecoration("이메일 주소"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.go,
-                    controller: email,
-                    keyboardType: TextInputType.emailAddress,
-                  )
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "회원 정보 입력\n",
+                textAlign: TextAlign.left,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
-            ),
-          ],
+              Container(
+                height: 10,
+              ),
+              Form(
+                key: register_FormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "이름",
+                      style: mediumTextStyle(),
+                      textAlign: TextAlign.left,
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: textFieldInputDecoration("이름"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.next,
+                      controller: name,
+                      keyboardType: TextInputType.text,
+                    ),
+                    Container(
+                      height: 15,
+                    ),
+                    Text(
+                      "아이디",
+                      style: mediumTextStyle(),
+                      textAlign: TextAlign.left,
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: textFieldInputDecoration("아이디"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.next,
+                      controller: identify,
+                      keyboardType: TextInputType.text,
+                    ),
+                    Container(
+                      height: 15,
+                    ),
+                    Text(
+                      "이메일 주소",
+                      style: mediumTextStyle(),
+                      textAlign: TextAlign.left,
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: textFieldInputDecoration("이메일 주소"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.go,
+                      controller: email,
+                      keyboardType: TextInputType.emailAddress,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Confirm();
+          Confirm(this.purpose);
         },
         style: ElevatedButton.styleFrom(
           primary: Color(0xff0055ff),
@@ -138,7 +142,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
     );
   }
 
-  void Confirm() {
+  void Confirm(purpose) {
     if (name.text.isEmpty) {
       showErrorAlertDialog(context, "이름을 입력해주세요.");
     } else if (identify.text.isEmpty) {
@@ -146,11 +150,20 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
     } else if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일를 입력해주세요.");
     } else {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  SignUp_Step3(Purpose_Helper.signup_personal, name.text, identify.text, email.text, phone, "null")));
+      if(purpose == Purpose_Helper.signup_personal) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SignUp_Step3(Purpose_Helper.signup_personal, name.text, identify.text, email.text, phone, "null")));
+      }else if(purpose == Purpose_Helper.signup_biz) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SignUp_Step3(Purpose_Helper.signup_biz, name.text, identify.text, email.text, phone, "null")));
+      }
+
     }
   }
 }

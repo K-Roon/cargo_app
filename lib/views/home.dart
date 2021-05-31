@@ -26,7 +26,9 @@ class _HomeState extends State<Home> {
   Home() async {}
 
   @override
-  void initState() {}
+  void initState() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,19 +171,5 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-
-  Widget pg1() {
-    return Column(
-      children: [Text("무~야~호")],
-    );
-  }
-
-  Widget pg2() {
-    return Column(
-      children: [Text("무~야~호")],
-    );
-  }
-
-// ignore: non_constant_identifier_names
 
 }
