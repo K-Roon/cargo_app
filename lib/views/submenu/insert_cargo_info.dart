@@ -19,8 +19,6 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
   String drdn_carSize = '-';
   String drdn_carKinds = '상관 없음';
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
