@@ -19,12 +19,17 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
   String drdn_carSize = '-';
   String drdn_carKinds = '상관 없음';
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: TextButton(
-          child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -149,8 +154,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                             });
                           },
                           items: <String>[
-                            '수작업 없음',
-                            '수작업 있음',
+                            '수작업',
                             '지게차',
                             '호이스트',
                             '크레인'
@@ -188,8 +192,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                             });
                           },
                           items: <String>[
-                            '수작업 없음',
-                            '수작업 있음',
+                            '수작업',
                             '지게차',
                             '호이스트',
                             '크레인'
@@ -316,8 +319,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            width: 1, color: Colors.black26)),
+                        border: Border.all(width: 1, color: Colors.black26)),
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,

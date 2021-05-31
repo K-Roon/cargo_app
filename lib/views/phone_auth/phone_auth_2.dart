@@ -62,11 +62,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
     ///보내어진 인증번호를 받아와서 맞는지 확인해야합니다.
     ///
     ///예를 들어, 보내어진 인증번호가 0000인 경우 반환값을 0000으로 해야합니다.
-    if (otp_num.text == "0000") {
-      compelete();
-    } else {
-      showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
-    }
+
   }
 
   @override
@@ -102,10 +98,10 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          isCorrectOTP();
+          compelete();
         },
         style: ElevatedButton.styleFrom(
-          primary: Color(0xff0055dd),
+          primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -148,7 +144,11 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   }
 
   void compelete() {
+    if (otp_num.text == "0000") {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum, purpose2)));
+    } else {
+      showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
+    }
   }
 }

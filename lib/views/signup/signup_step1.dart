@@ -1,5 +1,6 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
+import 'package:cargo_app/views/signup/signup_policy_biz.dart';
 import 'package:cargo_app/views/signup/signup_policy_personal.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,7 +72,7 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              PhoneAuth(Purpose_Helper.signup_biz)));
+                              SignUpPolicyBiz()));
                 },
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
