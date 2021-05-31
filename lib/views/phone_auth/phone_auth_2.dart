@@ -1,5 +1,5 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
-import 'package:cargo_app/views/signin.dart';
+import 'package:cargo_app/views/signIn.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/views/signup/signup_step2_Biz.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
