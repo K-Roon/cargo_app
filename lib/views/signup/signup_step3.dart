@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +39,13 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   bool isAvailable = false;
 
   _SignUp_Step3State(this.purpose, this.name, this.id, this.email, this.phone_number, this.biz_num);
+
+  static const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  Random _rnd = Random();
+
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -191,5 +200,5 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
 
 /// 여기에 회원정보등록 입력.
 void SignupMember() {
-  print("done");
+
 }
