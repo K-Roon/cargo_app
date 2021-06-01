@@ -75,7 +75,8 @@ class _SignInState extends State<SignIn> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  decoration: TextInputDeco.default_value("아이디"),
+                                  decoration:
+                                      TextInputDeco.default_value("아이디"),
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16),
                                   textInputAction: TextInputAction.next,
@@ -88,7 +89,8 @@ class _SignInState extends State<SignIn> {
                                   controller: passwordController,
                                   style: TextStyle(
                                       color: Colors.blue, fontSize: 16),
-                                  decoration: TextInputDeco.default_value("비밀번호"),
+                                  decoration:
+                                      TextInputDeco.default_value("비밀번호"),
                                 ),
                               ],
                             ),
@@ -120,7 +122,11 @@ class _SignInState extends State<SignIn> {
                                 child: Text("회원가입 하기"),
                                 onPressed: () {
                                   print("Join");
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp_Step1()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignUp_Step1()));
                                 },
                               ),
                             ],
@@ -189,9 +195,11 @@ class _SignInState extends State<SignIn> {
         onPressed: () {
           signIn();
         },
+
         ///TODO: 개발 완료시 제거 필요
         onLongPress: () {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Home()));
         },
         style: ElevatedButton.styleFrom(
           primary: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),
