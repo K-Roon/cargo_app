@@ -1,16 +1,35 @@
 import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
+import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RecommendSum extends StatefulWidget {
-  const RecommendSum({Key key}) : super(key: key);
+  const RecommendSum(this.killogram, {Key key}) : super(key: key);
+  final double killogram;
 
   @override
-  _RecommendSumState createState() => _RecommendSumState();
+  _RecommendSumState createState() => _RecommendSumState(this.killogram);
 }
 
 class _RecommendSumState extends State<RecommendSum> {
+  final double killogram;
+
+  _RecommendSumState(this.killogram);
+
+  String recommend_cargo(killogram) {
+    if (killogram >= 15000) return "25톤 트럭";
+    else if (killogram >= 11000) return "15톤 트럭";
+    else if (killogram >= 8000) return "11톤 트럭";
+    else if (killogram >= 5000) return "8톤 트럭";
+    else if (killogram >= 3500) return "5톤 트럭";
+    else if (killogram >= 2500) return "3.5톤 트럭";
+    else if (killogram >= 1400) return "2.5톤 트럭";
+    else if (killogram >= 1000) return "1.4톤 트럭";
+    else if (killogram >= 500) return "1톤 트럭";
+    else if (killogram >= 0) return "0.5톤 트럭";
+    else return "트럭 2대 사용";
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +42,8 @@ class _RecommendSumState extends State<RecommendSum> {
                   end: Alignment.bottomCenter,
                   stops: [
                 0.0,
-                0.4,
-                0.4,
+                0.2,
+                0.2,
                 1
               ],
                   colors: [
@@ -46,7 +65,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           color: Colors.white, height: 1.2, fontSize: 18),
                     ),
                     Text(
-                      "1.4톤 트럭",
+                      recommend_cargo(killogram),
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -76,7 +95,18 @@ class _RecommendSumState extends State<RecommendSum> {
                 ),
               ),
               Container(
-                color: Colors.white,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [
+                          0.0,
+                          0.1
+                        ],
+                        colors: [
+                          Color(0x00FFFFFF),
+                          Colors.white
+                        ])),
                 child: Column(
                   children: [
                     Container(
@@ -313,7 +343,7 @@ class _RecommendSumState extends State<RecommendSum> {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Insert_cargo_info()));
+              MaterialPageRoute(builder: (context) => Recommend()));
           print("화물차 부르기");
         },
         style: ElevatedButton.styleFrom(

@@ -177,7 +177,9 @@ class _RecommendState extends State<Recommend> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => RecommendSum()));
+          double weight = box_per_weight.text.isEmpty ? 0 :double.parse(box_per_weight.text);
+          double boxes = box_count.text.isEmpty ? 1 :double.parse(box_count.text);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RecommendSum(weight * boxes)));
           print("추천받기");
         },
         style: ElevatedButton.styleFrom(
