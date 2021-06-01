@@ -12,12 +12,12 @@ class Insert_cargo_info extends StatefulWidget {
 class _Insert_cargo_infoState extends State<Insert_cargo_info> {
   bool isno_EV = false;
   bool isAgain = false;
-  String drdn_reserve_when = '지금 바로';
-  String drdn_arrival_when = '바로 도착';
-  String drdn_departureWay = '수작업';
-  String drdn_arrivalWay = '수작업';
-  String drdn_carSize = '-';
-  String drdn_carKinds = '상관 없음';
+  String drDnDepartureWhen = '지금 바로';
+  String drDnArrivalWhen = '바로 도착';
+  String drDnDepartureWay = '수작업';
+  String drDnArrivalWay = '수작업';
+  String drDnCarSize = '-';
+  String drDnCarKinds = '상관 없음';
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 DropdownButton<String>(
-                  value: drdn_reserve_when,
+                  value: drDnDepartureWhen,
                   icon: const Icon(Icons.arrow_downward),
                   iconSize: 24,
                   elevation: 16,
@@ -73,7 +73,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   ),
                   onChanged: (String newValue) {
                     setState(() {
-                      drdn_reserve_when = newValue;
+                      drDnDepartureWhen = newValue;
                     });
                   },
                   items: <String>['지금 바로', '예약 하기']
@@ -102,7 +102,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 DropdownButton<String>(
-                  value: drdn_arrival_when,
+                  value: drDnArrivalWhen,
                   icon: const Icon(Icons.arrow_downward),
                   iconSize: 24,
                   elevation: 16,
@@ -113,7 +113,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   ),
                   onChanged: (String newValue) {
                     setState(() {
-                      drdn_arrival_when = newValue;
+                      drDnArrivalWhen = newValue;
                     });
                   },
                   items: <String>['바로 도착', '예약 하기']
@@ -137,7 +137,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           style: smallTextStyle(),
                         ),
                         DropdownButton<String>(
-                          value: drdn_departureWay,
+                          value: drDnDepartureWay,
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
@@ -148,7 +148,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           ),
                           onChanged: (String newValue) {
                             setState(() {
-                              drdn_departureWay = newValue;
+                              drDnDepartureWay = newValue;
                             });
                           },
                           items: <String>[
@@ -175,7 +175,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           style: smallTextStyle(),
                         ),
                         DropdownButton<String>(
-                          value: drdn_arrivalWay,
+                          value: drDnArrivalWay,
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
@@ -186,7 +186,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           ),
                           onChanged: (String newValue) {
                             setState(() {
-                              drdn_arrivalWay = newValue;
+                              drDnArrivalWay = newValue;
                             });
                           },
                           items: <String>[
@@ -217,7 +217,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           style: smallTextStyle(),
                         ),
                         DropdownButton<String>(
-                          value: drdn_carSize,
+                          value: drDnCarSize,
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
@@ -228,7 +228,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           ),
                           onChanged: (String newValue) {
                             setState(() {
-                              drdn_carSize = newValue;
+                              drDnCarSize = newValue;
                             });
                           },
                           items: <String>[
@@ -264,7 +264,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           style: smallTextStyle(),
                         ),
                         DropdownButton<String>(
-                          value: drdn_carKinds,
+                          value: drDnCarKinds,
                           icon: const Icon(Icons.arrow_downward),
                           iconSize: 24,
                           elevation: 16,
@@ -275,7 +275,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           ),
                           onChanged: (String newValue) {
                             setState(() {
-                              drdn_carKinds = newValue;
+                              drDnCarKinds = newValue;
                             });
                           },
                           items: <String>[
