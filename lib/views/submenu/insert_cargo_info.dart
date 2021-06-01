@@ -14,8 +14,8 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
   bool isAgain = false;
   String drdn_reserve_when = '지금 바로';
   String drdn_arrival_when = '바로 도착';
-  String drdn_departureWay = '수작업 없음';
-  String drdn_arrivalWay = '수작업 없음';
+  String drdn_departureWay = '수작업';
+  String drdn_arrivalWay = '수작업';
   String drdn_carSize = '-';
   String drdn_carKinds = '상관 없음';
 
