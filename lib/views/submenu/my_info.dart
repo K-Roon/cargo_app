@@ -1,6 +1,10 @@
+
+import 'package:cargo_app/views/submenu/change_my_info_phone.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'change_my_info_email.dart';
 
 class MyInfo extends StatefulWidget {
   const MyInfo({Key key}) : super(key: key);
@@ -49,11 +53,12 @@ class _MyInfoState extends State<MyInfo> {
             ),
             Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(width: 1, color: Colors.black26)),
                 child: Table(
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   columnWidths: {
                     0: FractionColumnWidth(.3),
                     1: FractionColumnWidth(.6),
@@ -72,7 +77,11 @@ class _MyInfoState extends State<MyInfo> {
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
-                        Container()
+                        TextButton(
+                            onPressed: () {
+                              print("ID");
+                            },
+                            child: Container()),
                       ],
                     ),
                     TableRow(
@@ -87,7 +96,20 @@ class _MyInfoState extends State<MyInfo> {
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
-                        Container()
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChangeMyEmail(
+                                          userEmail != null
+                                              ? userEmail
+                                              : "LOADING..")));
+                            },
+                            child: Icon(
+                              Icons.navigate_next_rounded,
+                              color: Colors.black,
+                            )),
                       ],
                     ),
                     TableRow(
@@ -102,7 +124,20 @@ class _MyInfoState extends State<MyInfo> {
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
-                        Container()
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChangeMyPhone(
+                                          userPhoneNum != null
+                                              ? userPhoneNum
+                                              : "LOADING..")));
+                            },
+                            child: Icon(
+                              Icons.navigate_next_rounded,
+                              color: Colors.black,
+                            )),
                       ],
                     ),
                   ],

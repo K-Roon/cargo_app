@@ -21,8 +21,32 @@ class _PaymentListState extends State<PaymentList> {
   TextEditingController cardPwBiz = new TextEditingController();
   TextEditingController bizNumBiz = new TextEditingController();
 
+  String personalCardName;
+  String personalCardNo;
+  String personalCardValid;
+  String personalCardPw;
+  String personalCardBirthday;
+
+  String bizCardName;
+  String bizCardNo;
+  String bizCardValid;
+  String bizCardPw;
+  String bizCardBizNum;
+
   @override
   Widget build(BuildContext context) {
+    hasNamePersonal.text = personalCardName;
+    cardNoPersonal.text = personalCardNo;
+    validPersonal.text = personalCardValid;
+    cardPwPersonal.text = personalCardPw;
+    birthDayPersonal.text = personalCardBirthday;
+
+    hasNameBiz.text = bizCardName;
+    cardNoBiz.text = bizCardNo;
+    validBiz.text = bizCardValid;
+    cardPwBiz.text = bizCardPw;
+    bizNumBiz.text = bizCardBizNum;
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -58,50 +82,114 @@ class _PaymentListState extends State<PaymentList> {
             bizCard(),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: ElevatedButton(
+          onPressed: () {
+            ChangeMyCard();
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue,
+            alignment: Alignment.center,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(0))),
+          ),
+          child: Container(
+              height: 80,
+              alignment: Alignment.center,
+              child: Text(
+                "카드변경",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              )),
+        ),
       ),
     );
   }
 
   personalCard() {
-    return Form(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: TextInputDeco.default_value("소유주 이름"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: hasNamePersonal,
-            keyboardType: TextInputType.text,
-          ), Container(),
-          TextFormField(
-            obscureText: true,
-            decoration: TextInputDeco.default_value("카드번호(****-****-****-****)"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: cardNoPersonal,
-            keyboardType: TextInputType.text,
+        children: [
+          Form(
+            child: Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: TextFormField(
+                        decoration: TextInputDeco.payment("소유주 이름"),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: hasNamePersonal,
+                        keyboardType: TextInputType.text,
+                      ),
+                    ),
+                    Container(),
+                  ],
+                ),
+              ],
+            ),
           ),
-          TextFormField(
-            decoration: TextInputDeco.default_value("유효기간(MM/YY)"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: validPersonal,
-            keyboardType: TextInputType.text,
+          Form(
+            child: Padding(
+              padding: EdgeInsets.all(5),
+              child: TextFormField(
+                obscureText: true,
+                decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
+                style: TextStyle(color: Colors.blue, fontSize: 16),
+                textInputAction: TextInputAction.next,
+                controller: cardNoPersonal,
+                keyboardType: TextInputType.text,
+              ),
+            ),
           ),
-          TextFormField(
-            decoration: TextInputDeco.default_value("생년월일(YYMMDD)"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: birthDayPersonal,
-            keyboardType: TextInputType.text,
-          ),
-          TextFormField(
-            obscureText: true,
-            decoration: TextInputDeco.default_value("카드 비밀번호 앞 2자리"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: cardPwPersonal,
-            keyboardType: TextInputType.text,
+          Form(
+            child: Column(
+              children: [
+                Table(
+                  children: [
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: TextFormField(
+                            decoration: TextInputDeco.payment("유효기간(MM/YY)"),
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            textInputAction: TextInputAction.next,
+                            controller: validPersonal,
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: TextFormField(
+                            decoration: TextInputDeco.payment("생년월일(YYMMDD)"),
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            textInputAction: TextInputAction.next,
+                            controller: birthDayPersonal,
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    textInputAction: TextInputAction.next,
+                    controller: cardPwPersonal,
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -109,48 +197,97 @@ class _PaymentListState extends State<PaymentList> {
   }
 
   bizCard() {
-    return Form(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: TextInputDeco.default_value("소유주 이름"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: hasNameBiz,
-            keyboardType: TextInputType.text,
-          ), Container(),
-          TextFormField(
-            obscureText: true,
-            decoration: TextInputDeco.default_value("카드번호(****-****-****-****)"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: cardNoBiz,
-            keyboardType: TextInputType.text,
+        children: [
+          Form(
+            child: Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: [
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: TextFormField(
+                        decoration: TextInputDeco.payment("소유주 이름"),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: hasNameBiz,
+                        keyboardType: TextInputType.text,
+                      ),
+                    ),
+                    Container(),
+                  ],
+                ),
+              ],
+            ),
           ),
-          TextFormField(
-            decoration: TextInputDeco.default_value("유효기간(MM/YY)"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: validBiz,
-            keyboardType: TextInputType.text,
+          Form(
+            child: Padding(
+              padding: EdgeInsets.all(5),
+              child: TextFormField(
+                obscureText: true,
+                decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
+                style: TextStyle(color: Colors.blue, fontSize: 16),
+                textInputAction: TextInputAction.next,
+                controller: cardNoBiz,
+                keyboardType: TextInputType.text,
+              ),
+            ),
           ),
-          TextFormField(
-            decoration: TextInputDeco.default_value("사업자번호"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: bizNumBiz,
-            keyboardType: TextInputType.text,
-          ),
-          TextFormField(
-            obscureText: true,
-            decoration: TextInputDeco.default_value("카드 비밀번호 앞 2자리"),
-            style: TextStyle(color: Colors.blue, fontSize: 16),
-            textInputAction: TextInputAction.next,
-            controller: cardPwBiz,
-            keyboardType: TextInputType.text,
+          Form(
+            child: Column(
+              children: [
+                Table(
+                  children: [
+                    TableRow(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: TextFormField(
+                            decoration:
+                                TextInputDeco.payment("유효기간(MM/YY)"),
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            textInputAction: TextInputAction.next,
+                            controller: validBiz,
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: TextFormField(
+                            decoration: TextInputDeco.payment("사업자번호"),
+                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            textInputAction: TextInputAction.next,
+                            controller: bizNumBiz,
+                            keyboardType: TextInputType.text,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    textInputAction: TextInputAction.next,
+                    controller: cardPwBiz,
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
+  }
+
+  void ChangeMyCard() {
+    print("카드변경");
   }
 }
