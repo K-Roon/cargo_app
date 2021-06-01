@@ -306,19 +306,161 @@ Widget homeDrawer(BuildContext context) {
               ListTile(
                 title: Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
                 onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
                   Navigator.pop(context);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          elevation: 0.0,
+                          titlePadding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(10))),
+                              padding: EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "안내",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          contentPadding: EdgeInsets.only(top: 10),
+                          content: Text(
+                            "1:1 고객 채팅 페이지로 이동합니다.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.black, fontSize: 15),
+                          ),
+                          actionsPadding: EdgeInsets.symmetric(horizontal: 10),
+                          actionsOverflowButtonSpacing: 10,
+                          actionsOverflowDirection: VerticalDirection.down,
+                          actions: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  alignment: Alignment.center,
+                                  primary: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.blue),
+                                ),
+                                child: Text(
+                                  "취소",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.blue),
+                                ),
+                                child: Text(
+                                  "1:1상담",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
               ),
               ListTile(
                 title: Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
                 onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
                   Navigator.pop(context);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          elevation: 0.0,
+                          titlePadding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(10))),
+                              padding: EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "안내",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          contentPadding: EdgeInsets.only(top: 10),
+                          content: Text(
+                            "접속중인 기기에서 로그아웃 하시겠습니까?",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.black, fontSize: 15),
+                          ),
+                          actionsPadding: EdgeInsets.symmetric(horizontal: 10),
+                          actionsOverflowButtonSpacing: 10,
+                          actionsOverflowDirection: VerticalDirection.down,
+                          actions: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  alignment: Alignment.center,
+                                  primary: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.blue),
+                                ),
+                                child: Text(
+                                  "취소",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.blue),
+                                ),
+                                child: Text(
+                                  "로그아웃",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
               ),
             ],
