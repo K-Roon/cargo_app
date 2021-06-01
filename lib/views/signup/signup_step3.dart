@@ -17,10 +17,12 @@ class SignUp_Step3 extends StatefulWidget {
   final String phone_number;
   final String biz_num;
 
-  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number, this.biz_num);
+  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number,
+      this.biz_num);
 
   @override
-  _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose, this.name, this.id, this.email, this.phone_number, this.biz_num);
+  _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose,
+      this.name, this.id, this.email, this.phone_number, this.biz_num);
 }
 
 class _SignUp_Step3State extends State<SignUp_Step3> {
@@ -38,7 +40,8 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   bool isLoading = false;
   bool isAvailable = false;
 
-  _SignUp_Step3State(this.purpose, this.name, this.id, this.email, this.phone_number, this.biz_num);
+  _SignUp_Step3State(this.purpose, this.name, this.id, this.email,
+      this.phone_number, this.biz_num);
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -146,13 +149,13 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
             return AlertDialog(
               elevation: 0.0,
               titlePadding: EdgeInsets.zero,
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               title: Container(
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(10))),
+                          BorderRadius.vertical(top: Radius.circular(10))),
                   padding: EdgeInsets.all(10),
                   alignment: Alignment.center,
                   child: Text(
@@ -172,14 +175,12 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
               actions: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Home()));
                   },
                   child: Container(
                       alignment: Alignment.center,
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width,
+                      width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
                           color: Colors.blue,
@@ -192,13 +193,10 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                 )
               ],
             );
-          }
-      );
+          });
     }
   }
 }
 
 /// 여기에 회원정보등록 입력.
-void SignupMember() {
-
-}
+void SignupMember() {}
