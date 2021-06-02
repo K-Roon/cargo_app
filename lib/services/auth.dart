@@ -15,26 +15,6 @@ class AuthService {
     return user != null ? ModelsUser(uid: user.uid) : null;
   }
 
-  ///가장 일반적인 방식인 이메일 및 비밀번호로 로그인 하는 방식 입니다.
-  ///email 및 password를 String 값으로 받아옵니다.
-  ///옳지 않은 값이 있는 경우 null 값을 반환합니다.
-  Future signInWithEmailAndPassword(String email, String password) async {
-    try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      User user = result.user;
-      //return _userFromFirebaseUser(user);
-      return null;
-    } catch (e) {
-      print(e.toString());
-      return e.toString();
-    }
-  }
-
-  Future signInWithCredential(Credential credential) async {
-    //_auth.signInWithPhoneNumber(phoneNumber);
-  }
-
   ///가장 일반적인 방식인 이메일 및 비밀번호로 가입 하는 방식 입니다.
   ///email 및 password를 String 값으로 받아옵니다.
   ///이미 가입되어있는 이메일로 가입을 한 경우 null 값을 반환합니다.
@@ -44,10 +24,28 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      //return _userFromFirebaseUser(user);
-      return null;
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print("에러: ${e.toString()}");
+      return e.toString();
+    }
+  }
+
+  /// 가장 일반적인 방식인 이메일 및 비밀번호로 로그인 하는 방식입니다.
+  ///
+  ///그러나!!
+  /// Auth 정보에는 이메일과 비밀번호를 등록하지만
+  /// 로그인 할 때는 아이디와 비밀번호를 가져오므로,
+  ///email 정보는 클라우드-파이어스토어를 통해 가져와야 합니다.
+  ///비밀번호가 옳지 않은경우 null 값을 반환합니다.
+  Future signInWithAccount(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
       return e.toString();
     }
   }

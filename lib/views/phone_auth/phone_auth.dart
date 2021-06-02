@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 
 class PhoneAuth extends StatefulWidget {
   final String purpose;
+  final bool marketing;
 
   ///test
-  PhoneAuth(this.purpose);
+  PhoneAuth(this.purpose, {this.marketing});
 
   @override
-  _PhoneAuthState createState() => _PhoneAuthState(purpose);
+  _PhoneAuthState createState() => _PhoneAuthState(this.purpose, marketing: this.marketing);
 }
 
 // ignore: non_constant_identifier_names
@@ -21,8 +22,8 @@ class _PhoneAuthState extends State<PhoneAuth> {
   bool isLoading = false;
 
   final String purpose;
-
-  _PhoneAuthState(this.purpose);
+  final bool marketing;
+  _PhoneAuthState(this.purpose, {this.marketing});
 
   submit() async {
     if (phoneFormKey.currentState.validate()) {}
@@ -85,7 +86,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
     if (phone_num.text.isEmpty) {
       showErrorAlertDialog(context, "전화번호를 입력해주세요.");
     } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneAuth2(this.purpose, phone_num.text)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneAuth2(this.purpose, phone_num.text, marketing: this.marketing,)));
     }
   }
 

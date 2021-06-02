@@ -1,3 +1,4 @@
+import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -8,12 +9,12 @@ import 'package:flutter/material.dart';
 class PhoneAuth2 extends StatefulWidget {
   final String purpose2;
   final String getPhoneNum;
+  final bool marketing;
 
-  ///test
-  PhoneAuth2(this.purpose2, this.getPhoneNum);
+  PhoneAuth2(this.purpose2, this.getPhoneNum, {this.marketing});
 
   @override
-  _PhoneAuth2State createState() => _PhoneAuth2State(purpose2, getPhoneNum);
+  _PhoneAuth2State createState() => _PhoneAuth2State(purpose2, getPhoneNum, marketing: marketing);
 }
 
 TextEditingController otp_num = new TextEditingController();
@@ -24,9 +25,10 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   bool isCorrect = true;
   final String purpose2;
   final String getPhoneNum;
+  final bool marketing;
   String otpNum = "";
 
-  _PhoneAuth2State(this.purpose2, this.getPhoneNum);
+  _PhoneAuth2State(this.purpose2, this.getPhoneNum, {this.marketing});
 
   ///서버에서 인증번호를 보내게 요청하는 메서드 입니다.
   ///
@@ -145,8 +147,11 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
   void compelete() {
     if (otp_num.text == "0000") {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum, purpose2)));
+      if(purpose2 == Purpose_Helper.signup_personal || purpose2 == Purpose_Helper.signup_biz) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum, purpose2, marketing)));
+      }
+
     } else {
       showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
     }

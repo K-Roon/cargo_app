@@ -1,7 +1,10 @@
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -26,6 +29,25 @@ class _SignInState extends State<SignIn> {
       showErrorAlertDialog(context, "ID를 입력해주세요");
     } else if (passwordController.text.isEmpty) {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요");
+    } else {
+      QuerySnapshot userSnapshot =
+          await DatabaseMethods().getEmailById(idController.text);
+      if (userSnapshot.docs[0].get("userId") != null ||
+          userSnapshot.docs[0].get("userId") != "" ||
+          userSnapshot.docs[0].get("email") != null ||
+          userSnapshot.docs[0].get("email") != "") {
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
+        HelperFunctions.saveUserNameSharedPreference(
+            userSnapshot.docs[0].get("name"));
+        HelperFunctions.saveUserEmailSharedPreference(
+            userSnapshot.docs[0].get("email"));
+        HelperFunctions.saveUserIdSharedPreference(idController.text);
+
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Home()));
+      } else {
+        showErrorAlertDialog(context, "ID를 찾을 수 없습니다");
+      }
     }
   }
 

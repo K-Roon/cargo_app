@@ -22,6 +22,23 @@ class DatabaseMethods {
         .get();
   }
 
+  ///중복되는 ID를 봅니다.
+  ///Null 값을 받아오는지 단순히 체크하기 위함이므로,
+  ///사실상 TEST 코드입니다.
+  getDuplicateId(String userId) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .where("userId", isEqualTo: userId)
+        .get();
+  }
+
+  getEmailById(String userId) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .where("userId", isEqualTo: userId)
+        .get();
+  }
+
   ///사용자의 이메일로 검색
   getUserByEmail(String userEmail) async {
     return await FirebaseFirestore.instance

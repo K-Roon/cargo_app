@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/auth.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,14 +18,13 @@ class SignUp_Step3 extends StatefulWidget {
   final String id;
   final String email;
   final String phone_number;
-  final String biz_num;
+  final bool marketing;
 
-  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number,
-      this.biz_num);
+  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number, this.marketing);
 
   @override
   _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose,
-      this.name, this.id, this.email, this.phone_number, this.biz_num);
+      this.name, this.id, this.email, this.phone_number, this.marketing);
 }
 
 class _SignUp_Step3State extends State<SignUp_Step3> {
@@ -31,7 +33,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   final String id;
   final String email;
   final String phone_number;
-  final String biz_num;
+  final bool marketing;
 
   final pwRegister_FormKey = GlobalKey<FormState>();
   TextEditingController pw = new TextEditingController();
@@ -41,7 +43,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   bool isAvailable = false;
 
   _SignUp_Step3State(this.purpose, this.name, this.id, this.email,
-      this.phone_number, this.biz_num);
+      this.phone_number, this.marketing);
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -49,6 +51,10 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
 
   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+  HelperFunctions helperFunctions = new HelperFunctions();
+  AuthService authService = new AuthService();
+  DatabaseMethods databaseMethods = new DatabaseMethods();
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -142,7 +148,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
     } else if (pw.text != pw_confirm.text) {
       showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
     } else {
-      SignupMember();
+      signupMember();
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -196,7 +202,41 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
           });
     }
   }
+  /// 여기에 회원정보등록 입력.
+  signupMember() async {
+    setState(() {
+      isLoading = true;
+    });
+    await authService
+        .signUpWithEmailAndPassword(
+        this.email, passwordController.text)
+        .then((val) {
+      if (val != null) {
+        Map<String, dynamic> userDataMap = {
+          "email": this.email,
+          "name": this.name,
+          "userId": this.id,
+          "purpose": this.purpose,
+          "phonenum": this.phone_number,
+          "marketing_SMS": this.marketing,
+          "marketing_Email": this.marketing,
+          "point": 0
+        };
+
+        databaseMethods.uploadUserInfo(this.id, userDataMap);
+
+        HelperFunctions.saveUserLoggedInSharedPreference(true);
+        HelperFunctions.saveUserNameSharedPreference(
+            this.name);
+        HelperFunctions.saveUserEmailSharedPreference(
+            this.email);
+        HelperFunctions.saveUserIdSharedPreference(this.id);
+
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Home()));
+      }
+    });
+  }
 }
 
-/// 여기에 회원정보등록 입력.
-void SignupMember() {}
+
