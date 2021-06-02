@@ -135,7 +135,7 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        PhoneAuth(Purpose_Helper.signup_biz)));
+                        PhoneAuth(Purpose_Helper.signup_biz, marketing: marketingAgreement,)));
           } else {
             showErrorAlertDialog(context, "약관에 동의 해주세요");
           }

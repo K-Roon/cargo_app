@@ -1,5 +1,4 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/views/signup/signup_policy_biz.dart';
 import 'package:cargo_app/views/signup/signup_policy_personal.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class SignUp_Step1 extends StatefulWidget {
-  ///test
   SignUp_Step1();
 
   @override
@@ -18,7 +16,7 @@ class SignUp_Step1 extends StatefulWidget {
 // ignore: camel_case_types
 class _SignUp_Step1State extends State<SignUp_Step1> {
   bool isLoading = false;
-
+  _SignUp_Step1State();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
