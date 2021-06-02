@@ -24,7 +24,7 @@ class AuthService {
       return _userFromFirebaseUser(user);
     } catch (e) {
       print("에러: ${e.toString()}");
-      return e.toString();
+      return null;
     }
   }
 
@@ -40,9 +40,9 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      return _userFromFirebaseUser(user);
+      return null;
     } catch (e) {
-      print(e.toString());
+      print("ERROR!!:: ${e.toString()}");
       return e.toString();
     }
   }
@@ -60,7 +60,7 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (e) {
-      print(e.toString());
+      print("ERROR!!: ${e.toString()}");
       return null;
     }
   }

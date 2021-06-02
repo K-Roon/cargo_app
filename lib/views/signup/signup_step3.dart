@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/models/user.dart';
 import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -20,7 +22,8 @@ class SignUp_Step3 extends StatefulWidget {
   final String phone_number;
   final bool marketing;
 
-  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number, this.marketing);
+  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number,
+      this.marketing);
 
   @override
   _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose,
@@ -147,69 +150,21 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요.");
     } else if (pw.text != pw_confirm.text) {
       showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
+    } else if (pw.text.length < 6){
+      showErrorAlertDialog(context, "6자리 이상의 비밀번호를 입력하세요.");
     } else {
       signupMember();
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              elevation: 0.0,
-              titlePadding: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              title: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10))),
-                  padding: EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "안내",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  )),
-              contentPadding: EdgeInsets.only(top: 10),
-              content: Text(
-                "회원가입이 성공적으로\n완료되었습니다.",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-              actionsPadding: EdgeInsets.all(10),
-              actions: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Home()));
-                  },
-                  child: Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(3)),
-                      child: Text(
-                        "확인",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      )),
-                )
-              ],
-            );
-          });
     }
   }
+
   /// 여기에 회원정보등록 입력.
   signupMember() async {
     setState(() {
       isLoading = true;
     });
+    print(this.email);
     await authService
-        .signUpWithEmailAndPassword(
-        this.email, passwordController.text)
+        .signUpWithEmailAndPassword(this.email, pw.text)
         .then((val) {
       if (val != null) {
         Map<String, dynamic> userDataMap = {
@@ -220,23 +175,68 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
           "phonenum": this.phone_number,
           "marketing_SMS": this.marketing,
           "marketing_Email": this.marketing,
-          "point": 0
+          "point": 0,
+          "userUID": ModelsUser().uid.toString()
         };
 
         databaseMethods.uploadUserInfo(this.id, userDataMap);
 
         HelperFunctions.saveUserLoggedInSharedPreference(true);
-        HelperFunctions.saveUserNameSharedPreference(
-            this.name);
-        HelperFunctions.saveUserEmailSharedPreference(
-            this.email);
+        HelperFunctions.saveUserNameSharedPreference(this.name);
+        HelperFunctions.saveUserEmailSharedPreference(this.email);
         HelperFunctions.saveUserIdSharedPreference(this.id);
-
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home()));
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                elevation: 0.0,
+                titlePadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                title: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(10))),
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "안내",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    )),
+                contentPadding: EdgeInsets.only(top: 10),
+                content: Text(
+                  "회원가입이 성공적으로\n완료되었습니다.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                ),
+                actionsPadding: EdgeInsets.all(10),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Home()));
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(3)),
+                        child: Text(
+                          "확인",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        )),
+                  )
+                ],
+              );
+            });
       }
     });
   }
 }
-
-

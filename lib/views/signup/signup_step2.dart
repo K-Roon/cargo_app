@@ -157,20 +157,18 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
     } else if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일를 입력해주세요.");
     } else {
-      QuerySnapshot userSnapshot =
-          await DatabaseMethods().getDuplicateId(identify.text);
-      print("INFORMATION: ${userSnapshot.docs[0].get("userId")}");
-      if (userSnapshot.docs[0].get("userId") == null ||
-          userSnapshot.docs[0].get("userId") == "") {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SignUp_Step3(purpose, name.text,
-                    identify.text, email.text, phone, marketing)));
-      } else {
-        showErrorAlertDialog(context, "아이디가 중복되는 것 같습니다.");
-        identify.text = "";
-      }
+     await DatabaseMethods().getDuplicateId(identify.text).then((value) {
+       if (value == null) {
+         Navigator.push(
+             context,
+             MaterialPageRoute(
+                 builder: (context) => SignUp_Step3(purpose, name.text,
+                     identify.text, email.text, phone, marketing)));
+       } else {
+         showErrorAlertDialog(context, "아이디가 중복되는 것 같습니다.");
+         identify.text = "";
+       }
+     });
     }
   }
 }

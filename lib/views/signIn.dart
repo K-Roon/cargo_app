@@ -1,4 +1,5 @@
 import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
@@ -36,15 +37,27 @@ class _SignInState extends State<SignIn> {
           userSnapshot.docs[0].get("userId") != "" ||
           userSnapshot.docs[0].get("email") != null ||
           userSnapshot.docs[0].get("email") != "") {
-        HelperFunctions.saveUserLoggedInSharedPreference(true);
-        HelperFunctions.saveUserNameSharedPreference(
-            userSnapshot.docs[0].get("name"));
-        HelperFunctions.saveUserEmailSharedPreference(
-            userSnapshot.docs[0].get("email"));
-        HelperFunctions.saveUserIdSharedPreference(idController.text);
+        print("EMAIL:: ${userSnapshot.docs[0].get("email")}");
+        await AuthService()
+            .signInWithAccount(userSnapshot.docs[0].get("email"),
+                passwordController.text)
+            .then((result) async {
+          if (result == null) {
+            HelperFunctions.saveUserLoggedInSharedPreference(true);
+            HelperFunctions.saveUserNameSharedPreference(
+                userSnapshot.docs[0].get("name"));
+            HelperFunctions.saveUserEmailSharedPreference(
+                userSnapshot.docs[0].get("email"));
+            HelperFunctions.saveUserIdSharedPreference(idController.text);
 
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          } else if (result.contains("wrong-password")) {
+            showErrorAlertDialog(context, "ID나 비밀번호를 찾을 수 없습니다.");
+          } else {
+            showErrorAlertDialog(context, "알 수 없는 오류: $result");
+          }
+        });
       } else {
         showErrorAlertDialog(context, "ID를 찾을 수 없습니다");
       }

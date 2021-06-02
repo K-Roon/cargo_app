@@ -446,19 +446,12 @@ Widget homeDrawer(BuildContext context) {
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  AuthService().signOut().then((value) {
-                                    if (value != null) {
+                                  AuthService().signOut();
                                       HelperFunctions.saveUserLoggedInSharedPreference(false);
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => SignIn()));
-                                    } else {
-                                      showErrorAlertDialog(
-                                          context, "로그아웃 중 오류가 발생했어요.");
-                                    }
-                                  });
-                                  Navigator.pop(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.blue,
