@@ -1,8 +1,5 @@
-import 'dart:html';
-
 import 'package:cargo_app/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 ///사용자의 인증 기능을 담당합니다.
 ///로그인/아웃 등 기본기능부터 구글 연동 로그인(예정)까지 다뤄 보안상으로 매우 중요합니다.
