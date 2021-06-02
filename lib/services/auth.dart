@@ -70,9 +70,6 @@ class AuthService {
 
   Future changeEmail(String email, String newEmail) async {
     try {
-      FirebaseAuth.instance.currentUser.updateEmail(newEmail).then((value) {
-        print("OK");
-      });
       return null;
     } catch (e) {
       return e.toString();

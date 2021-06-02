@@ -230,12 +230,6 @@ class _SignInState extends State<SignIn> {
         onPressed: () {
           signIn();
         },
-
-        ///TODO: 개발 완료시 제거 필요
-        onLongPress: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Home()));
-        },
         style: ElevatedButton.styleFrom(
           primary: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),
           alignment: Alignment.center,

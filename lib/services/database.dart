@@ -63,6 +63,19 @@ class DatabaseMethods {
         .get();
   }
 
+  ///사용자 정보 업데이트
+  changeNewInfo(String newInfoCategory, String newInfo) {
+    FirebaseFirestore.instance.collection("users").doc(Constants.myId).update({
+      newInfoCategory: newInfo
+    });
+  }
+
+  ///사용자 정보 업데이트(부울)
+  changeNewInfoBool(String newInfoCategory, bool newInfo) {
+    FirebaseFirestore.instance.collection("users").doc(Constants.myId).update({
+      newInfoCategory: newInfo
+    });
+  }
 
   ///사용자가 초대되어있는 대화방 모두 불러오기
   getChatRooms(String userId) async {

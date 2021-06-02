@@ -3,6 +3,7 @@ class Constants {
   static String myId = "";
   static String userEmail = "";
   static String userPhoneNum = "";
+  static String passWord = "";
   static bool receiveEmail = false;
   static bool receiveSMS = false;
 

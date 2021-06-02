@@ -19,9 +19,21 @@ class MyInfo extends StatefulWidget {
 class _MyInfoState extends State<MyInfo> {
   @override
   void initState() {
+    updateMyInfo();
     super.initState();
   }
 
+  void updateMyInfo() async {
+    await DatabaseMethods()
+        .getUserInfoDB(Constants.myId.toString())
+        .then((value) {
+      QuerySnapshot querySnapshot = value;
+      Constants.userEmail = querySnapshot.docs[0].get("email");
+      Constants.userPhoneNum = querySnapshot.docs[0].get("phonenum");
+      Constants.receiveEmail = querySnapshot.docs[0].get("marketing_Email");
+      Constants.receiveSMS = querySnapshot.docs[0].get("marketing_SMS");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -178,8 +190,7 @@ class _MyInfoState extends State<MyInfo> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        Constants.receiveEmail =
-                            !Constants.receiveEmail;
+                        Constants.receiveEmail = !Constants.receiveEmail;
                       });
                     },
                     child: Row(
@@ -198,6 +209,7 @@ class _MyInfoState extends State<MyInfo> {
                             onChanged: (bool value) {
                               setState(() {
                                 Constants.receiveEmail = value;
+                                DatabaseMethods().changeNewInfoBool("marketing_Email", Constants.receiveEmail);
                               });
                             },
                           ),
@@ -209,6 +221,7 @@ class _MyInfoState extends State<MyInfo> {
                     onTap: () {
                       setState(() {
                         Constants.receiveSMS = !Constants.receiveSMS;
+
                       });
                     },
                     child: Row(
@@ -223,10 +236,13 @@ class _MyInfoState extends State<MyInfo> {
                         Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
-                            value: Constants.receiveSMS != null ? Constants.receiveSMS : false,
+                            value: Constants.receiveSMS != null
+                                ? Constants.receiveSMS
+                                : false,
                             onChanged: (bool value) {
                               setState(() {
                                 Constants.receiveSMS = value;
+                                DatabaseMethods().changeNewInfoBool("marketing_SMS", Constants.receiveSMS);
                               });
                             },
                           ),

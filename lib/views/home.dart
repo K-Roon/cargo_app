@@ -30,6 +30,7 @@ class _HomeState extends State<Home> {
   setHome() async {
     Constants.myName = await HelperFunctions.getUserNameSharedPreference();
     Constants.myId = await HelperFunctions.getUserIdSharedPreference();
+    Constants.passWord = await HelperFunctions.getUserPWSharedPreference();
     await DatabaseMethods()
         .getUserInfoDB(Constants.myId.toString())
         .then((value) {

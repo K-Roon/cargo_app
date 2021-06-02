@@ -1,3 +1,6 @@
+import 'package:cargo_app/helper/constants.dart';
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,8 +16,7 @@ class ChangeMyPhone extends StatefulWidget {
   _ChangeMyPhoneState createState() => _ChangeMyPhoneState(phoneNumber);
 }
 
-// ignore: non_constant_identifier_names
-TextEditingController phone_num = new TextEditingController();
+TextEditingController phone = new TextEditingController();
 
 class _ChangeMyPhoneState extends State<ChangeMyPhone> {
   final phoneFormKey = GlobalKey<FormState>();
@@ -79,7 +81,7 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
                               )),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
-                          controller: phone_num,
+                          controller: phone,
                         ),
                       ),
                     ],
@@ -91,7 +93,7 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          isNotNull();
+          changeIt();
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
@@ -111,12 +113,20 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
     );
   }
 
-  ///전화번호 입력칸이 비어있지 않은지 확인하는 단순한 메서드 입니다.
-  void isNotNull() {
-    if (phone_num.text.isEmpty) {
+  ///실제로 바뀝니다..
+  void changeIt() async {
+    if (phone.text.isEmpty) {
       showErrorAlertDialog(context, "전화번호를 입력해주세요.");
     } else {
-      print("I LOVE YOU");
+      try {
+        DatabaseMethods().changeNewInfo("phonenum", phone.text);
+        showErrorAlertDialog(context,"전화번호가 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
+        Constants.userPhoneNum = phone.text;
+        HelperFunctions.saveUserLoggedInSharedPreference(false);
+      } catch (e) {
+        print("Deletion error $e");
+        showErrorAlertDialog(context,"Something went wrong");
+      }
     }
   }
 }
