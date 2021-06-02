@@ -1,6 +1,10 @@
+import 'package:cargo_app/helper/constants.dart';
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home_departure.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -23,11 +27,24 @@ class _HomeState extends State<Home> {
   bool isAvailable = false;
 
 
-  Home() async {}
+  setHome() async {
+    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+    Constants.myId = await HelperFunctions.getUserIdSharedPreference();
+    await DatabaseMethods()
+        .getUserInfoDB(Constants.myId.toString())
+        .then((value) {
+      QuerySnapshot querySnapshot = value;
+      Constants.userEmail = querySnapshot.docs[0].get("email");
+      Constants.userPhoneNum = querySnapshot.docs[0].get("phonenum");
+      Constants.receiveEmail = querySnapshot.docs[0].get("marketing_Email");
+      Constants.receiveSMS = querySnapshot.docs[0].get("marketing_SMS");
+    });
+  }
 
   @override
   void initState() {
-
+    setHome();
+    super.initState();
   }
 
   @override

@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
             HelperFunctions.saveUserEmailSharedPreference(
                 userSnapshot.docs[0].get("email"));
             HelperFunctions.saveUserIdSharedPreference(idController.text);
-
+            HelperFunctions.saveUserPWSharedPreference(passwordController.text);
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => Home()));
           } else if (result.contains("wrong-password")) {

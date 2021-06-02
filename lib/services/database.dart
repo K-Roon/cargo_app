@@ -45,13 +45,6 @@ class DatabaseMethods {
         .get();
   }
 
-  ///사용자의 이메일로 검색
-  getUserByEmail(String userEmail) async {
-    return await FirebaseFirestore.instance
-        .collection("users")
-        .where("email", isEqualTo: userEmail)
-        .get();
-  }
 
   ///사용자의 친구 목록을 얻어옴.
   getFriends(String userId) async {
@@ -61,6 +54,13 @@ class DatabaseMethods {
         .collection("friends")
         .orderBy("friendName", descending: false)
         .snapshots();
+  }
+
+  Future getUserInfoDB(String userId) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .where("userId", isEqualTo: userId)
+        .get();
   }
 
 

@@ -176,7 +176,6 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
           "marketing_SMS": this.marketing,
           "marketing_Email": this.marketing,
           "point": 0,
-          "userUID": ModelsUser().uid.toString()
         };
 
         databaseMethods.uploadUserInfo(this.id, userDataMap);
@@ -185,6 +184,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
         HelperFunctions.saveUserNameSharedPreference(this.name);
         HelperFunctions.saveUserEmailSharedPreference(this.email);
         HelperFunctions.saveUserIdSharedPreference(this.id);
+        HelperFunctions.saveUserPWSharedPreference(pw.text);
         showDialog(
             context: context,
             builder: (BuildContext context) {
