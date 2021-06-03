@@ -71,57 +71,61 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar_custom(context, ""),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "회원 정보 입력\n",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            Container(
-              height: 10,
-            ),
-            Form(
-              key: pwRegister_FormKey,
+      body: isLoading
+          ? Container(
+              child: Center(child: CircularProgressIndicator()),
+            )
+          : Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "비밀번호 입력",
-                    style: mediumTextStyle(),
+                    "회원 정보 입력\n",
                     textAlign: TextAlign.left,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                   Container(
                     height: 10,
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: textFieldInputDecoration("비밀번호"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: pw,
-                    keyboardType: TextInputType.text,
-                  ),
-                  Container(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: textFieldInputDecoration("비밀번호 확인"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: pw_confirm,
-                    keyboardType: TextInputType.text,
+                  Form(
+                    key: pwRegister_FormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "비밀번호 입력",
+                          style: mediumTextStyle(),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: textFieldInputDecoration("비밀번호"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: pw,
+                          keyboardType: TextInputType.text,
+                        ),
+                        Container(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: textFieldInputDecoration("비밀번호 확인"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: pw_confirm,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
@@ -150,7 +154,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요.");
     } else if (pw.text != pw_confirm.text) {
       showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
-    } else if (pw.text.length < 6){
+    } else if (pw.text.length < 6) {
       showErrorAlertDialog(context, "6자리 이상의 비밀번호를 입력하세요.");
     } else {
       signupMember();
@@ -238,5 +242,6 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
             });
       }
     });
+    isLoading = false;
   }
 }

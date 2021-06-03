@@ -1,7 +1,5 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth_new.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,7 +89,6 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
                     contentPadding: EdgeInsets.all(0),
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text("(선택) 마케팅 정보 수신에 대한 동의"),
-
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     value: marketingAgreement,
@@ -119,7 +116,6 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
                         marketingAgreement = value;
                       });
                     }),
-
               ],
             )
           ],
@@ -128,28 +124,20 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          if(criticalServiceAgreement &&
+          if (criticalServiceAgreement &&
               criticalPersonalInformation &&
               criticalPersonalPosition &&
-              criticalOlderThen14 ) {
-            ///TODO: 휴대폰 인증 코드가 기존처럼 변경된다면 이거 주석 해제 바람.
-            /*
+              criticalOlderThen14) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        PhoneAuth(Purpose_Helper.signup_personal, marketing: marketingAgreement,)));
-                        */
-
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        PhoneAuthNew(Purpose_Helper.signup_personal, marketing: marketingAgreement,)));
+                    builder: (context) => PhoneAuth(
+                          Purpose_Helper.signup_personal,
+                          marketing: marketingAgreement,
+                        )));
           } else {
             showErrorAlertDialog(context, "약관에 동의 해주세요");
           }
-          
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
