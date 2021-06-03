@@ -1,6 +1,8 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/signup/signup_step3.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -8,19 +10,24 @@ import 'package:flutter/painting.dart';
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
 
+///회원 정보 입력 창
 class SignUp_Step2 extends StatefulWidget {
   final String phone_num;
   final String purpose;
-  SignUp_Step2(this.phone_num, this.purpose);
+  final bool marketing;
+
+  SignUp_Step2(this.phone_num, this.purpose, this.marketing);
 
   @override
-  _SignUp_Step2State createState() => _SignUp_Step2State(phone_num, purpose);
+  _SignUp_Step2State createState() =>
+      _SignUp_Step2State(phone_num, purpose, marketing);
 }
 
 class _SignUp_Step2State extends State<SignUp_Step2> {
   final register_FormKey = GlobalKey<FormState>();
   final String phone;
   final String purpose;
+  final bool marketing;
   TextEditingController name = new TextEditingController();
   TextEditingController identify = new TextEditingController();
   TextEditingController email = new TextEditingController();
@@ -28,7 +35,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
   bool isLoading = false;
   bool isAvailable = false;
 
-  _SignUp_Step2State(this.phone, this.purpose);
+  _SignUp_Step2State(this.phone, this.purpose, this.marketing);
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -122,7 +129,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Confirm(this.purpose);
+          confirm(this.purpose);
         },
         style: ElevatedButton.styleFrom(
           primary: Color(0xff0055ff),
@@ -142,7 +149,7 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
     );
   }
 
-  void Confirm(purpose) {
+  Future<void> confirm(purpose) async {
     if (name.text.isEmpty) {
       showErrorAlertDialog(context, "이름을 입력해주세요.");
     } else if (identify.text.isEmpty) {
@@ -150,20 +157,18 @@ class _SignUp_Step2State extends State<SignUp_Step2> {
     } else if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일를 입력해주세요.");
     } else {
-      if(purpose == Purpose_Helper.signup_personal) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    SignUp_Step3(Purpose_Helper.signup_personal, name.text, identify.text, email.text, phone, "null")));
-      }else if(purpose == Purpose_Helper.signup_biz) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    SignUp_Step3(Purpose_Helper.signup_biz, name.text, identify.text, email.text, phone, "null")));
-      }
-
+     await DatabaseMethods().getDuplicateId(identify.text).then((value) {
+       if (value == null) {
+         Navigator.push(
+             context,
+             MaterialPageRoute(
+                 builder: (context) => SignUp_Step3(purpose, name.text,
+                     identify.text, email.text, phone, marketing)));
+       } else {
+         showErrorAlertDialog(context, "아이디가 중복되는 것 같습니다.");
+         identify.text = "";
+       }
+     });
     }
   }
 }

@@ -1,11 +1,11 @@
-import 'dart:html';
+
 
 import 'package:cargo_app/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 ///사용자의 인증 기능을 담당합니다.
-///로그인/아웃 등 기본기능부터 구글 연동 로그인(예정)까지 다뤄 보안상으로 매우 중요합니다.
+///로그인/아웃 등을 다뤄 보안상으로 매우 중요합니다.
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -13,26 +13,6 @@ class AuthService {
   // ignore: deprecated_member_use
   ModelsUser _userFromFirebaseUser(User user) {
     return user != null ? ModelsUser(uid: user.uid) : null;
-  }
-
-  ///가장 일반적인 방식인 이메일 및 비밀번호로 로그인 하는 방식 입니다.
-  ///email 및 password를 String 값으로 받아옵니다.
-  ///옳지 않은 값이 있는 경우 null 값을 반환합니다.
-  Future signInWithEmailAndPassword(String email, String password) async {
-    try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      User user = result.user;
-      //return _userFromFirebaseUser(user);
-      return null;
-    } catch (e) {
-      print(e.toString());
-      return e.toString();
-    }
-  }
-
-  Future signInWithCredential(Credential credential) async {
-    //_auth.signInWithPhoneNumber(phoneNumber);
   }
 
   ///가장 일반적인 방식인 이메일 및 비밀번호로 가입 하는 방식 입니다.
@@ -44,10 +24,28 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
-      //return _userFromFirebaseUser(user);
-      return null;
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print("에러: ${e.toString()}");
+      return null;
+    }
+  }
+
+  /// 가장 일반적인 방식인 이메일 및 비밀번호로 로그인 하는 방식입니다.
+  ///
+  ///그러나!!
+  /// Auth 정보에는 이메일과 비밀번호를 등록하지만
+  /// 로그인 할 때는 아이디와 비밀번호를 가져오므로,
+  ///email 정보는 클라우드-파이어스토어를 통해 가져와야 합니다.
+  ///비밀번호가 옳지 않은경우 null 값을 반환합니다.
+  Future signInWithAccount(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User user = result.user;
+      return null;
+    } catch (e) {
+      print("ERROR!!:: ${e.toString()}");
       return e.toString();
     }
   }
@@ -65,8 +63,16 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (e) {
-      print(e.toString());
+      print("ERROR!!: ${e.toString()}");
       return null;
+    }
+  }
+
+  Future changeEmail(String email, String newEmail) async {
+    try {
+      return null;
+    } catch (e) {
+      return e.toString();
     }
   }
 }

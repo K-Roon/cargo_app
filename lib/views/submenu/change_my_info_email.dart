@@ -1,12 +1,15 @@
-import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
+import 'package:cargo_app/helper/constants.dart';
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/auth.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChangeMyEmail extends StatefulWidget {
   final String myEmail;
 
-  ///test
   ChangeMyEmail(this.myEmail);
 
   @override
@@ -54,7 +57,9 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
                 children: [
                   TableRow(
                     children: [
-                      Container(margin: EdgeInsets.symmetric(vertical: 10),child: Text("현재 이메일 주소")),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text("현재 이메일 주소")),
                       Text(this.myEmail),
                     ],
                   ),
@@ -68,7 +73,8 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
                               hintText: this.myEmail,
                               hintStyle: TextStyle(color: Colors.black26),
                               focusColor: Colors.blue,
-                              contentPadding: EdgeInsets.symmetric(vertical: -5, horizontal: 3.0),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: -5, horizontal: 3.0),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.blue),
                                 borderRadius: BorderRadius.circular(5),
@@ -91,7 +97,7 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          isNotNull();
+          changeIt();
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
@@ -111,12 +117,26 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
     );
   }
 
-  ///전화번호 입력칸이 비어있지 않은지 확인하는 단순한 메서드 입니다.
-  void isNotNull() {
+  ///실제로 바뀝니다..
+  void changeIt() async {
     if (email.text.isEmpty) {
       showErrorAlertDialog(context, "이메일 주소를 입력해주세요.");
     } else {
-      print("I LOVE YOU");
+      try {
+        User user = await FirebaseAuth.instance.currentUser;
+        var credential = EmailAuthProvider.credential(
+            email: user.email, password: Constants.passWord);
+        var result = await user.reauthenticateWithCredential(credential);
+        await result.user.updateEmail(email.text);
+        DatabaseMethods().changeNewInfo("email", email.text);
+        showErrorAlertDialog(context,"이메일이 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
+        Constants.userEmail = email.text;
+        HelperFunctions.saveUserEmailSharedPreference(email.text);
+        HelperFunctions.saveUserLoggedInSharedPreference(false);
+      } catch (e) {
+        print("Deletion error $e");
+        showErrorAlertDialog(context,"Something went wrong");
+      }
     }
   }
 }

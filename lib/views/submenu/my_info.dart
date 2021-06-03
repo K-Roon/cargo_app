@@ -1,6 +1,9 @@
-
+import 'package:cargo_app/helper/constants.dart';
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/submenu/change_my_info_phone.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +17,23 @@ class MyInfo extends StatefulWidget {
 }
 
 class _MyInfoState extends State<MyInfo> {
-  String myName = "홍길동(TEST)";
-  bool _receiveEmail = false;
-  bool _receiveSMS = false;
-  String userID = "umjunsik";
-  String userEmail = "honggilldong@kroon.kr";
-  String userPhoneNum = "01000000000";
+  @override
+  void initState() {
+    updateMyInfo();
+    super.initState();
+  }
+
+  void updateMyInfo() async {
+    await DatabaseMethods()
+        .getUserInfoDB(Constants.myId.toString())
+        .then((value) {
+      QuerySnapshot querySnapshot = value;
+      Constants.userEmail = querySnapshot.docs[0].get("email");
+      Constants.userPhoneNum = querySnapshot.docs[0].get("phonenum");
+      Constants.receiveEmail = querySnapshot.docs[0].get("marketing_Email");
+      Constants.receiveSMS = querySnapshot.docs[0].get("marketing_SMS");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +53,7 @@ class _MyInfoState extends State<MyInfo> {
               height: 10,
             ),
             Text(
-              myName == null ? "(LOADING..)" : myName,
+              Constants.myName == null ? "(LOADING..)" : Constants.myName,
               textAlign: TextAlign.left,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
@@ -73,7 +87,7 @@ class _MyInfoState extends State<MyInfo> {
                           style: TextStyle(color: Colors.grey),
                         ),
                         Text(
-                          userID != null ? userID : "LOADING..",
+                          Constants.myId != "" ? Constants.myId : "LOADING..",
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
@@ -92,7 +106,9 @@ class _MyInfoState extends State<MyInfo> {
                           style: TextStyle(color: Colors.grey),
                         ),
                         Text(
-                          userEmail != null ? userEmail : "LOADING..",
+                          Constants.userEmail != ""
+                              ? Constants.userEmail
+                              : "LOADING..",
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
@@ -102,9 +118,9 @@ class _MyInfoState extends State<MyInfo> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ChangeMyEmail(
-                                          userEmail != null
-                                              ? userEmail
-                                              : "LOADING..")));
+                                          Constants.userEmail != ""
+                                              ? Constants.userEmail
+                                              : false)));
                             },
                             child: Icon(
                               Icons.navigate_next_rounded,
@@ -120,7 +136,9 @@ class _MyInfoState extends State<MyInfo> {
                           style: TextStyle(color: Colors.grey),
                         ),
                         Text(
-                          userPhoneNum != null ? userPhoneNum : "LOADING..",
+                          Constants.userPhoneNum != ""
+                              ? Constants.userPhoneNum
+                              : "LOADING..",
                           textAlign: TextAlign.left,
                           style: TextStyle(color: Colors.black),
                         ),
@@ -130,8 +148,8 @@ class _MyInfoState extends State<MyInfo> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ChangeMyPhone(
-                                          userPhoneNum != null
-                                              ? userPhoneNum
+                                          Constants.userPhoneNum != ""
+                                              ? Constants.userPhoneNum
                                               : "LOADING..")));
                             },
                             child: Icon(
@@ -172,7 +190,7 @@ class _MyInfoState extends State<MyInfo> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        _receiveEmail = !_receiveEmail;
+                        Constants.receiveEmail = !Constants.receiveEmail;
                       });
                     },
                     child: Row(
@@ -187,10 +205,11 @@ class _MyInfoState extends State<MyInfo> {
                         Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
-                            value: _receiveEmail,
+                            value: Constants.receiveEmail,
                             onChanged: (bool value) {
                               setState(() {
-                                _receiveEmail = value;
+                                Constants.receiveEmail = value;
+                                DatabaseMethods().changeNewInfoBool("marketing_Email", Constants.receiveEmail);
                               });
                             },
                           ),
@@ -201,7 +220,8 @@ class _MyInfoState extends State<MyInfo> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        _receiveSMS = !_receiveSMS;
+                        Constants.receiveSMS = !Constants.receiveSMS;
+
                       });
                     },
                     child: Row(
@@ -216,10 +236,13 @@ class _MyInfoState extends State<MyInfo> {
                         Transform.scale(
                           scale: 0.7,
                           child: CupertinoSwitch(
-                            value: _receiveSMS,
+                            value: Constants.receiveSMS != null
+                                ? Constants.receiveSMS
+                                : false,
                             onChanged: (bool value) {
                               setState(() {
-                                _receiveSMS = value;
+                                Constants.receiveSMS = value;
+                                DatabaseMethods().changeNewInfoBool("marketing_SMS", Constants.receiveSMS);
                               });
                             },
                           ),

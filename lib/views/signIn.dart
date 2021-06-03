@@ -1,7 +1,11 @@
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/auth.dart';
+import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -26,6 +30,37 @@ class _SignInState extends State<SignIn> {
       showErrorAlertDialog(context, "ID를 입력해주세요");
     } else if (passwordController.text.isEmpty) {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요");
+    } else {
+      QuerySnapshot userSnapshot =
+          await DatabaseMethods().getEmailById(idController.text);
+      if (userSnapshot.docs[0].get("userId") != null ||
+          userSnapshot.docs[0].get("userId") != "" ||
+          userSnapshot.docs[0].get("email") != null ||
+          userSnapshot.docs[0].get("email") != "") {
+        print("EMAIL:: ${userSnapshot.docs[0].get("email")}");
+        await AuthService()
+            .signInWithAccount(userSnapshot.docs[0].get("email"),
+                passwordController.text)
+            .then((result) async {
+          if (result == null) {
+            HelperFunctions.saveUserLoggedInSharedPreference(true);
+            HelperFunctions.saveUserNameSharedPreference(
+                userSnapshot.docs[0].get("name"));
+            HelperFunctions.saveUserEmailSharedPreference(
+                userSnapshot.docs[0].get("email"));
+            HelperFunctions.saveUserIdSharedPreference(idController.text);
+            HelperFunctions.saveUserPWSharedPreference(passwordController.text);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          } else if (result.contains("wrong-password")) {
+            showErrorAlertDialog(context, "ID나 비밀번호를 찾을 수 없습니다.");
+          } else {
+            showErrorAlertDialog(context, "알 수 없는 오류: $result");
+          }
+        });
+      } else {
+        showErrorAlertDialog(context, "ID를 찾을 수 없습니다");
+      }
     }
   }
 
@@ -194,12 +229,6 @@ class _SignInState extends State<SignIn> {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           signIn();
-        },
-
-        ///TODO: 개발 완료시 제거 필요
-        onLongPress: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Home()));
         },
         style: ElevatedButton.styleFrom(
           primary: isAvailable ? Color(0xff0055ff) : Color(0xff8d9699),

@@ -1,5 +1,8 @@
+import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/views/home.dart';
 import 'package:cargo_app/views/payment_list.dart';
+import 'package:cargo_app/views/signIn.dart';
 import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
 import 'package:cargo_app/views/submenu/my_deliver.dart';
 import 'package:cargo_app/views/submenu/my_info.dart';
@@ -350,8 +353,8 @@ Widget homeDrawer(BuildContext context) {
                                   primary: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
-                                  side: BorderSide(
-                                      width: 1, color: Colors.blue),
+                                  side:
+                                      BorderSide(width: 1, color: Colors.blue),
                                 ),
                                 child: Text(
                                   "취소",
@@ -369,8 +372,8 @@ Widget homeDrawer(BuildContext context) {
                                   primary: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
-                                  side: BorderSide(
-                                      width: 1, color: Colors.blue),
+                                  side:
+                                      BorderSide(width: 1, color: Colors.blue),
                                 ),
                                 child: Text(
                                   "1:1상담",
@@ -430,8 +433,8 @@ Widget homeDrawer(BuildContext context) {
                                   primary: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
-                                  side: BorderSide(
-                                      width: 1, color: Colors.blue),
+                                  side:
+                                      BorderSide(width: 1, color: Colors.blue),
                                 ),
                                 child: Text(
                                   "취소",
@@ -443,14 +446,19 @@ Widget homeDrawer(BuildContext context) {
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  AuthService().signOut();
+                                      HelperFunctions.saveUserLoggedInSharedPreference(false);
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => SignIn()));
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
-                                  side: BorderSide(
-                                      width: 1, color: Colors.blue),
+                                  side:
+                                      BorderSide(width: 1, color: Colors.blue),
                                 ),
                                 child: Text(
                                   "로그아웃",
