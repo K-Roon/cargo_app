@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cargo_app/helper/constants.dart';
@@ -12,10 +13,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
+
+Future<Position> getLocation() async {
+  Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.low);
+  return position;
+}
 
 class Home extends StatefulWidget {
   Home();
@@ -26,9 +36,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _ScaffoldState = GlobalKey<ScaffoldState>();
+  int count = 1;
   bool isLoading = false;
   bool isAvailable = false;
+  Completer<GoogleMapController> _controller = Completer();
 
+  @override
+  void initState() {
+    setHome();
+    permissionLocation();
+    super.initState();
+  }
 
   setHome() async {
     Constants.myName = await HelperFunctions.getUserNameSharedPreference();
@@ -45,17 +63,41 @@ class _HomeState extends State<Home> {
     });
   }
 
-  @override
-  void initState() {
-    setHome();
-    super.initState();
+  Future permissionLocation() async {
+    if (await Permission.locationWhenInUse.request().isGranted) {
+      findMyLocation();
+    } else if (count == 1){
+      showErrorAlertDialog(
+          context,
+          "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
+              "\n(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)");
+      count++;
+    } else {
+      openAppSettings();
+    }
+  }
+
+  Future<void> findMyLocation() async {
+    final GoogleMapController controller = await _controller.future;
+    await getLocation().then((value) {
+      print("위치찾기..");
+      controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(value.latitude, value.longitude),
+        zoom: 16,
+      )));
+    });
   }
 
   Future<bool> _onBackPressed() {
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       SystemNavigator.pop(animated: true);
     }
   }
+
+  static final CameraPosition seoulCityHall = CameraPosition(
+    target: LatLng(37.56666726409609, 126.97841469661337),
+    zoom: 18,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +131,7 @@ class _HomeState extends State<Home> {
                 new FloatingActionButton(
                   heroTag: "getPosition",
                   onPressed: () {
-                    print("GPS POSITION");
+                    permissionLocation();
                   },
                   backgroundColor: Colors.white,
                   elevation: 0.0,
@@ -112,7 +154,17 @@ class _HomeState extends State<Home> {
               )
             : Stack(
                 children: <Widget>[
-                  Container(color: Colors.lime),
+                  GoogleMap(
+                    padding: EdgeInsets.fromLTRB(10, 200, 10, 200),
+                    mapType: MapType.normal,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    compassEnabled: false,
+                    initialCameraPosition: seoulCityHall,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
 
                   ///슬라이드 바 표시
                   slidingUp_Page()
@@ -158,7 +210,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Home_departure(true)));
+                      builder: (context) => HomeDeparture(true)));
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
@@ -181,7 +233,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Home_departure(false)));
+                      builder: (context) => HomeDeparture(false)));
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
@@ -201,5 +253,4 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-
 }

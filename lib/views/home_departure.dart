@@ -1,46 +1,82 @@
-import 'package:cargo_app/views/signup/signup_step1.dart';
-import 'package:cargo_app/views/submenu/insert_cargo_info.dart';
-import 'package:cargo_app/views/submenu/my_deliver.dart';
-import 'package:cargo_app/views/submenu/recommend.dart';
-import 'package:cargo_app/widget/margin_bar.dart';
-import 'package:cargo_app/widget/textInputDeco.dart';
+import 'dart:async';
+
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
-
-class Home_departure extends StatefulWidget {
+Future<Position> getLocation() async {
+  Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.low);
+  return position;
+}
+class HomeDeparture extends StatefulWidget {
   final bool isDeparture;
 
-  Home_departure(this.isDeparture);
+  HomeDeparture(this.isDeparture);
 
   @override
-  _Home_departureState createState() => _Home_departureState(this.isDeparture);
+  _HomeDepartureState createState() => _HomeDepartureState(this.isDeparture);
 }
 
-class _Home_departureState extends State<Home_departure> {
+class _HomeDepartureState extends State<HomeDeparture> {
   final _ScaffoldState = GlobalKey<ScaffoldState>();
+  Completer<GoogleMapController> _controller = Completer();
+  int count = 1;
   final bool isDeparture;
   bool isLoading = false;
   bool isAvailable = false;
   int point = 0;
-  final double _initFabHeight = 120.0;
-  double _fabHeight = 0;
   double _panelHeightOpen = 0;
-  double _panelHeightClosed = 95.0;
 
   final List<Tab> myTabs = <Tab>[
     Tab(text: '최근 주소'),
     Tab(text: '즐겨찾는 주소'),
   ];
 
-  _Home_departureState(this.isDeparture);
+  _HomeDepartureState(this.isDeparture);
+
+  @override
+  void initState() {
+    permissionLocation();
+    super.initState();
+  }
+
+  Future permissionLocation() async {
+    if (await Permission.locationWhenInUse.request().isGranted) {
+      findMyLocation();
+    } else if (count == 1){
+      showErrorAlertDialog(
+          context,
+          "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
+              "\n(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)");
+      count++;
+    } else {
+      openAppSettings();
+    }
+  }
+
+  Future<void> findMyLocation() async {
+    final GoogleMapController controller = await _controller.future;
+    await getLocation().then((value) {
+      print("위치찾기..");
+      controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 16,)));
+    });
+  }
+
+  static final CameraPosition seoulCityHall = CameraPosition(
+    target: LatLng(37.56666726409609, 126.97841469661337),
+    zoom: 18,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +110,7 @@ class _Home_departureState extends State<Home_departure> {
               new FloatingActionButton(
                 heroTag: "getPosition",
                 onPressed: () {
-                  print("GPS POSITION");
+                  permissionLocation();
                 },
                 backgroundColor: Colors.white,
                 elevation: 0.0,
@@ -90,14 +126,23 @@ class _Home_departureState extends State<Home_departure> {
         ],
       ),
       extendBodyBehindAppBar: true,
-      //resizeToAvoidBottomInset: false,
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
             )
           : Stack(
               children: <Widget>[
-                Container(color: Colors.lime),
+                GoogleMap(
+                  padding: EdgeInsets.fromLTRB(10, 200, 10, 200),
+                  mapType: MapType.normal,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  compassEnabled: false,
+                  initialCameraPosition: seoulCityHall,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
 
                 ///슬라이드 바 표시
                 slidingUp_Page()
@@ -153,7 +198,7 @@ class _Home_departureState extends State<Home_departure> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(color: Colors.black26, width: 0.0),
+                              BorderSide(color: Colors.black26, width: 0.0),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         border: OutlineInputBorder(
@@ -172,7 +217,6 @@ class _Home_departureState extends State<Home_departure> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TabBar(tabs: myTabs),
-
                 ],
               ),
             )
@@ -215,5 +259,4 @@ class _Home_departureState extends State<Home_departure> {
       children: [Text("무~야~호")],
     );
   }
-
 }
