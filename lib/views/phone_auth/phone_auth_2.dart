@@ -14,7 +14,8 @@ class PhoneAuth2 extends StatefulWidget {
   PhoneAuth2(this.purpose2, this.getPhoneNum, {this.marketing});
 
   @override
-  _PhoneAuth2State createState() => _PhoneAuth2State(purpose2, getPhoneNum, marketing: marketing);
+  _PhoneAuth2State createState() =>
+      _PhoneAuth2State(purpose2, getPhoneNum, marketing: marketing);
 }
 
 TextEditingController otp_num = new TextEditingController();
@@ -27,7 +28,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   final String getPhoneNum;
   final bool marketing;
   String otpNum = "";
-
+  FirebaseAuth _auth = FirebaseAuth.instance;
   _PhoneAuth2State(this.purpose2, this.getPhoneNum, {this.marketing});
 
   ///서버에서 인증번호를 보내게 요청하는 메서드 입니다.
@@ -38,33 +39,60 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   Future<void> getOTP(String phoneNum) async {
     print("서버에서 인증번호를 보내게 요청함");
     print('+82 ${phoneNum.replaceFirst("0", "", 0)}');
-    FirebaseAuth auth = FirebaseAuth.instance;
-    /*
-    await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+82 ${phoneNum.replaceFirst("0", "", 0)}',
-
-
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        //await auth.signInWithCredential(credential);
-        await print("LOG: VerificationCompleted");
+    await _auth.verifyPhoneNumber(
+      phoneNumber: "+82 ${phoneNum.replaceFirst("0", "", 0)}",
+      verificationCompleted: (phoneAuthCredential) async {
+        setState(() {
+          isLoading = false;
+        });
+        //signInWithPhoneAuthCredential(phoneAuthCredential);
       },
-      verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int resendToken) async {
-        String smsCode = otp_num.text;
-
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
-
-        await print("LOG: CODESENT: ${smsCode}");
-        //await auth.signInWithCredential(credential);
+      verificationFailed: (verificationFailed) async {
+        setState(() {
+          isLoading = false;
+        });
+        showErrorAlertDialog(context, verificationFailed.message);
       },
-      codeAutoRetrievalTimeout: (String verificationId) {},
+      codeSent: (verificationId, resendingToken) async {
+        setState(() {
+          isLoading = false;
+        });
+      },
+      codeAutoRetrievalTimeout: (verificationId) async {},
     );
-*/
+  }
 
-    ///보내어진 인증번호를 받아와서 맞는지 확인해야합니다.
-    ///
-    ///예를 들어, 보내어진 인증번호가 0000인 경우 반환값을 0000으로 해야합니다.
+  void signInWithPhoneAuthCredential(
+      PhoneAuthCredential phoneAuthCredential) async {
+    setState(() {
+      isLoading = true;
+    });
 
+    try {
+      final authCredential =
+      await _auth.signInWithCredential(phoneAuthCredential);
+
+      setState(() {
+        isLoading = false;
+      });
+
+      if (authCredential?.user != null) {
+        if (this.purpose2 == Purpose_Helper.signup_personal ||
+            purpose2 == Purpose_Helper.signup_biz) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SignUp_Step2(getPhoneNum, purpose2, marketing)));
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+
+      showErrorAlertDialog(context, e.toString());
+    }
   }
 
   @override
@@ -88,7 +116,8 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
             Form(
               key: otpFormKey,
               child: TextFormField(
-                decoration: TextInputDeco.default_value("문자인증 API 적용 전 인증번호는 0000 입니다."),
+                decoration: TextInputDeco.default_value(
+                    "문자인증 API 적용 전 인증번호는 0000 입니다."),
                 style: TextStyle(color: Colors.blue, fontSize: 16),
                 textInputAction: TextInputAction.next,
                 controller: otp_num,
@@ -147,11 +176,14 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
   void compelete() {
     if (otp_num.text == "0000") {
-      if(purpose2 == Purpose_Helper.signup_personal || purpose2 == Purpose_Helper.signup_biz) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => SignUp_Step2(getPhoneNum, purpose2, marketing)));
+      if (purpose2 == Purpose_Helper.signup_personal ||
+          purpose2 == Purpose_Helper.signup_biz) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SignUp_Step2(getPhoneNum, purpose2, marketing)));
       }
-
     } else {
       showErrorAlertDialog(context, "OTP 번호와 일치하지 않습니다.");
     }

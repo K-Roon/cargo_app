@@ -128,7 +128,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
           Confirm();
         },
         style: ElevatedButton.styleFrom(
-          primary: Color(0xff0055ff),
+          primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(

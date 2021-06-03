@@ -65,7 +65,11 @@ class _HomeState extends State<Home> {
 
   Future permissionLocation() async {
     if (await Permission.locationWhenInUse.request().isGranted) {
+      setState(() {
+        isLoading = true;
+      });
       findMyLocation();
+      isLoading = false;
     } else if (count == 1){
       showErrorAlertDialog(
           context,

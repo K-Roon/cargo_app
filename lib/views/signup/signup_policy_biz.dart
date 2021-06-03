@@ -1,6 +1,7 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
+import 'package:cargo_app/views/phone_auth/phone_auth_new.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -131,11 +132,20 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
               criticalPersonalInformation &&
               criticalPersonalPosition &&
               criticalOlderThen14 ) {
+            ///TODO: 휴대폰 인증 코드가 기존처럼 변경된다면 이거 주석 해제 바람.
+            /*
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
                         PhoneAuth(Purpose_Helper.signup_biz, marketing: marketingAgreement,)));
+                        */
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        PhoneAuthNew(Purpose_Helper.signup_biz, marketing: marketingAgreement,)));
           } else {
             showErrorAlertDialog(context, "약관에 동의 해주세요");
           }
