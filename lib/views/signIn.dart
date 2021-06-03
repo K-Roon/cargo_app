@@ -9,9 +9,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:geolocator/geolocator.dart';
 
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
+
 
 class SignIn extends StatefulWidget {
   SignIn();
@@ -24,6 +26,7 @@ class _SignInState extends State<SignIn> {
   final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
+  Position CurPosition;
 
   signIn() async {
     if (idController.text.isEmpty) {
@@ -39,8 +42,8 @@ class _SignInState extends State<SignIn> {
           userSnapshot.docs[0].get("email") != "") {
         print("EMAIL:: ${userSnapshot.docs[0].get("email")}");
         await AuthService()
-            .signInWithAccount(userSnapshot.docs[0].get("email"),
-                passwordController.text)
+            .signInWithAccount(
+                userSnapshot.docs[0].get("email"), passwordController.text)
             .then((result) async {
           if (result == null) {
             HelperFunctions.saveUserLoggedInSharedPreference(true);
@@ -62,6 +65,11 @@ class _SignInState extends State<SignIn> {
         showErrorAlertDialog(context, "ID를 찾을 수 없습니다");
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
