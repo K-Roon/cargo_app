@@ -1,6 +1,5 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/phone_auth/phone_auth.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,7 +89,6 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
                     contentPadding: EdgeInsets.all(0),
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text("(선택) 마케팅 정보 수신에 대한 동의"),
-
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     value: marketingAgreement,
@@ -118,7 +116,6 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
                         marketingAgreement = value;
                       });
                     }),
-
               ],
             )
           ],
@@ -127,19 +124,20 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          if(criticalServiceAgreement &&
+          if (criticalServiceAgreement &&
               criticalPersonalInformation &&
               criticalPersonalPosition &&
-              criticalOlderThen14 ) {
+              criticalOlderThen14) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        PhoneAuth(Purpose_Helper.signup_biz, marketing: marketingAgreement,)));
+                    builder: (context) => PhoneAuth(
+                          Purpose_Helper.signup_biz,
+                          marketing: marketingAgreement,
+                        )));
           } else {
             showErrorAlertDialog(context, "약관에 동의 해주세요");
           }
-          
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
