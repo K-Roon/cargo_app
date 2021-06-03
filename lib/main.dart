@@ -21,9 +21,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool userIsLoggedIn = false;
+  bool isLoading = true;
 
   @override
   void initState() {
+    setState(() {
+      isLoading = true;
+    });
     getLoggedInState();
     super.initState();
   }
@@ -33,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     await HelperFunctions.getUserLoggedInSharedPreference().then((value) {
       setState(() {
         userIsLoggedIn = value;
+        isLoading = false;
       });
     });
   }
@@ -53,11 +58,33 @@ class _MyAppState extends State<MyApp> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: AppBarTheme(brightness: Brightness.light),
         ),
-        home: userIsLoggedIn != null
-            ? userIsLoggedIn
-                ? Home()
-                : SignIn()
-            : SignIn());
+        home: isLoading
+            ? Container(
+                child: Center(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text(
+                      "잠시만 기다리십시오..\n" +
+                          "인터넷 상태에 따라 로딩시간이 길어질 수 있습니다..",
+                      textDirection: TextDirection.ltr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          backgroundColor: Colors.black,
+                          fontSize: 12,
+                      fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                )),
+              )
+            : userIsLoggedIn != null
+                ? userIsLoggedIn
+                    ? Home()
+                    : SignIn()
+                : SignIn());
   }
 }
 

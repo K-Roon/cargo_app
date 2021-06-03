@@ -1,5 +1,6 @@
 import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,8 @@ class PhoneAuth extends StatefulWidget {
   PhoneAuth(this.purpose, {this.marketing});
 
   @override
-  _PhoneAuthState createState() => _PhoneAuthState(this.purpose, marketing: this.marketing);
+  _PhoneAuthState createState() =>
+      _PhoneAuthState(this.purpose, marketing: this.marketing);
 }
 
 // ignore: non_constant_identifier_names
@@ -23,7 +25,10 @@ class _PhoneAuthState extends State<PhoneAuth> {
 
   final String purpose;
   final bool marketing;
+
   _PhoneAuthState(this.purpose, {this.marketing});
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   submit() async {
     if (phoneFormKey.currentState.validate()) {}
@@ -33,38 +38,42 @@ class _PhoneAuthState extends State<PhoneAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar_custom(context, ""),
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "휴대전화 번호를\n입력해주세요.",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            Container(
-              height: 50,
-            ),
-            Form(
-              key: phoneFormKey,
-              child: TextFormField(
-                decoration: textFieldInputDecoration("전화번호"),
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-                textInputAction: TextInputAction.next,
-                controller: phone_num,
+      body: isLoading
+          ? Container(
+              child: Center(child: CircularProgressIndicator()),
+            )
+          : Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "휴대전화 번호를\n입력해주세요.",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  Container(
+                    height: 50,
+                  ),
+                  Form(
+                    key: phoneFormKey,
+                    child: TextFormField(
+                      decoration: textFieldInputDecoration("전화번호"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.next,
+                      controller: phone_num,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          isNotNull();
+          getOTP();
         },
         style: ElevatedButton.styleFrom(
-          primary: Color(0xff0055ff),
+          primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
@@ -81,13 +90,46 @@ class _PhoneAuthState extends State<PhoneAuth> {
     );
   }
 
-  ///전화번호 입력칸이 비어있지 않은지 확인하는 단순한 메서드 입니다.
-  void isNotNull() {
+  ///전화번호 입력칸에 대한 유효성 검사 및 인증번호 전송 요청 등을 수행합니다.
+  getOTP() async {
+    setState(() {
+      isLoading = true;
+    });
     if (phone_num.text.isEmpty) {
       showErrorAlertDialog(context, "전화번호를 입력해주세요.");
+      isLoading = false;
     } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneAuth2(this.purpose, phone_num.text, marketing: this.marketing,)));
+      await _auth.verifyPhoneNumber(
+        phoneNumber: "+82 ${phone_num.text.replaceFirst("0", "", 0)}",
+        verificationCompleted: (phoneAuthCredential) async {
+          setState(() {
+            isLoading = false;
+          });
+          //signInWithPhoneAuthCredential(phoneAuthCredential);
+        },
+        verificationFailed: (verificationFailed) async {
+          setState(() {
+            isLoading = false;
+          });
+          showErrorAlertDialog(context, verificationFailed.message);
+        },
+        codeSent: (verificationId, resendingToken) async {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PhoneAuth2(
+                        this.purpose,
+                        phone_num.text,
+                        verificationId,
+                        marketing: this.marketing,
+                      )));
+        },
+        codeAutoRetrievalTimeout: (verificationId) async {
+          setState(() {
+            isLoading = false;
+          });
+        },
+      );
     }
   }
-
 }
