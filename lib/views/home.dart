@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/database.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 final TextEditingController startArea = new TextEditingController();
@@ -48,65 +51,74 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  Future<bool> _onBackPressed() {
+    if(Platform.isAndroid) {
+      SystemNavigator.pop(animated: true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _ScaffoldState,
-      drawer: homeDrawer(context),
-      endDrawerEnableOpenDragGesture: false,
-      appBar: AppBar(
-        elevation: 0.0,
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        leading: new FloatingActionButton(
-          heroTag: "OpenDrawer",
-          onPressed: () {
-            _ScaffoldState.currentState.openDrawer();
-          },
-          backgroundColor: Colors.white,
+    return new WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        key: _ScaffoldState,
+        drawer: homeDrawer(context),
+        endDrawerEnableOpenDragGesture: false,
+        appBar: AppBar(
           elevation: 0.0,
-          hoverElevation: 0.0,
-          highlightElevation: 0.0,
-          focusElevation: 0.0,
-          disabledElevation: 0.0,
-          child: Icon(Icons.menu_rounded, size: 20, color: Colors.black),
-        ),
-        actions: [
-          Row(
-            children: [
-              new FloatingActionButton(
-                heroTag: "getPosition",
-                onPressed: () {
-                  print("GPS POSITION");
-                },
-                backgroundColor: Colors.white,
-                elevation: 0.0,
-                hoverElevation: 0.0,
-                highlightElevation: 0.0,
-                focusElevation: 0.0,
-                disabledElevation: 0.0,
-                child: Icon(Icons.gps_not_fixed_rounded,
-                    size: 20, color: Colors.black),
-              ),
-            ],
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          leading: new FloatingActionButton(
+            heroTag: "OpenDrawer",
+            onPressed: () {
+              _ScaffoldState.currentState.openDrawer();
+            },
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+            hoverElevation: 0.0,
+            highlightElevation: 0.0,
+            focusElevation: 0.0,
+            disabledElevation: 0.0,
+            child: Icon(Icons.menu_rounded, size: 20, color: Colors.black),
           ),
-        ],
-      ),
-      extendBodyBehindAppBar: true,
-      //resizeToAvoidBottomInset: false,
-      body: isLoading
-          ? Container(
-              child: Center(child: CircularProgressIndicator()),
-            )
-          : Stack(
-              children: <Widget>[
-                Container(color: Colors.lime),
-
-                ///슬라이드 바 표시
-                slidingUp_Page()
+          actions: [
+            Row(
+              children: [
+                new FloatingActionButton(
+                  heroTag: "getPosition",
+                  onPressed: () {
+                    print("GPS POSITION");
+                  },
+                  backgroundColor: Colors.white,
+                  elevation: 0.0,
+                  hoverElevation: 0.0,
+                  highlightElevation: 0.0,
+                  focusElevation: 0.0,
+                  disabledElevation: 0.0,
+                  child: Icon(Icons.gps_not_fixed_rounded,
+                      size: 20, color: Colors.black),
+                ),
               ],
             ),
+          ],
+        ),
+        extendBodyBehindAppBar: true,
+        //resizeToAvoidBottomInset: false,
+        body: isLoading
+            ? Container(
+                child: Center(child: CircularProgressIndicator()),
+              )
+            : Stack(
+                children: <Widget>[
+                  Container(color: Colors.lime),
+
+                  ///슬라이드 바 표시
+                  slidingUp_Page()
+                ],
+              ),
+      ),
     );
   }
 
