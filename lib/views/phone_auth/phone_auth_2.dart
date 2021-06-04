@@ -1,4 +1,5 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
+import 'package:cargo_app/views/findmyid.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -42,7 +43,6 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
     setState(() {
       isLoading = true;
     });
-
     try {
       final authCredential =
           await _auth.signInWithCredential(phoneAuthCredential);
@@ -53,12 +53,18 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
       if (authCredential?.user != null) {
         if (this.purpose2 == Purpose_Helper.signup_personal ||
-            purpose2 == Purpose_Helper.signup_biz) {
+            this.purpose2 == Purpose_Helper.signup_biz) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       SignUp_Step2(getPhoneNum, purpose2, marketing)));
+        } else if (this.purpose2 == Purpose_Helper.find_myID) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      FindMyId(getPhoneNum)));
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -94,11 +100,14 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                   Form(
                     key: otpFormKey,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
                       decoration: TextInputDeco.defalut_center(
                           "예)000000"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
+                      textAlign: TextAlign.center,
                       controller: otp_num,
+                      onEditingComplete: (()=>compelete()),
                     ),
                   ),
                 ],

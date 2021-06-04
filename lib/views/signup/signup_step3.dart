@@ -211,7 +211,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
                     )),
-                contentPadding: EdgeInsets.only(top: 10),
+                contentPadding: EdgeInsets.all(10),
                 content: Text(
                   "회원가입이 성공적으로\n완료되었습니다.",
                   textAlign: TextAlign.center,

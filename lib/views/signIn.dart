@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:cargo_app/helper/helperfunctions.dart';
+import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
+import 'package:cargo_app/views/phone_auth/phone_auth.dart';
 import 'package:cargo_app/views/signup/signup_step1.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -16,7 +18,6 @@ import 'package:geolocator/geolocator.dart';
 
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
-
 
 class SignIn extends StatefulWidget {
   SignIn();
@@ -151,6 +152,7 @@ class _SignInState extends State<SignIn> {
                                         color: Colors.blue, fontSize: 16),
                                     decoration:
                                         TextInputDeco.default_value("비밀번호"),
+                                    onEditingComplete: (() => signIn()),
                                   ),
                                 ],
                               ),
@@ -165,7 +167,11 @@ class _SignInState extends State<SignIn> {
                                 TextButton(
                                   child: Text("아이디 찾기"),
                                   onPressed: () {
-                                    print("Find My ID");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PhoneAuth(
+                                                Purpose_Helper.find_myID)));
                                   },
                                 ),
                                 Text(" | ",
@@ -251,25 +257,27 @@ class _SignInState extends State<SignIn> {
                     ]),
               ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: ElevatedButton(
-          onPressed: () {
-            signIn();
-          },
-          style: ElevatedButton.styleFrom(
-            primary: isAvailable ? Colors.blue : Color(0xff8d9699),
-            alignment: Alignment.center,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(0))),
-          ),
-          child: Container(
-              height: 80,
-              alignment: Alignment.center,
-              child: Text(
-                "로그인",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              )),
-        ),
+        floatingActionButton: isLoading
+            ? Container()
+            : ElevatedButton(
+                onPressed: () {
+                  signIn();
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: isAvailable ? Colors.blue : Color(0xff8d9699),
+                  alignment: Alignment.center,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(0))),
+                ),
+                child: Container(
+                    height: 80,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "로그인",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
+              ),
       ),
     );
   }
