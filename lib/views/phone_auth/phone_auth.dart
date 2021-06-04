@@ -58,35 +58,39 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   Form(
                     key: phoneFormKey,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
                       decoration: textFieldInputDecoration("전화번호"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       controller: phone_num,
+                      onEditingComplete: (() => getOTP()),
                     ),
                   ),
                 ],
               ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
-          getOTP();
-        },
-        style: ElevatedButton.styleFrom(
-          primary: Colors.blue,
-          alignment: Alignment.center,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
-        ),
-        child: Container(
-            height: 80,
-            alignment: Alignment.center,
-            child: Text(
-              "인증번호 받기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            )),
-      ),
+      floatingActionButton: isLoading
+          ? Container()
+          : ElevatedButton(
+              onPressed: () {
+                getOTP();
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                alignment: Alignment.center,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(0))),
+              ),
+              child: Container(
+                  height: 80,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "인증번호 받기",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )),
+            ),
     );
   }
 

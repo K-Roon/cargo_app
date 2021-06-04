@@ -121,7 +121,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               )),
-          contentPadding: EdgeInsets.only(top: 10),
+          contentPadding: EdgeInsets.all(10),
           content: Text(
             errorText,
             textAlign: TextAlign.center,
@@ -174,7 +174,7 @@ void showChooseAlertDialog(BuildContext context, String errorText) async {
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               )),
-          contentPadding: EdgeInsets.only(top: 10),
+          contentPadding: EdgeInsets.all(10),
           content: Text(
             errorText,
             textAlign: TextAlign.center,
@@ -271,7 +271,7 @@ Widget homeDrawer(BuildContext context) {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pushReplacement(context,
+                  Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Recommend()));
                 },
               ),
@@ -333,7 +333,7 @@ Widget homeDrawer(BuildContext context) {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               )),
-                          contentPadding: EdgeInsets.only(top: 10),
+                          contentPadding: EdgeInsets.all(10),
                           content: Text(
                             "1:1 고객 채팅 페이지로 이동합니다.",
                             textAlign: TextAlign.center,
@@ -413,7 +413,7 @@ Widget homeDrawer(BuildContext context) {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               )),
-                          contentPadding: EdgeInsets.only(top: 10),
+                          contentPadding: EdgeInsets.all(10),
                           content: Text(
                             "접속중인 기기에서 로그아웃 하시겠습니까?",
                             textAlign: TextAlign.center,

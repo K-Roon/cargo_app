@@ -5,6 +5,7 @@ import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home_departure.dart';
+import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:cargo_app/widget/margin_bar.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:intl/intl.dart';
 
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
@@ -70,7 +72,7 @@ class _HomeState extends State<Home> {
       });
       findMyLocation();
       isLoading = false;
-    } else if (count == 1){
+    } else if (count == 1) {
       showErrorAlertDialog(
           context,
           "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
@@ -105,6 +107,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    todayTips();
     return new WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -211,10 +214,8 @@ class _HomeState extends State<Home> {
         GestureDetector(
             onTap: () {
               print("출발지 주소 검색");
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeDeparture(true)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeDeparture(true)));
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
@@ -256,5 +257,114 @@ class _HomeState extends State<Home> {
         Container(height: 15),
       ],
     );
+  }
+
+  Future<void> todayTips() async {
+    bool dismissToday = false;
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now);
+    if (formatted != await HelperFunctions.getDismissDate()) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              elevation: 0.0,
+              titlePadding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              title: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(10))),
+                  padding: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: Text(
+                    "안내",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  )),
+              contentPadding: EdgeInsets.all(10),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "화물의 양 및 무게에 맞는 트럭을 알고있습니까?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Checkbox(
+                          value: dismissToday,
+                          onChanged: (bool value) {
+                            setState(() {
+                              dismissToday = value;
+                            });
+                          }),
+                      Text("하루동안 보지 않음")
+                    ],
+                  ),
+                ],
+              ),
+              actionsPadding: EdgeInsets.symmetric(horizontal: 10),
+              actionsOverflowButtonSpacing: 10,
+              actionsOverflowDirection: VerticalDirection.down,
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.325,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Recommend()));
+                        },
+                        style: OutlinedButton.styleFrom(
+                          alignment: Alignment.center,
+                          primary: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          side: BorderSide(width: 1, color: Colors.blue),
+                        ),
+                        child: Text(
+                          "알고 싶음",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.325,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          if (dismissToday)
+                            HelperFunctions.saveDismissDate(formatted);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          side: BorderSide(width: 1, color: Colors.blue),
+                        ),
+                        child: Text(
+                          "알고 있음",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          });
+    }
   }
 }
