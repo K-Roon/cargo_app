@@ -66,17 +66,6 @@ class _MyAppState extends State<MyApp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(),
-                    Text(
-                      "잠시만 기다리십시오..\n" +
-                          "인터넷 상태에 따라 로딩시간이 길어질 수 있습니다..",
-                      textDirection: TextDirection.ltr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          backgroundColor: Colors.black,
-                          fontSize: 12,
-                      fontWeight: FontWeight.normal),
-                    ),
                   ],
                 )),
               )

@@ -63,6 +63,13 @@ class DatabaseMethods {
         .get();
   }
 
+  Future getUserInfoWithPhoneNum(String phoneNum) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .where("phonenum", isEqualTo: phoneNum)
+        .get();
+  }
+
   ///사용자 정보 업데이트
   changeNewInfo(String newInfoCategory, String newInfo) {
     FirebaseFirestore.instance.collection("users").doc(Constants.myId).update({

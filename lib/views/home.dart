@@ -17,6 +17,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:intl/intl.dart';
 
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
@@ -179,6 +180,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget slidingUp_Page() {
+    todayTips();
     return SlidingUpPanel(
       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       defaultPanelState: PanelState.OPEN,
@@ -256,5 +258,84 @@ class _HomeState extends State<Home> {
         Container(height: 15),
       ],
     );
+  }
+
+  void todayTips() {
+    final DateTime now = DateTime.now();
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            elevation: 0.0,
+            titlePadding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            title: Container(
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(10))),
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                child: Text(
+                  "안내",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                )),
+            contentPadding: EdgeInsets.all(10),
+            content: Text(
+              "1:1 고객 채팅 페이지로 이동합니다.",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black, fontSize: 15),
+            ),
+            actionsPadding: EdgeInsets.symmetric(horizontal: 10),
+            actionsOverflowButtonSpacing: 10,
+            actionsOverflowDirection: VerticalDirection.down,
+            actions: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    alignment: Alignment.center,
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    side:
+                    BorderSide(width: 1, color: Colors.blue),
+                  ),
+                  child: Text(
+                    "취소",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    side:
+                    BorderSide(width: 1, color: Colors.blue),
+                  ),
+                  child: Text(
+                    "1:1상담",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
