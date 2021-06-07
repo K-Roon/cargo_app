@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextInputDeco {
-  static InputDecoration default_value(String hintText) {
+  static InputDecoration defaultValue(String hintText) {
     return InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black26),

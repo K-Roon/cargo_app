@@ -48,7 +48,7 @@ class _ResetPassWordState extends State<ResetPassWord> {
             child: Center(child: CircularProgressIndicator()),
           )
         : Scaffold(
-            appBar: appBar_custom(context, ""),
+            appBar: appBarCustom(context, ""),
             body: Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: Column(

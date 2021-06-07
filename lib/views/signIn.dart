@@ -137,7 +137,7 @@ class _SignInState extends State<SignIn> {
                                 children: [
                                   TextFormField(
                                     decoration:
-                                        TextInputDeco.default_value("아이디"),
+                                        TextInputDeco.defaultValue("아이디"),
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
                                     textInputAction: TextInputAction.next,
@@ -151,7 +151,7 @@ class _SignInState extends State<SignIn> {
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
                                     decoration:
-                                        TextInputDeco.default_value("비밀번호"),
+                                        TextInputDeco.defaultValue("비밀번호"),
                                     onEditingComplete: (() => signIn()),
                                   ),
                                 ],
@@ -171,7 +171,7 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => PhoneAuth(
-                                                Purpose_Helper.find_myID)));
+                                                PurposeHelper.findMyID)));
                                   },
                                 ),
                                 Text(" | ",
@@ -183,7 +183,7 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => PhoneAuth(
-                                                Purpose_Helper.find_myPW)));
+                                                PurposeHelper.findMyPW)));
                                   },
                                 ),
                                 Text(" | ",

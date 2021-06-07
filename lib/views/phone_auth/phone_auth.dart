@@ -1,4 +1,5 @@
 import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,6 @@ class PhoneAuth extends StatefulWidget {
       _PhoneAuthState(this.purpose, marketing: this.marketing);
 }
 
-// ignore: non_constant_identifier_names
 TextEditingController phone_num = new TextEditingController();
 
 class _PhoneAuthState extends State<PhoneAuth> {
@@ -37,7 +37,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -59,7 +59,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                     key: phoneFormKey,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: textFieldInputDecoration("전화번호"),
+                      decoration: TextInputDeco.defaultValue("전화번호"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       controller: phone_num,

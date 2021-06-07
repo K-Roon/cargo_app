@@ -1,13 +1,13 @@
-class Purpose_Helper {
+class PurposeHelper {
   ///개인명의로 회원가입
-  static String signup_personal = "SIGNUP_PERSONAL";
+  static String signUpPersonal = "SIGNUP_PERSONAL";
 
   ///법인명의로 회원가입
-  static String signup_biz = "SIGNUP_BIZ";
+  static String signUpBiz = "SIGNUP_BIZ";
 
   ///아이디 찾기
-  static String find_myID = "FIND_MYID";
+  static String findMyID = "FIND_MYID";
 
   ///비밀번호 찾기
-  static String find_myPW = "FIND_MYPW";
+  static String findMyPW = "FIND_MYPW";
 }

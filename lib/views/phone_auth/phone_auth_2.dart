@@ -53,20 +53,20 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       });
 
       if (authCredential?.user != null) {
-        if (this.purpose2 == Purpose_Helper.signup_personal ||
-            this.purpose2 == Purpose_Helper.signup_biz) {
+        if (this.purpose2 == PurposeHelper.signUpPersonal ||
+            this.purpose2 == PurposeHelper.signUpBiz) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      SignUp_Step2(getPhoneNum, purpose2, marketing)));
-        } else if (this.purpose2 == Purpose_Helper.find_myID) {
+                      SignUpStep2(getPhoneNum, purpose2, marketing)));
+        } else if (this.purpose2 == PurposeHelper.findMyID) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       FindMyId(getPhoneNum)));
-        } else if (this.purpose2 == Purpose_Helper.find_myPW) {
+        } else if (this.purpose2 == PurposeHelper.findMyPW) {
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -86,7 +86,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),

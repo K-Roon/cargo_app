@@ -10,7 +10,6 @@ import 'package:cargo_app/views/submenu/notice.dart';
 import 'package:cargo_app/views/submenu/recommend.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 ///textInputDecoration 으로 대체되었다.
@@ -31,8 +30,7 @@ InputDecoration textFieldInputDecoration(String hintText) {
       ));
 }
 
-// ignore: non_constant_identifier_names
-AppBar appBar_custom(BuildContext context, String title) {
+AppBar appBarCustom(BuildContext context, String title) {
   return AppBar(
     leading: TextButton(
       child: Icon(
@@ -72,12 +70,6 @@ TextStyle simpleTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 16);
 }
 
-///btnTxtStyle로 대체되었다.
-@deprecated
-TextStyle buttonTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 16);
-}
-
 TextStyle btnTxtStyle({Color color}) {
   return TextStyle(color: color != null ? color : Colors.black, fontSize: 16);
 }
@@ -90,7 +82,7 @@ TextStyle mediumTextStyle() {
   return TextStyle(color: Colors.black, fontSize: 15);
 }
 
-TextStyle txtStyle_flexible(Color color, double fontSize) {
+TextStyle txtStyleFlexible(Color color, double fontSize) {
   return TextStyle(color: color, fontSize: fontSize);
 }
 
@@ -205,7 +197,7 @@ Widget homeDrawer(BuildContext context) {
             children: [
               ListTile(
                 title:
-                    Text('화물차 부르기', style: txtStyle_flexible(Colors.white, 20)),
+                    Text('화물차 부르기', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -217,8 +209,8 @@ Widget homeDrawer(BuildContext context) {
                 },
               ),
               ListTile(
-                title: Text('화물차 추천받기',
-                    style: txtStyle_flexible(Colors.white, 20)),
+                title:
+                    Text('화물차 추천받기', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -229,7 +221,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               ListTile(
                 title:
-                    Text('내 운송 조회', style: txtStyle_flexible(Colors.white, 20)),
+                    Text('내 운송 조회', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -240,7 +232,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               ListTile(
                 title:
-                    Text('내 정보 관리', style: txtStyle_flexible(Colors.white, 20)),
+                    Text('내 정보 관리', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -250,7 +242,7 @@ Widget homeDrawer(BuildContext context) {
                 },
               ),
               ListTile(
-                title: Text('공지사항', style: txtStyle_flexible(Colors.white, 20)),
+                title: Text('공지사항', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -260,7 +252,7 @@ Widget homeDrawer(BuildContext context) {
                 },
               ),
               ListTile(
-                title: Text('고객센터', style: txtStyle_flexible(Colors.white, 20)),
+                title: Text('고객센터', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   Navigator.pop(context);
                   showDialog(
@@ -359,7 +351,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               SizedBox(),
               ListTile(
-                title: Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
+                title: Text('로그아웃', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   Navigator.pop(context);
                   showDialog(

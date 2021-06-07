@@ -145,13 +145,13 @@ class _HomeDepartureState extends State<HomeDeparture> {
                 ),
 
                 ///슬라이드 바 표시
-                slidingUp_Page()
+                slidingUpPage()
               ],
             ),
     );
   }
 
-  Widget slidingUp_Page() {
+  Widget slidingUpPage() {
     return SlidingUpPanel(
       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       defaultPanelState: PanelState.OPEN,

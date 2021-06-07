@@ -16,7 +16,6 @@ class ChangeMyEmail extends StatefulWidget {
   _ChangeMyEmailState createState() => _ChangeMyEmailState(myEmail);
 }
 
-// ignore: non_constant_identifier_names
 TextEditingController email = new TextEditingController();
 
 class _ChangeMyEmailState extends State<ChangeMyEmail> {
@@ -34,7 +33,7 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -129,13 +128,14 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
         var result = await user.reauthenticateWithCredential(credential);
         await result.user.updateEmail(email.text);
         DatabaseMethods().changeNewInfo("email", email.text);
-        showErrorAlertDialog(context,"이메일이 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
+        showErrorAlertDialog(
+            context, "이메일이 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
         Constants.userEmail = email.text;
         HelperFunctions.saveUserEmailSharedPreference(email.text);
         HelperFunctions.saveUserLoggedInSharedPreference(false);
       } catch (e) {
         print("Deletion error $e");
-        showErrorAlertDialog(context,"Something went wrong");
+        showErrorAlertDialog(context, "Something went wrong");
       }
     }
   }

@@ -1,12 +1,11 @@
 import 'dart:math';
 
 import 'package:cargo_app/helper/helperfunctions.dart';
-import 'package:cargo_app/models/user.dart';
 import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -14,7 +13,7 @@ import 'package:flutter/painting.dart';
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
 
-class SignUp_Step3 extends StatefulWidget {
+class SignUpStep3 extends StatefulWidget {
   final String purpose;
   final String name;
   final String id;
@@ -22,15 +21,15 @@ class SignUp_Step3 extends StatefulWidget {
   final String phone_number;
   final bool marketing;
 
-  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number,
+  SignUpStep3(this.purpose, this.name, this.id, this.email, this.phone_number,
       this.marketing);
 
   @override
-  _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose,
+  _SignUpStep3State createState() => _SignUpStep3State(this.purpose,
       this.name, this.id, this.email, this.phone_number, this.marketing);
 }
 
-class _SignUp_Step3State extends State<SignUp_Step3> {
+class _SignUpStep3State extends State<SignUpStep3> {
   final String purpose;
   final String name;
   final String id;
@@ -45,7 +44,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   bool isLoading = false;
   bool isAvailable = false;
 
-  _SignUp_Step3State(this.purpose, this.name, this.id, this.email,
+  _SignUpStep3State(this.purpose, this.name, this.id, this.email,
       this.phone_number, this.marketing);
 
   static const _chars =
@@ -70,7 +69,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -103,7 +102,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                         ),
                         TextFormField(
                           obscureText: true,
-                          decoration: textFieldInputDecoration("비밀번호"),
+                          decoration: TextInputDeco.defaultValue("비밀번호"),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
                           controller: pw,
@@ -114,7 +113,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                         ),
                         TextFormField(
                           obscureText: true,
-                          decoration: textFieldInputDecoration("비밀번호 확인"),
+                          decoration: TextInputDeco.defaultValue("비밀번호 확인"),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
                           controller: pw_confirm,
