@@ -127,6 +127,9 @@ class _PhoneAuthState extends State<PhoneAuth> {
                         verificationId,
                         marketing: this.marketing,
                       )));
+          setState(() {
+            isLoading = false;
+          });
         },
         codeAutoRetrievalTimeout: (verificationId) async {
           setState(() {

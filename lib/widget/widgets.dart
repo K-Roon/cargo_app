@@ -101,6 +101,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
               )),
           contentPadding: EdgeInsets.all(15),
           content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 errorText,
@@ -110,23 +111,31 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
               Container(
                 height: 15,
               ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    primary: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    side: BorderSide(width: 1, color: Colors.blue),
+              Row(
+                mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        primary: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                        side: BorderSide(width: 1, color: Colors.blue),
+                      ),
+                      child: Text(
+                        "확인",
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ),
                   ),
-                  child: Text(
-                    "확인",
-                    style: TextStyle(fontSize: 15),
-                  ),
-                ),
+                  Container()
+                ],
               )
             ],
           ),
