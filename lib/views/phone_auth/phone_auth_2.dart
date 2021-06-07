@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/findmyid.dart';
 import 'package:cargo_app/views/reset_pw.dart';
@@ -23,7 +25,7 @@ class PhoneAuth2 extends StatefulWidget {
           marketing: marketing);
 }
 
-TextEditingController otp_num = new TextEditingController();
+TextEditingController txtControllerOtpNum = new TextEditingController();
 
 class _PhoneAuth2State extends State<PhoneAuth2> {
   final otpFormKey = GlobalKey<FormState>();
@@ -34,7 +36,10 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   final bool marketing;
   final String verificationId;
   String otpNum = "";
+  bool isNotRead = true;
   FirebaseAuth _auth = FirebaseAuth.instance;
+  int leftTime = 300;
+  Timer _timer;
 
   _PhoneAuth2State(this.purpose2, this.getPhoneNum, this.verificationId,
       {this.marketing});
@@ -53,25 +58,21 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       });
 
       if (authCredential?.user != null) {
-        if (this.purpose2 == Purpose_Helper.signup_personal ||
-            this.purpose2 == Purpose_Helper.signup_biz) {
+        if (this.purpose2 == PurposeHelper.signUpPersonal ||
+            this.purpose2 == PurposeHelper.signUpBiz) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      SignUp_Step2(getPhoneNum, purpose2, marketing)));
-        } else if (this.purpose2 == Purpose_Helper.find_myID) {
+                      SignUpStep2(getPhoneNum, purpose2, marketing)));
+        } else if (this.purpose2 == PurposeHelper.findMyID) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => FindMyId(getPhoneNum)));
+        } else if (this.purpose2 == PurposeHelper.findMyPW) {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      FindMyId(getPhoneNum)));
-        } else if (this.purpose2 == Purpose_Helper.find_myPW) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ResetPassWord(getPhoneNum)));
+                  builder: (context) => ResetPassWord(getPhoneNum)));
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -84,9 +85,24 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   }
 
   @override
+  void initState() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (leftTime > 0) {
+          --leftTime;
+        } else {
+          _timer.cancel();
+          timeOut();
+        }
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -107,15 +123,20 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                   Form(
                     key: otpFormKey,
                     child: TextFormField(
+                      enabled: isNotRead,
                       keyboardType: TextInputType.number,
-                      decoration: TextInputDeco.defalut_center(
-                          "예)000000"),
+                      decoration: TextInputDeco.defaultCenter("예)000000"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       textAlign: TextAlign.center,
-                      controller: otp_num,
-                      onEditingComplete: (()=>compelete()),
+                      controller: txtControllerOtpNum,
+                      onEditingComplete: (() => compelete()),
                     ),
+                  ),
+                  Text(
+                    "남은 시간: ${(leftTime / 60).floor().toString()}분${(leftTime % 60).toString()}초",
+                    textAlign: TextAlign.left,
+                    style: mediumTextStyle(),
                   ),
                 ],
               ),
@@ -137,7 +158,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
             alignment: Alignment.center,
             child: Text(
               "인증완료",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );
@@ -145,7 +166,14 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
   void compelete() {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: otp_num.text);
+        verificationId: verificationId, smsCode: txtControllerOtpNum.text);
     signInWithPhoneAuthCredential(phoneAuthCredential);
+  }
+
+  void timeOut() {
+    showErrorAlertDialog(
+        context, "시간이 초과되어 재인증이 필요합니다.\n(뒤로가기를 누른 후, '인증번호 받기' 버튼을 다시 눌러주세요)");
+    isNotRead = false;
+    _timer.cancel();
   }
 }

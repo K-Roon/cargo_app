@@ -15,19 +15,19 @@ class _RecommendState extends State<Recommend> {
   List<bool> isSelected = List.generate(3, (index) => false);
 
   ///상자의 세로
-  TextEditingController box_vertical = new TextEditingController();
+  TextEditingController boxVertical = new TextEditingController();
 
   ///상자의 가로
-  TextEditingController box_horizonal = new TextEditingController();
+  TextEditingController boxHorizontal = new TextEditingController();
 
   ///상자의 높이
-  TextEditingController box_height = new TextEditingController();
+  TextEditingController boxHeight = new TextEditingController();
 
   ///상자의 개당 무게
-  TextEditingController box_per_weight = new TextEditingController();
+  TextEditingController boxPerWeight = new TextEditingController();
 
   ///상자의 개수
-  TextEditingController box_count = new TextEditingController();
+  TextEditingController boxCount = new TextEditingController();
 
   @override
   void initState() {
@@ -121,7 +121,7 @@ class _RecommendState extends State<Recommend> {
                       Container(
                           width: 200,
                           child: TextFormField(
-                            controller: box_horizonal,
+                            controller: boxHorizontal,
                             decoration: TextInputDeco.square(""),
                           )),
                       Text("  cm")
@@ -132,7 +132,7 @@ class _RecommendState extends State<Recommend> {
                       Container(
                           width: 200,
                           child: TextFormField(
-                            controller: box_vertical,
+                            controller: boxVertical,
                             decoration: TextInputDeco.square(""),
                           )),
                       Text("  cm")
@@ -143,7 +143,7 @@ class _RecommendState extends State<Recommend> {
                       Container(
                           width: 200,
                           child: TextFormField(
-                            controller: box_height,
+                            controller: boxHeight,
                             decoration: TextInputDeco.square(""),
                           )),
                       Text("  cm")
@@ -154,7 +154,7 @@ class _RecommendState extends State<Recommend> {
                       Container(
                           width: 200,
                           child: TextFormField(
-                            controller: box_per_weight,
+                            controller: boxPerWeight,
                             decoration: TextInputDeco.square(""),
                           )),
                       Text("  kg")
@@ -165,7 +165,7 @@ class _RecommendState extends State<Recommend> {
                       Container(
                           width: 200,
                           child: TextFormField(
-                            controller: box_count,
+                            controller: boxCount,
                             decoration: TextInputDeco.square(""),
                           )),
                       Text("  박스/파렛트/벌")
@@ -207,11 +207,11 @@ class _RecommendState extends State<Recommend> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          double weight = box_per_weight.text.isEmpty
+          double weight = boxPerWeight.text.isEmpty
               ? 0
-              : double.parse(box_per_weight.text);
+              : double.parse(boxPerWeight.text);
           double boxes =
-              box_count.text.isEmpty ? 1 : double.parse(box_count.text);
+              boxCount.text.isEmpty ? 1 : double.parse(boxCount.text);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -230,7 +230,7 @@ class _RecommendState extends State<Recommend> {
             alignment: Alignment.center,
             child: Text(
               "추천받기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

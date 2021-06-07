@@ -1,5 +1,4 @@
 import 'package:cargo_app/helper/constants.dart';
-import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/submenu/change_my_info_phone.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -63,7 +62,7 @@ class _MyInfoState extends State<MyInfo> {
               Text(
                 "계정 정보",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: smallBoldStyle(),
               ),
               Container(
                   margin: EdgeInsets.symmetric(vertical: 20),
@@ -166,7 +165,7 @@ class _MyInfoState extends State<MyInfo> {
               Text(
                 "결제 수단",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: smallBoldStyle(),
               ),
               paymentTool(context),
               Container(
@@ -175,7 +174,7 @@ class _MyInfoState extends State<MyInfo> {
               Text(
                 "마케팅 정보 수신 동의",
                 textAlign: TextAlign.left,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: smallBoldStyle(),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),

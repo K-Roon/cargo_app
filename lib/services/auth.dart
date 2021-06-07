@@ -2,7 +2,6 @@
 
 import 'package:cargo_app/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 ///사용자의 인증 기능을 담당합니다.
 ///로그인/아웃 등을 다뤄 보안상으로 매우 중요합니다.
@@ -19,7 +18,6 @@ class AuthService {
   ///email 및 password를 String 값으로 받아옵니다.
   ///이미 가입되어있는 이메일로 가입을 한 경우 null 값을 반환합니다.
   Future signUpWithEmailAndPassword(String email, String password) async {
-    //print("UPLOADING.. : 사용자 정보: $email, $password");
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);

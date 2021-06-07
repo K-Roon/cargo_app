@@ -37,7 +37,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _ScaffoldState = GlobalKey<ScaffoldState>();
+  final _scaffoldState = GlobalKey<ScaffoldState>();
   int count = 1;
   bool isLoading = false;
   bool isAvailable = false;
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
     setHome();
     permissionLocation();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _ScaffoldState.currentState.openDrawer();
+      _scaffoldState.currentState.openDrawer();
       todayTips();
       isLoading = false;
     });
@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
     return new WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        key: _ScaffoldState,
+        key: _scaffoldState,
         drawer: homeDrawer(context),
         endDrawerEnableOpenDragGesture: false,
         appBar: AppBar(
@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
           leading: new FloatingActionButton(
             heroTag: "OpenDrawer",
             onPressed: () {
-              _ScaffoldState.currentState.openDrawer();
+              _scaffoldState.currentState.openDrawer();
             },
             backgroundColor: Colors.white,
             elevation: 0.0,
@@ -182,14 +182,14 @@ class _HomeState extends State<Home> {
                   ),
 
                   ///슬라이드 바 표시
-                  slidingUp_Page()
+                  slidingUpPage()
                 ],
               ),
       ),
     );
   }
 
-  Widget slidingUp_Page() {
+  Widget slidingUpPage() {
     return SlidingUpPanel(
       borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       defaultPanelState: PanelState.OPEN,
@@ -269,7 +269,7 @@ class _HomeState extends State<Home> {
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now);
-    if (formatted == await HelperFunctions.getDismissDate()) {
+    if (formatted != await HelperFunctions.getDismissDate()) {
       showDialog(
           context: context,
           useRootNavigator: false,
@@ -281,13 +281,13 @@ class _HomeState extends State<Home> {
 }
 
 class MyDialog extends StatefulWidget {
-
   @override
   _MyDialogState createState() => _MyDialogState();
 }
 
 class _MyDialogState extends State<MyDialog> {
   bool _dismissToday = false;
+
   @override
   Widget build(BuildContext context) {
     final DateTime now = DateTime.now();
@@ -296,21 +296,17 @@ class _MyDialogState extends State<MyDialog> {
     return AlertDialog(
       elevation: 0.0,
       titlePadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Container(
           decoration: BoxDecoration(
               color: Colors.blue,
-              borderRadius:
-              BorderRadius.vertical(top: Radius.circular(10))),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
           padding: EdgeInsets.all(15),
           alignment: Alignment.center,
           child: Text(
             "안내",
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           )),
       contentPadding: EdgeInsets.all(15),
       content: Column(
@@ -339,7 +335,8 @@ class _MyDialogState extends State<MyDialog> {
                       });
                     }),
                 Text("오늘 하루 안 보기")
-              ],),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -348,11 +345,11 @@ class _MyDialogState extends State<MyDialog> {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
+                    if (_dismissToday)
+                      HelperFunctions.saveDismissDate(formatted);
                     Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Recommend()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Recommend()));
                   },
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 15),
@@ -398,4 +395,3 @@ class _MyDialogState extends State<MyDialog> {
     );
   }
 }
-

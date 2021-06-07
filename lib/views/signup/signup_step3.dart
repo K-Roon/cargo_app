@@ -1,12 +1,11 @@
 import 'dart:math';
 
 import 'package:cargo_app/helper/helperfunctions.dart';
-import 'package:cargo_app/models/user.dart';
 import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/views/home.dart';
+import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -14,39 +13,39 @@ import 'package:flutter/painting.dart';
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
 
-class SignUp_Step3 extends StatefulWidget {
+class SignUpStep3 extends StatefulWidget {
   final String purpose;
   final String name;
   final String id;
   final String email;
-  final String phone_number;
+  final String phoneNumber;
   final bool marketing;
 
-  SignUp_Step3(this.purpose, this.name, this.id, this.email, this.phone_number,
+  SignUpStep3(this.purpose, this.name, this.id, this.email, this.phoneNumber,
       this.marketing);
 
   @override
-  _SignUp_Step3State createState() => _SignUp_Step3State(this.purpose,
-      this.name, this.id, this.email, this.phone_number, this.marketing);
+  _SignUpStep3State createState() => _SignUpStep3State(this.purpose,
+      this.name, this.id, this.email, this.phoneNumber, this.marketing);
 }
 
-class _SignUp_Step3State extends State<SignUp_Step3> {
+class _SignUpStep3State extends State<SignUpStep3> {
   final String purpose;
   final String name;
   final String id;
   final String email;
-  final String phone_number;
+  final String phoneNumber;
   final bool marketing;
 
-  final pwRegister_FormKey = GlobalKey<FormState>();
+  final pwRegisterFormKey = GlobalKey<FormState>();
   TextEditingController pw = new TextEditingController();
-  TextEditingController pw_confirm = new TextEditingController();
+  TextEditingController pwConfirm = new TextEditingController();
 
   bool isLoading = false;
   bool isAvailable = false;
 
-  _SignUp_Step3State(this.purpose, this.name, this.id, this.email,
-      this.phone_number, this.marketing);
+  _SignUpStep3State(this.purpose, this.name, this.id, this.email,
+      this.phoneNumber, this.marketing);
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -70,7 +69,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -89,7 +88,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                     height: 10,
                   ),
                   Form(
-                    key: pwRegister_FormKey,
+                    key: pwRegisterFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -103,7 +102,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                         ),
                         TextFormField(
                           obscureText: true,
-                          decoration: textFieldInputDecoration("비밀번호"),
+                          decoration: TextInputDeco.defaultValue("비밀번호"),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
                           controller: pw,
@@ -114,10 +113,10 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
                         ),
                         TextFormField(
                           obscureText: true,
-                          decoration: textFieldInputDecoration("비밀번호 확인"),
+                          decoration: TextInputDeco.defaultValue("비밀번호 확인"),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
-                          controller: pw_confirm,
+                          controller: pwConfirm,
                           keyboardType: TextInputType.text,
                         ),
                       ],
@@ -129,7 +128,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Confirm();
+          confirm();
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
@@ -143,16 +142,16 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
             alignment: Alignment.center,
             child: Text(
               "확인",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );
   }
 
-  void Confirm() {
+  void confirm() {
     if (pw.text.isEmpty) {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요.");
-    } else if (pw.text != pw_confirm.text) {
+    } else if (pw.text != pwConfirm.text) {
       showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
     } else if (pw.text.length < 6) {
       showErrorAlertDialog(context, "6자리 이상의 비밀번호를 입력하세요.");
@@ -176,7 +175,7 @@ class _SignUp_Step3State extends State<SignUp_Step3> {
           "name": this.name,
           "userId": this.id,
           "purpose": this.purpose,
-          "phonenum": this.phone_number,
+          "phonenum": this.phoneNumber,
           "marketing_SMS": this.marketing,
           "marketing_Email": this.marketing,
           "point": 0,

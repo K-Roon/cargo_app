@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
 
 class TextInputDeco {
-  static InputDecoration default_value(String hintText) {
+  static InputDecoration defaultValue(String hintText) {
+    return InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(color: Colors.black26),
+        focusColor: Colors.blue,
+        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10),
+        ));
+  }
+
+  static InputDecoration defaultPassword(String hintText) {
     return InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black26),
@@ -51,7 +67,7 @@ class TextInputDeco {
         ));
   }
 
-  static InputDecoration radius_hard(String hintText, {Icon icon}) {
+  static InputDecoration radiusHard(String hintText, {Icon icon}) {
     return InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black26),
@@ -68,27 +84,7 @@ class TextInputDeco {
         ),);
   }
 
-  static InputDecoration elevation_only(String hintText) {
-    return InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black26),
-        fillColor: Colors.white,
-        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.0),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.0),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26, width: 0.0),
-          borderRadius: BorderRadius.circular(10),
-        ));
-  }
-
-  static InputDecoration defalut_center(String hintText) {
+  static InputDecoration defaultCenter(String hintText) {
     return InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black26),

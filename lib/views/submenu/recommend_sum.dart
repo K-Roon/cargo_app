@@ -17,23 +17,35 @@ class _RecommendSumState extends State<RecommendSum> {
 
   _RecommendSumState(this.killogram);
 
-  String recommend_cargo(killogram) {
-    if (killogram >= 15000) return "25톤 트럭";
-    else if (killogram >= 11000) return "15톤 트럭";
-    else if (killogram >= 8000) return "11톤 트럭";
-    else if (killogram >= 5000) return "8톤 트럭";
-    else if (killogram >= 3500) return "5톤 트럭";
-    else if (killogram >= 2500) return "3.5톤 트럭";
-    else if (killogram >= 1400) return "2.5톤 트럭";
-    else if (killogram >= 1000) return "1.4톤 트럭";
-    else if (killogram >= 500) return "1톤 트럭";
-    else if (killogram >= 0) return "0.5톤 트럭";
-    else return "트럭 2대 사용";
+  String recommendCargo(killogram) {
+    if (killogram >= 15000)
+      return "25톤 트럭";
+    else if (killogram >= 11000)
+      return "15톤 트럭";
+    else if (killogram >= 8000)
+      return "11톤 트럭";
+    else if (killogram >= 5000)
+      return "8톤 트럭";
+    else if (killogram >= 3500)
+      return "5톤 트럭";
+    else if (killogram >= 2500)
+      return "3.5톤 트럭";
+    else if (killogram >= 1400)
+      return "2.5톤 트럭";
+    else if (killogram >= 1000)
+      return "1.4톤 트럭";
+    else if (killogram >= 500)
+      return "1톤 트럭";
+    else if (killogram >= 0)
+      return "0.5톤 트럭";
+    else
+      return "트럭 2대 사용";
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, "화물차 추천 받기"),
+      appBar: appBarCustom(context, "화물차 추천 받기"),
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
@@ -65,7 +77,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           color: Colors.white, height: 1.2, fontSize: 18),
                     ),
                     Text(
-                      recommend_cargo(killogram),
+                      recommendCargo(killogram),
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -99,14 +111,8 @@ class _RecommendSumState extends State<RecommendSum> {
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        stops: [
-                          0.0,
-                          0.1
-                        ],
-                        colors: [
-                          Color(0x00FFFFFF),
-                          Colors.white
-                        ])),
+                        stops: [0.0, 0.1],
+                        colors: [Color(0x00FFFFFF), Colors.white])),
                 child: Column(
                   children: [
                     Container(
@@ -116,7 +122,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Insert_cargo_info()));
+                                  builder: (context) => InsertCargoInfo()));
                           print("다시 추천받기");
                         },
                         child: Row(
@@ -342,8 +348,8 @@ class _RecommendSumState extends State<RecommendSum> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => Recommend()));
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Recommend()));
           print("화물차 부르기");
         },
         style: ElevatedButton.styleFrom(
@@ -358,7 +364,7 @@ class _RecommendSumState extends State<RecommendSum> {
             alignment: Alignment.center,
             child: Text(
               "화물차 부르기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

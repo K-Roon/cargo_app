@@ -20,7 +20,7 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       //resizeToAvoidBottomInset: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +32,7 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
             children: [
               OutlinedButton(
                 onPressed: () {
-                  print(Purpose_Helper.signup_personal);
+                  print(PurposeHelper.signUpPersonal);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -65,7 +65,7 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
               Container(width: 30),
               OutlinedButton(
                 onPressed: () {
-                  print(Purpose_Helper.signup_biz);
+                  print(PurposeHelper.signUpBiz);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

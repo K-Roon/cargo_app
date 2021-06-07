@@ -30,14 +30,14 @@ class _ResetPassWordState extends State<ResetPassWord> {
         await DatabaseMethods().getUserInfoWithPhoneNum(this.phoneNum);
     setState(() {
       myEmail = querySnapshot.docs[0].get("email");
-      myEmail != null ? resetPassword(myEmail) : null ;
+      if (myEmail != null) ResetPassword(myEmail);
     });
   }
 
   _ResetPassWordState(this.phoneNum);
 
   @override
-  Future<void> resetPassword(String email) async {
+  Future<void> ResetPassword(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 
@@ -48,7 +48,7 @@ class _ResetPassWordState extends State<ResetPassWord> {
             child: Center(child: CircularProgressIndicator()),
           )
         : Scaffold(
-            appBar: appBar_custom(context, ""),
+            appBar: appBarCustom(context, ""),
             body: Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: Column(

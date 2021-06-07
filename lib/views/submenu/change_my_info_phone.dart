@@ -1,7 +1,6 @@
 import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/database.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 class ChangeMyPhone extends StatefulWidget {
   final String phoneNumber;
 
-  ///test
   ChangeMyPhone(this.phoneNumber);
 
   @override
@@ -33,7 +31,7 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -56,7 +54,9 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
                 children: [
                   TableRow(
                     children: [
-                      Container(margin: EdgeInsets.symmetric(vertical: 10),child: Text("현재 휴대폰 번호")),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text("현재 휴대폰 번호")),
                       Text(this.phoneNumber),
                     ],
                   ),
@@ -70,7 +70,8 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
                               hintText: this.phoneNumber,
                               hintStyle: TextStyle(color: Colors.black26),
                               focusColor: Colors.blue,
-                              contentPadding: EdgeInsets.symmetric(vertical: -5, horizontal: 3.0),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: -5, horizontal: 3.0),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.blue),
                                 borderRadius: BorderRadius.circular(5),
@@ -107,7 +108,7 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
             alignment: Alignment.center,
             child: Text(
               "휴대폰 번호 변경",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );
@@ -120,12 +121,13 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
     } else {
       try {
         DatabaseMethods().changeNewInfo("phonenum", phone.text);
-        showErrorAlertDialog(context,"전화번호가 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
+        showErrorAlertDialog(
+            context, "전화번호가 성공적으로 변경되었어요. 기기에 따라 로그아웃이 진행될 수 있습니다.");
         Constants.userPhoneNum = phone.text;
         HelperFunctions.saveUserLoggedInSharedPreference(false);
       } catch (e) {
         print("Deletion error $e");
-        showErrorAlertDialog(context,"Something went wrong");
+        showErrorAlertDialog(context, "Something went wrong");
       }
     }
   }
