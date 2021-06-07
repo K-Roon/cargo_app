@@ -1,5 +1,6 @@
 import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/findmyid.dart';
+import 'package:cargo_app/views/reset_pw.dart';
 import 'package:cargo_app/views/signup/signup_step2.dart';
 import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
@@ -65,6 +66,12 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
               MaterialPageRoute(
                   builder: (context) =>
                       FindMyId(getPhoneNum)));
+        } else if (this.purpose2 == Purpose_Helper.find_myPW) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ResetPassWord(getPhoneNum)));
         }
       }
     } on FirebaseAuthException catch (e) {
