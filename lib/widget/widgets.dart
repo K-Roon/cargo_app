@@ -12,24 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-///textInputDecoration 으로 대체되었다.
-@deprecated
-InputDecoration textFieldInputDecoration(String hintText) {
-  return InputDecoration(
-      hintText: hintText,
-      hintStyle: TextStyle(color: Colors.black26),
-      focusColor: Colors.blue,
-      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black26),
-        borderRadius: BorderRadius.circular(10),
-      ));
-}
-
 AppBar appBarCustom(BuildContext context, String title) {
   return AppBar(
     leading: TextButton(
@@ -205,7 +187,7 @@ Widget homeDrawer(BuildContext context) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Insert_cargo_info()));
+                          builder: (context) => InsertCargoInfo()));
                 },
               ),
               ListTile(

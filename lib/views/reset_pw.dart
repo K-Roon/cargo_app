@@ -30,14 +30,14 @@ class _ResetPassWordState extends State<ResetPassWord> {
         await DatabaseMethods().getUserInfoWithPhoneNum(this.phoneNum);
     setState(() {
       myEmail = querySnapshot.docs[0].get("email");
-      myEmail != null ? resetPassword(myEmail) : null ;
+      if (myEmail != null) ResetPW(myEmail);
     });
   }
 
   _ResetPassWordState(this.phoneNum);
 
   @override
-  Future<void> resetPassword(String email) async {
+  Future<void> ResetPW(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 

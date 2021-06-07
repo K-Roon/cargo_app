@@ -17,7 +17,7 @@ class PhoneAuth extends StatefulWidget {
       _PhoneAuthState(this.purpose, marketing: this.marketing);
 }
 
-TextEditingController phone_num = new TextEditingController();
+TextEditingController phoneNum = new TextEditingController();
 
 class _PhoneAuthState extends State<PhoneAuth> {
   final phoneFormKey = GlobalKey<FormState>();
@@ -62,7 +62,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                       decoration: TextInputDeco.defaultValue("전화번호"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
-                      controller: phone_num,
+                      controller: phoneNum,
                       onEditingComplete: (() => getOTP()),
                     ),
                   ),
@@ -99,12 +99,12 @@ class _PhoneAuthState extends State<PhoneAuth> {
     setState(() {
       isLoading = true;
     });
-    if (phone_num.text.isEmpty) {
+    if (phoneNum.text.isEmpty) {
       showErrorAlertDialog(context, "전화번호를 입력해주세요.");
       isLoading = false;
     } else {
       await _auth.verifyPhoneNumber(
-        phoneNumber: "+82 ${phone_num.text.replaceFirst("0", "", 0)}",
+        phoneNumber: "+82 ${phoneNum.text.replaceFirst("0", "", 0)}",
         verificationCompleted: (phoneAuthCredential) async {
           setState(() {
             isLoading = false;
@@ -123,7 +123,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
               MaterialPageRoute(
                   builder: (context) => PhoneAuth2(
                         this.purpose,
-                        phone_num.text,
+                        phoneNum.text,
                         verificationId,
                         marketing: this.marketing,
                       )));

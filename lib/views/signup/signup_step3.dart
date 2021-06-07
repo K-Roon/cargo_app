@@ -18,15 +18,15 @@ class SignUpStep3 extends StatefulWidget {
   final String name;
   final String id;
   final String email;
-  final String phone_number;
+  final String phoneNumber;
   final bool marketing;
 
-  SignUpStep3(this.purpose, this.name, this.id, this.email, this.phone_number,
+  SignUpStep3(this.purpose, this.name, this.id, this.email, this.phoneNumber,
       this.marketing);
 
   @override
   _SignUpStep3State createState() => _SignUpStep3State(this.purpose,
-      this.name, this.id, this.email, this.phone_number, this.marketing);
+      this.name, this.id, this.email, this.phoneNumber, this.marketing);
 }
 
 class _SignUpStep3State extends State<SignUpStep3> {
@@ -34,18 +34,18 @@ class _SignUpStep3State extends State<SignUpStep3> {
   final String name;
   final String id;
   final String email;
-  final String phone_number;
+  final String phoneNumber;
   final bool marketing;
 
-  final pwRegister_FormKey = GlobalKey<FormState>();
+  final pwRegisterFormKey = GlobalKey<FormState>();
   TextEditingController pw = new TextEditingController();
-  TextEditingController pw_confirm = new TextEditingController();
+  TextEditingController pwConfirm = new TextEditingController();
 
   bool isLoading = false;
   bool isAvailable = false;
 
   _SignUpStep3State(this.purpose, this.name, this.id, this.email,
-      this.phone_number, this.marketing);
+      this.phoneNumber, this.marketing);
 
   static const _chars =
       'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -88,7 +88,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
                     height: 10,
                   ),
                   Form(
-                    key: pwRegister_FormKey,
+                    key: pwRegisterFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -116,7 +116,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
                           decoration: TextInputDeco.defaultValue("비밀번호 확인"),
                           style: TextStyle(color: Colors.blue, fontSize: 16),
                           textInputAction: TextInputAction.next,
-                          controller: pw_confirm,
+                          controller: pwConfirm,
                           keyboardType: TextInputType.text,
                         ),
                       ],
@@ -128,7 +128,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          Confirm();
+          confirm();
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
@@ -148,10 +148,10 @@ class _SignUpStep3State extends State<SignUpStep3> {
     );
   }
 
-  void Confirm() {
+  void confirm() {
     if (pw.text.isEmpty) {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요.");
-    } else if (pw.text != pw_confirm.text) {
+    } else if (pw.text != pwConfirm.text) {
       showErrorAlertDialog(context, "비밀번호 확인란과 동일하지 않습니다.");
     } else if (pw.text.length < 6) {
       showErrorAlertDialog(context, "6자리 이상의 비밀번호를 입력하세요.");
@@ -175,7 +175,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
           "name": this.name,
           "userId": this.id,
           "purpose": this.purpose,
-          "phonenum": this.phone_number,
+          "phonenum": this.phoneNumber,
           "marketing_SMS": this.marketing,
           "marketing_Email": this.marketing,
           "point": 0,

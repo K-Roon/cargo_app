@@ -85,7 +85,7 @@ class _PaymentListState extends State<PaymentList> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ElevatedButton(
           onPressed: () {
-            ChangeMyCard();
+            changeMyCard();
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.blue,
@@ -287,7 +287,7 @@ class _PaymentListState extends State<PaymentList> {
     );
   }
 
-  void ChangeMyCard() {
+  void changeMyCard() {
     print("카드변경");
   }
 }

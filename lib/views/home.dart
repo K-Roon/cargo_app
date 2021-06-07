@@ -37,7 +37,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final _ScaffoldState = GlobalKey<ScaffoldState>();
+  final _scaffoldState = GlobalKey<ScaffoldState>();
   int count = 1;
   bool isLoading = false;
   bool isAvailable = false;
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
     setHome();
     permissionLocation();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _ScaffoldState.currentState.openDrawer();
+      _scaffoldState.currentState.openDrawer();
       todayTips();
       isLoading = false;
     });
@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
     return new WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        key: _ScaffoldState,
+        key: _scaffoldState,
         drawer: homeDrawer(context),
         endDrawerEnableOpenDragGesture: false,
         appBar: AppBar(
@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
           leading: new FloatingActionButton(
             heroTag: "OpenDrawer",
             onPressed: () {
-              _ScaffoldState.currentState.openDrawer();
+              _scaffoldState.currentState.openDrawer();
             },
             backgroundColor: Colors.white,
             elevation: 0.0,

@@ -108,7 +108,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                     key: otpFormKey,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: TextInputDeco.defalut_center(
+                      decoration: TextInputDeco.defaultCenter(
                           "예)000000"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,

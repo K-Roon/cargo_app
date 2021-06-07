@@ -17,7 +17,7 @@ class _RecommendSumState extends State<RecommendSum> {
 
   _RecommendSumState(this.killogram);
 
-  String recommend_cargo(killogram) {
+  String recommendCargo(killogram) {
     if (killogram >= 15000)
       return "25톤 트럭";
     else if (killogram >= 11000)
@@ -77,7 +77,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           color: Colors.white, height: 1.2, fontSize: 18),
                     ),
                     Text(
-                      recommend_cargo(killogram),
+                      recommendCargo(killogram),
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -122,7 +122,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Insert_cargo_info()));
+                                  builder: (context) => InsertCargoInfo()));
                           print("다시 추천받기");
                         },
                         child: Row(

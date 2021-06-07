@@ -1,5 +1,4 @@
 import 'package:cargo_app/views/home.dart';
-import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Mydeliver extends StatefulWidget {

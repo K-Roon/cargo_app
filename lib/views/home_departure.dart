@@ -28,7 +28,7 @@ class HomeDeparture extends StatefulWidget {
 }
 
 class _HomeDepartureState extends State<HomeDeparture> {
-  final _ScaffoldState = GlobalKey<ScaffoldState>();
+  final scaffoldState = GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
   int count = 1;
   final bool isDeparture;
@@ -83,7 +83,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
     _panelHeightOpen = MediaQuery.of(context).size.height * .70;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      key: _ScaffoldState,
+      key: scaffoldState,
       drawer: homeDrawer(context),
       endDrawerEnableOpenDragGesture: false,
       appBar: AppBar(
@@ -94,7 +94,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
         leading: new FloatingActionButton(
           heroTag: "OpenDrawer",
           onPressed: () {
-            _ScaffoldState.currentState.openDrawer();
+            scaffoldState.currentState.openDrawer();
           },
           backgroundColor: Colors.white,
           elevation: 0.0,

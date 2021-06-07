@@ -2,15 +2,15 @@ import 'package:cargo_app/widget/textInputDeco.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
-class Insert_cargo_info extends StatefulWidget {
-  const Insert_cargo_info({Key key}) : super(key: key);
+class InsertCargoInfo extends StatefulWidget {
+  const InsertCargoInfo({Key key}) : super(key: key);
 
   @override
-  _Insert_cargo_infoState createState() => _Insert_cargo_infoState();
+  _InsertCargoInfoState createState() => _InsertCargoInfoState();
 }
 
-class _Insert_cargo_infoState extends State<Insert_cargo_info> {
-  bool isno_EV = false;
+class _InsertCargoInfoState extends State<InsertCargoInfo> {
+  bool isNoEv = false;
   bool isAgain = false;
   String drDnDepartureWhen = '지금 바로';
   String drDnArrivalWhen = '바로 도착';
@@ -50,7 +50,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 TextFormField(
-                  decoration: TextInputDeco.radius_hard("출발지 입력",
+                  decoration: TextInputDeco.radiusHard("출발지 입력",
                       icon: Icon(
                         Icons.edit,
                         size: 15,
@@ -90,7 +90,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 TextFormField(
-                  decoration: TextInputDeco.radius_hard("도착지 입력",
+                  decoration: TextInputDeco.radiusHard("도착지 입력",
                       icon: Icon(
                         Icons.edit,
                         size: 15,
@@ -302,7 +302,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 TextFormField(
-                  decoration: TextInputDeco.radius_hard("",
+                  decoration: TextInputDeco.radiusHard("",
                       icon: Icon(
                         Icons.edit,
                         size: 15,
@@ -342,7 +342,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 TextFormField(
-                  decoration: TextInputDeco.radius_hard(
+                  decoration: TextInputDeco.radiusHard(
                     "크기 및 개수 입력(ex. 100*120*100Cm/2박스)",
                   ),
                 ),
@@ -352,7 +352,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                   style: smallTextStyle(),
                 ),
                 TextFormField(
-                  decoration: TextInputDeco.radius_hard(""),
+                  decoration: TextInputDeco.radiusHard(""),
                 ),
                 Container(height: 20),
                 Text(
@@ -364,7 +364,7 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          isno_EV = isno_EV ? false : true;
+                          isNoEv = isNoEv ? false : true;
                         });
                       },
                       child: Container(
@@ -372,10 +372,10 @@ class _Insert_cargo_infoState extends State<Insert_cargo_info> {
                           children: [
                             Text("엘리베이터 없음"),
                             Checkbox(
-                              value: isno_EV,
+                              value: isNoEv,
                               onChanged: (bool newValue) {
                                 setState(() {
-                                  isno_EV = newValue;
+                                  isNoEv = newValue;
                                 });
                               },
                             ),

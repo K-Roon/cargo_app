@@ -1,6 +1,5 @@
 import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/helper/helperfunctions.dart';
-import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';

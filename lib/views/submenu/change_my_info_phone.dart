@@ -1,7 +1,6 @@
 import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/database.dart';
-import 'package:cargo_app/views/phone_auth/phone_auth_2.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 class ChangeMyPhone extends StatefulWidget {
   final String phoneNumber;
 
-  ///test
   ChangeMyPhone(this.phoneNumber);
 
   @override
