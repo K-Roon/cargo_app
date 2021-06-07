@@ -45,8 +45,17 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    setState(() {
+      isLoading = true;
+    });
     setHome();
     permissionLocation();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _ScaffoldState.currentState.openDrawer();
+      todayTips();
+      isLoading = false;
+    });
+
     super.initState();
   }
 
@@ -107,7 +116,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    todayTips();
     return new WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -201,19 +209,18 @@ class _HomeState extends State<Home> {
                   color: Colors.black54,
                   borderRadius: BorderRadius.all(Radius.circular(12.0))),
             ),
-            slide_main()
+            slideMain()
           ],
         ),
       ),
     );
   }
 
-  Widget slide_main() {
+  Widget slideMain() {
     return Column(
       children: [
         GestureDetector(
             onTap: () {
-              print("출발지 주소 검색");
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HomeDeparture(true)));
             },
@@ -234,7 +241,6 @@ class _HomeState extends State<Home> {
         MarginBar.marginBar(context),
         GestureDetector(
             onTap: () {
-              print("카카오톡으로 로그인");
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -259,112 +265,137 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<void> todayTips() async {
-    bool dismissToday = false;
+  void todayTips() async {
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now);
-    if (formatted != await HelperFunctions.getDismissDate()) {
+    if (formatted == await HelperFunctions.getDismissDate()) {
       showDialog(
           context: context,
+          useRootNavigator: false,
           builder: (BuildContext context) {
-            return AlertDialog(
-              elevation: 0.0,
-              titlePadding: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              title: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10))),
-                  padding: EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "안내",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold),
-                  )),
-              contentPadding: EdgeInsets.all(10),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "화물의 양 및 무게에 맞는 트럭을 알고있습니까?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black, fontSize: 15),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Checkbox(
-                          value: dismissToday,
-                          onChanged: (bool value) {
-                            setState(() {
-                              dismissToday = value;
-                            });
-                          }),
-                      Text("하루동안 보지 않음")
-                    ],
-                  ),
-                ],
-              ),
-              actionsPadding: EdgeInsets.symmetric(horizontal: 10),
-              actionsOverflowButtonSpacing: 10,
-              actionsOverflowDirection: VerticalDirection.down,
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.325,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Recommend()));
-                        },
-                        style: OutlinedButton.styleFrom(
-                          alignment: Alignment.center,
-                          primary: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                          side: BorderSide(width: 1, color: Colors.blue),
-                        ),
-                        child: Text(
-                          "알고 싶음",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.325,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          if (dismissToday)
-                            HelperFunctions.saveDismissDate(formatted);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                          side: BorderSide(width: 1, color: Colors.blue),
-                        ),
-                        child: Text(
-                          "알고 있음",
-                          style: TextStyle(fontSize: 15),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
+            return MyDialog();
           });
     }
   }
 }
+
+class MyDialog extends StatefulWidget {
+
+  @override
+  _MyDialogState createState() => _MyDialogState();
+}
+
+class _MyDialogState extends State<MyDialog> {
+  bool _dismissToday = false;
+  @override
+  Widget build(BuildContext context) {
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now);
+    return AlertDialog(
+      elevation: 0.0,
+      titlePadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)),
+      title: Container(
+          decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius:
+              BorderRadius.vertical(top: Radius.circular(10))),
+          padding: EdgeInsets.all(15),
+          alignment: Alignment.center,
+          child: Text(
+            "안내",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold),
+          )),
+      contentPadding: EdgeInsets.all(15),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "몇톤트럭이 필요한지\n알고 있습니까?",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontSize: 15),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _dismissToday = !_dismissToday;
+              });
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Checkbox(
+                    value: _dismissToday,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _dismissToday = value;
+                      });
+                    }),
+                Text("오늘 하루 안 보기")
+              ],),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Recommend()));
+                  },
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    alignment: Alignment.center,
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    side: BorderSide(width: 1, color: Colors.blue),
+                  ),
+                  child: Text(
+                    "찾아 보기",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+              Container(
+                width: 10,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_dismissToday)
+                      HelperFunctions.saveDismissDate(formatted);
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    side: BorderSide(width: 1, color: Colors.blue),
+                  ),
+                  child: Text(
+                    "알고 있음",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+

@@ -179,7 +179,11 @@ class _SignInState extends State<SignIn> {
                                 TextButton(
                                   child: Text("비밀번호 찾기"),
                                   onPressed: () {
-                                    print("Find My PW");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PhoneAuth(
+                                                Purpose_Helper.find_myPW)));
                                   },
                                 ),
                                 Text(" | ",
