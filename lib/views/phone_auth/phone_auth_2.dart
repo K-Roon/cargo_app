@@ -23,7 +23,7 @@ class PhoneAuth2 extends StatefulWidget {
           marketing: marketing);
 }
 
-TextEditingController otp_num = new TextEditingController();
+TextEditingController txtControllerOtpNum = new TextEditingController();
 
 class _PhoneAuth2State extends State<PhoneAuth2> {
   final otpFormKey = GlobalKey<FormState>();
@@ -113,7 +113,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       textAlign: TextAlign.center,
-                      controller: otp_num,
+                      controller: txtControllerOtpNum,
                       onEditingComplete: (()=>compelete()),
                     ),
                   ),
@@ -145,7 +145,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
   void compelete() {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: otp_num.text);
+        verificationId: verificationId, smsCode: txtControllerOtpNum.text);
     signInWithPhoneAuthCredential(phoneAuthCredential);
   }
 }

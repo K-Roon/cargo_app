@@ -14,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
 
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
@@ -30,7 +29,6 @@ class _SignInState extends State<SignIn> {
   final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
-  Position CurPosition;
 
   signIn() async {
     setState(() {
