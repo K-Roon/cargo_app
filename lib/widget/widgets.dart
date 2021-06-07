@@ -56,8 +56,8 @@ TextStyle btnTxtStyle({Color color}) {
   return TextStyle(color: color != null ? color : Colors.black, fontSize: 16);
 }
 
-TextStyle biggerTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 20);
+TextStyle biggerTextStyle({Color color}) {
+  return TextStyle(color: color != null ? color : Colors.white, fontSize: 20);
 }
 
 TextStyle mediumTextStyle() {
@@ -69,7 +69,11 @@ TextStyle txtStyleFlexible(Color color, double fontSize) {
 }
 
 TextStyle smallTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 11);
+  return TextStyle(color: Colors.black, fontSize: 12);
+}
+
+TextStyle smallBoldStyle({Color color}) {
+  return TextStyle(color: color != null ? color : Colors.black, fontSize: 12, fontWeight: FontWeight.bold);
 }
 
 void showErrorAlertDialog(BuildContext context, String errorText) async {
@@ -80,12 +84,12 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
           elevation: 0.0,
           titlePadding: EdgeInsets.zero,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Container(
               decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(10))),
+                  BorderRadius.vertical(top: Radius.circular(10))),
               padding: EdgeInsets.all(15),
               alignment: Alignment.center,
               child: Text(
@@ -179,7 +183,7 @@ Widget homeDrawer(BuildContext context) {
             children: [
               ListTile(
                 title:
-                    Text('화물차 부르기', style: txtStyleFlexible(Colors.white, 20)),
+                Text('화물차 부르기', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -192,7 +196,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               ListTile(
                 title:
-                    Text('화물차 추천받기', style: txtStyleFlexible(Colors.white, 20)),
+                Text('화물차 추천받기', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -203,7 +207,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               ListTile(
                 title:
-                    Text('내 운송 조회', style: txtStyleFlexible(Colors.white, 20)),
+                Text('내 운송 조회', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -214,7 +218,7 @@ Widget homeDrawer(BuildContext context) {
               ),
               ListTile(
                 title:
-                    Text('내 정보 관리', style: txtStyleFlexible(Colors.white, 20)),
+                Text('내 정보 관리', style: txtStyleFlexible(Colors.white, 20)),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -274,7 +278,7 @@ Widget homeDrawer(BuildContext context) {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
@@ -284,12 +288,12 @@ Widget homeDrawer(BuildContext context) {
                                       },
                                       style: OutlinedButton.styleFrom(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 15),
+                                        EdgeInsets.symmetric(vertical: 15),
                                         alignment: Alignment.center,
                                         primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
+                                            BorderRadius.circular(5)),
                                         side: BorderSide(
                                             width: 1, color: Colors.blue),
                                       ),
@@ -309,11 +313,11 @@ Widget homeDrawer(BuildContext context) {
                                       },
                                       style: ElevatedButton.styleFrom(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 15),
+                                        EdgeInsets.symmetric(vertical: 15),
                                         primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
+                                            BorderRadius.circular(5)),
                                         side: BorderSide(
                                             width: 1, color: Colors.blue),
                                       ),
@@ -373,7 +377,7 @@ Widget homeDrawer(BuildContext context) {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
@@ -383,12 +387,12 @@ Widget homeDrawer(BuildContext context) {
                                       },
                                       style: OutlinedButton.styleFrom(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 15),
+                                        EdgeInsets.symmetric(vertical: 15),
                                         alignment: Alignment.center,
                                         primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
+                                            BorderRadius.circular(5)),
                                         side: BorderSide(
                                             width: 1, color: Colors.blue),
                                       ),
@@ -407,7 +411,7 @@ Widget homeDrawer(BuildContext context) {
                                         AuthService().signOut();
                                         HelperFunctions
                                             .saveUserLoggedInSharedPreference(
-                                                false);
+                                            false);
                                         Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(
@@ -416,11 +420,11 @@ Widget homeDrawer(BuildContext context) {
                                       },
                                       style: ElevatedButton.styleFrom(
                                         padding:
-                                            EdgeInsets.symmetric(vertical: 15),
+                                        EdgeInsets.symmetric(vertical: 15),
                                         primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(5)),
+                                            BorderRadius.circular(5)),
                                         side: BorderSide(
                                             width: 1, color: Colors.blue),
                                       ),

@@ -1,4 +1,5 @@
 import 'package:cargo_app/widget/textInputDeco.dart';
+import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 
 class PaymentList extends StatefulWidget {
@@ -99,7 +100,7 @@ class _PaymentListState extends State<PaymentList> {
               alignment: Alignment.center,
               child: Text(
                 "카드변경",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: biggerTextStyle(),
               )),
         ),
       ),

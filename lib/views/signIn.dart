@@ -277,7 +277,7 @@ class _SignInState extends State<SignIn> {
                     alignment: Alignment.center,
                     child: Text(
                       "로그인",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: biggerTextStyle(),
                     )),
               ),
       ),

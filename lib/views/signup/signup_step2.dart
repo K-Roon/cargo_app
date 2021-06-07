@@ -146,7 +146,7 @@ class _SignUpStep2State extends State<SignUpStep2> {
             alignment: Alignment.center,
             child: Text(
               "확인",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

@@ -230,7 +230,7 @@ class _RecommendState extends State<Recommend> {
             alignment: Alignment.center,
             child: Text(
               "추천받기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

@@ -137,7 +137,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
             alignment: Alignment.center,
             child: Text(
               "인증완료",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

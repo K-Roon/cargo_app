@@ -142,7 +142,7 @@ class _SignUpStep3State extends State<SignUpStep3> {
             alignment: Alignment.center,
             child: Text(
               "확인",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

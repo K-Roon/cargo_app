@@ -151,7 +151,7 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
             alignment: Alignment.center,
             child: Text(
               "확인",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

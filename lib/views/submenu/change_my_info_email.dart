@@ -109,7 +109,7 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
             alignment: Alignment.center,
             child: Text(
               "이메일 주소 변경",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );
