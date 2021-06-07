@@ -436,7 +436,7 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
             alignment: Alignment.center,
             child: Text(
               "호출하기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

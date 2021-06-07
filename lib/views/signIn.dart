@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cargo_app/helper/helperfunctions.dart';
@@ -29,6 +30,15 @@ class _SignInState extends State<SignIn> {
   final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
+  Color loginButtonBackground = Color(0xff8d9699);
+
+  void timeOut() {
+    showErrorAlertDialog(context, "ID, 비밀번호를 찾을 수 없거나 인터넷 속도가 너무 느려 이용할 수 없습니다.");
+    setState(() {
+      isLoading = false;
+    });
+    Timer(Duration(minutes: 1), timeOut).cancel();
+  }
 
   signIn() async {
     setState(() {
@@ -41,6 +51,7 @@ class _SignInState extends State<SignIn> {
       showErrorAlertDialog(context, "비밀번호를 입력해주세요");
       isLoading = false;
     } else {
+      Timer(Duration(minutes: 1), timeOut);
       QuerySnapshot userSnapshot =
           await DatabaseMethods().getEmailById(idController.text);
       if (userSnapshot.docs[0].get("userId") != null ||
@@ -63,13 +74,17 @@ class _SignInState extends State<SignIn> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => Home()));
           } else if (result.contains("wrong-password")) {
-            showErrorAlertDialog(context, "ID나 비밀번호를 찾을 수 없습니다.");
+            showErrorAlertDialog(context, "비밀번호가 틀린 것 같습니다.");
+            isLoading = false;
+            Timer(Duration(minutes: 1), timeOut).cancel();
           } else {
             showErrorAlertDialog(context, "알 수 없는 오류: $result");
+            isLoading = false;
+            Timer(Duration(minutes: 1), timeOut).cancel();
           }
         });
       } else {
-        showErrorAlertDialog(context, "ID를 찾을 수 없습니다");
+        showErrorAlertDialog(context, "ID나 비밀번호를 찾을 수 없습니다.");
         isLoading = false;
       }
     }
@@ -83,11 +98,19 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      if(idController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+        loginButtonBackground = Colors.blue;
+      } else {
+        loginButtonBackground = Color(0xff8d9699);
+      }
+    });
     return new WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -149,7 +172,19 @@ class _SignInState extends State<SignIn> {
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
                                     decoration:
-                                        TextInputDeco.defaultValue("비밀번호"),
+                                    InputDecoration(
+                                        hintText: "비밀번호",
+                                        hintStyle: TextStyle(color: Colors.black26),
+                                        focusColor: Colors.blue,
+                                        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.blue),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.black26),
+                                          borderRadius: BorderRadius.circular(10),
+                                        )),
                                     onEditingComplete: (() => signIn()),
                                   ),
                                 ],
@@ -266,7 +301,7 @@ class _SignInState extends State<SignIn> {
                   signIn();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: isAvailable ? Colors.blue : Color(0xff8d9699),
+                  primary: loginButtonBackground,
                   alignment: Alignment.center,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -277,7 +312,7 @@ class _SignInState extends State<SignIn> {
                     alignment: Alignment.center,
                     child: Text(
                       "로그인",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: biggerTextStyle(),
                     )),
               ),
       ),

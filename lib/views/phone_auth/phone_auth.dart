@@ -88,7 +88,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   alignment: Alignment.center,
                   child: Text(
                     "인증번호 받기",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: biggerTextStyle(),
                   )),
             ),
     );
@@ -127,6 +127,9 @@ class _PhoneAuthState extends State<PhoneAuth> {
                         verificationId,
                         marketing: this.marketing,
                       )));
+          setState(() {
+            isLoading = false;
+          });
         },
         codeAutoRetrievalTimeout: (verificationId) async {
           setState(() {

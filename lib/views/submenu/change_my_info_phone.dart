@@ -108,7 +108,7 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
             alignment: Alignment.center,
             child: Text(
               "휴대폰 번호 변경",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

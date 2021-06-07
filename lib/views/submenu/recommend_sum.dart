@@ -364,7 +364,7 @@ class _RecommendSumState extends State<RecommendSum> {
             alignment: Alignment.center,
             child: Text(
               "화물차 부르기",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );

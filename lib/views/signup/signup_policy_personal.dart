@@ -151,7 +151,7 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
             alignment: Alignment.center,
             child: Text(
               "확인",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: biggerTextStyle(),
             )),
       ),
     );
