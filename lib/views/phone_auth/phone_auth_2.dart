@@ -23,7 +23,7 @@ class PhoneAuth2 extends StatefulWidget {
           marketing: marketing);
 }
 
-TextEditingController otp_num = new TextEditingController();
+TextEditingController txtControllerOtpNum = new TextEditingController();
 
 class _PhoneAuth2State extends State<PhoneAuth2> {
   final otpFormKey = GlobalKey<FormState>();
@@ -53,20 +53,20 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
       });
 
       if (authCredential?.user != null) {
-        if (this.purpose2 == Purpose_Helper.signup_personal ||
-            this.purpose2 == Purpose_Helper.signup_biz) {
+        if (this.purpose2 == PurposeHelper.signUpPersonal ||
+            this.purpose2 == PurposeHelper.signUpBiz) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      SignUp_Step2(getPhoneNum, purpose2, marketing)));
-        } else if (this.purpose2 == Purpose_Helper.find_myID) {
+                      SignUpStep2(getPhoneNum, purpose2, marketing)));
+        } else if (this.purpose2 == PurposeHelper.findMyID) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       FindMyId(getPhoneNum)));
-        } else if (this.purpose2 == Purpose_Helper.find_myPW) {
+        } else if (this.purpose2 == PurposeHelper.findMyPW) {
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -86,7 +86,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: isLoading
           ? Container(
               child: Center(child: CircularProgressIndicator()),
@@ -108,12 +108,12 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                     key: otpFormKey,
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      decoration: TextInputDeco.defalut_center(
+                      decoration: TextInputDeco.defaultCenter(
                           "예)000000"),
                       style: TextStyle(color: Colors.blue, fontSize: 16),
                       textInputAction: TextInputAction.next,
                       textAlign: TextAlign.center,
-                      controller: otp_num,
+                      controller: txtControllerOtpNum,
                       onEditingComplete: (()=>compelete()),
                     ),
                   ),
@@ -145,7 +145,7 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
 
   void compelete() {
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: verificationId, smsCode: otp_num.text);
+        verificationId: verificationId, smsCode: txtControllerOtpNum.text);
     signInWithPhoneAuthCredential(phoneAuthCredential);
   }
 }

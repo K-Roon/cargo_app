@@ -22,7 +22,7 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar_custom(context, ""),
+      appBar: appBarCustom(context, ""),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -132,7 +132,7 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PhoneAuth(
-                          Purpose_Helper.signup_biz,
+                      PurposeHelper.signUpBiz,
                           marketing: marketingAgreement,
                         )));
           } else {

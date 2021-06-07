@@ -14,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
 
 final TextEditingController idController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
@@ -30,7 +29,6 @@ class _SignInState extends State<SignIn> {
   final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
-  Position CurPosition;
 
   signIn() async {
     setState(() {
@@ -137,7 +135,7 @@ class _SignInState extends State<SignIn> {
                                 children: [
                                   TextFormField(
                                     decoration:
-                                        TextInputDeco.default_value("아이디"),
+                                        TextInputDeco.defaultValue("아이디"),
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
                                     textInputAction: TextInputAction.next,
@@ -151,7 +149,7 @@ class _SignInState extends State<SignIn> {
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
                                     decoration:
-                                        TextInputDeco.default_value("비밀번호"),
+                                        TextInputDeco.defaultValue("비밀번호"),
                                     onEditingComplete: (() => signIn()),
                                   ),
                                 ],
@@ -171,7 +169,7 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => PhoneAuth(
-                                                Purpose_Helper.find_myID)));
+                                                PurposeHelper.findMyID)));
                                   },
                                 ),
                                 Text(" | ",
@@ -183,7 +181,7 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => PhoneAuth(
-                                                Purpose_Helper.find_myPW)));
+                                                PurposeHelper.findMyPW)));
                                   },
                                 ),
                                 Text(" | ",
