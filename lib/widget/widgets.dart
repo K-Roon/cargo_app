@@ -165,7 +165,7 @@ void showChooseAlertDialog(BuildContext context, String errorText) async {
                   color: Colors.blue,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(10))),
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15),
               alignment: Alignment.center,
               child: Text(
                 "안내",
@@ -174,7 +174,7 @@ void showChooseAlertDialog(BuildContext context, String errorText) async {
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               )),
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: EdgeInsets.all(15),
           content: Text(
             errorText,
             textAlign: TextAlign.center,
@@ -387,6 +387,7 @@ Widget homeDrawer(BuildContext context) {
                       });
                 },
               ),
+              SizedBox(),
               ListTile(
                 title: Text('로그아웃', style: txtStyle_flexible(Colors.white, 20)),
                 onTap: () {
