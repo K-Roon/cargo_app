@@ -93,9 +93,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
         automaticallyImplyLeading: false,
         leading: new FloatingActionButton(
           heroTag: "OpenDrawer",
-          onPressed: () {
-            scaffoldState.currentState.openDrawer();
-          },
+          onPressed: () => scaffoldState.currentState.openDrawer(),
           backgroundColor: Colors.white,
           elevation: 0.0,
           hoverElevation: 0.0,
@@ -109,9 +107,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
             children: [
               new FloatingActionButton(
                 heroTag: "getPosition",
-                onPressed: () {
-                  permissionLocation();
-                },
+                onPressed: () => permissionLocation(),
                 backgroundColor: Colors.white,
                 elevation: 0.0,
                 hoverElevation: 0.0,

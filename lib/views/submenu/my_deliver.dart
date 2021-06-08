@@ -20,10 +20,8 @@ class _MydeliverState extends State<Mydeliver> {
               Icons.home_rounded,
               color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Home()));
-            },
+            onPressed: () => Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Home())),
           ),
           title: Text("내 운송 관리"),
           centerTitle: true,

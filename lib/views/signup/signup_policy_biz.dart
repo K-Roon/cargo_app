@@ -144,7 +144,7 @@ class _SignUpPolicyBizState extends State<SignUpPolicyBiz> {
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+              borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

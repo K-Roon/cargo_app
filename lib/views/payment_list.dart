@@ -58,9 +58,7 @@ class _PaymentListState extends State<PaymentList> {
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
           ),
           title: Text("카드등록"),
           centerTitle: true,
@@ -85,15 +83,13 @@ class _PaymentListState extends State<PaymentList> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ElevatedButton(
-          onPressed: () {
-            changeMyCard();
-          },
+          onPressed: () => changeMyCard(),
           style: ElevatedButton.styleFrom(
             primary: Colors.blue,
             alignment: Alignment.center,
             elevation: 0,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(0))),
+                borderRadius: BorderRadius.circular(0)),
           ),
           child: Container(
               height: 80,

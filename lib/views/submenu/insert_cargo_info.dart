@@ -28,9 +28,7 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
             Icons.arrow_back_ios,
             color: Colors.black,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text("화물정보입력"),
         centerTitle: true,
@@ -421,15 +419,13 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          print("PRESSED");
-        },
+        onPressed: () => print("PRESSED"),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+              borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

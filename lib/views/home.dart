@@ -129,9 +129,7 @@ class _HomeState extends State<Home> {
           automaticallyImplyLeading: false,
           leading: new FloatingActionButton(
             heroTag: "OpenDrawer",
-            onPressed: () {
-              _scaffoldState.currentState.openDrawer();
-            },
+            onPressed: () => _scaffoldState.currentState.openDrawer(),
             backgroundColor: Colors.white,
             elevation: 0.0,
             hoverElevation: 0.0,

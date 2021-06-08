@@ -93,15 +93,13 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          changeIt();
-        },
+        onPressed: () => changeIt(),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+              borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

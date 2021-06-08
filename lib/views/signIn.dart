@@ -33,7 +33,8 @@ class _SignInState extends State<SignIn> {
   Color loginButtonBackground = Color(0xff8d9699);
 
   void timeOut() {
-    showErrorAlertDialog(context, "ID, 비밀번호를 찾을 수 없거나 인터넷 속도가 너무 느려 이용할 수 없습니다.");
+    showErrorAlertDialog(
+        context, "ID, 비밀번호를 찾을 수 없거나 인터넷 속도가 너무 느려 이용할 수 없습니다.");
     setState(() {
       isLoading = false;
     });
@@ -98,14 +99,13 @@ class _SignInState extends State<SignIn> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if(idController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      if (idController.text.isNotEmpty && passwordController.text.isNotEmpty) {
         loginButtonBackground = Colors.blue;
       } else {
         loginButtonBackground = Color(0xff8d9699);
@@ -171,19 +171,24 @@ class _SignInState extends State<SignIn> {
                                     controller: passwordController,
                                     style: TextStyle(
                                         color: Colors.blue, fontSize: 16),
-                                    decoration:
-                                    InputDecoration(
+                                    decoration: InputDecoration(
                                         hintText: "비밀번호",
-                                        hintStyle: TextStyle(color: Colors.black26),
+                                        hintStyle:
+                                            TextStyle(color: Colors.black26),
                                         focusColor: Colors.blue,
-                                        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 20.0),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.blue),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide:
+                                              BorderSide(color: Colors.blue),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.black26),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide:
+                                              BorderSide(color: Colors.black26),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         )),
                                     onEditingComplete: (() => signIn()),
                                   ),
@@ -199,13 +204,11 @@ class _SignInState extends State<SignIn> {
                               children: [
                                 TextButton(
                                   child: Text("아이디 찾기"),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PhoneAuth(
-                                                PurposeHelper.findMyID)));
-                                  },
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PhoneAuth(
+                                              PurposeHelper.findMyID))),
                                 ),
                                 Text(" | ",
                                     style: TextStyle(color: Colors.black26)),
@@ -305,7 +308,7 @@ class _SignInState extends State<SignIn> {
                   alignment: Alignment.center,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(0))),
+                      borderRadius: BorderRadius.circular(0)),
                 ),
                 child: Container(
                     height: 80,

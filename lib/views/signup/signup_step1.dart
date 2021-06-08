@@ -16,7 +16,9 @@ class SignUp_Step1 extends StatefulWidget {
 // ignore: camel_case_types
 class _SignUp_Step1State extends State<SignUp_Step1> {
   bool isLoading = false;
+
   _SignUp_Step1State();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +33,10 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                onPressed: () {
-                  print(PurposeHelper.signUpPersonal);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              SignUpPolicyPersonal()));
-                },
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SignUpPolicyPersonal())),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
                   padding: EdgeInsets.all(30),
@@ -64,14 +62,8 @@ class _SignUp_Step1State extends State<SignUp_Step1> {
               ),
               Container(width: 30),
               OutlinedButton(
-                onPressed: () {
-                  print(PurposeHelper.signUpBiz);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              SignUpPolicyBiz()));
-                },
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignUpPolicyBiz())),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.grey,
                   padding: EdgeInsets.all(30),

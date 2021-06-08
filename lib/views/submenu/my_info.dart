@@ -91,9 +91,7 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                print("ID");
-                              },
+                              onPressed: () => print("ID"),
                               child: Container()),
                         ],
                       ),
@@ -112,15 +110,13 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
+                              onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ChangeMyEmail(
                                             Constants.userEmail != ""
                                                 ? Constants.userEmail
-                                                : false)));
-                              },
+                                                : false))),
                               child: Icon(
                                 Icons.navigate_next_rounded,
                                 color: Colors.black,
@@ -142,15 +138,13 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
+                              onPressed: ()  => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ChangeMyPhone(
                                             Constants.userPhoneNum != ""
                                                 ? Constants.userPhoneNum
-                                                : "LOADING..")));
-                              },
+                                                : "LOADING.."))),
                               child: Icon(
                                 Icons.navigate_next_rounded,
                                 color: Colors.black,

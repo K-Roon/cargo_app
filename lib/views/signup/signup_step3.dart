@@ -25,8 +25,8 @@ class SignUpStep3 extends StatefulWidget {
       this.marketing);
 
   @override
-  _SignUpStep3State createState() => _SignUpStep3State(this.purpose,
-      this.name, this.id, this.email, this.phoneNumber, this.marketing);
+  _SignUpStep3State createState() => _SignUpStep3State(this.purpose, this.name,
+      this.id, this.email, this.phoneNumber, this.marketing);
 }
 
 class _SignUpStep3State extends State<SignUpStep3> {
@@ -127,15 +127,12 @@ class _SignUpStep3State extends State<SignUpStep3> {
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          confirm();
-        },
+        onPressed: () => confirm(),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

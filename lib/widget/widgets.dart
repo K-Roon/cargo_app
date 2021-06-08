@@ -19,9 +19,7 @@ AppBar appBarCustom(BuildContext context, String title) {
         Icons.arrow_back_ios,
         color: Colors.black,
       ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
+      onPressed: () => Navigator.pop(context),
     ),
     title: Text(title),
     automaticallyImplyLeading: true,
@@ -36,10 +34,8 @@ AppBar appBarSub(BuildContext context, String title) {
         Icons.home_rounded,
         color: Colors.black,
       ),
-      onPressed: () {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home()));
-      },
+      onPressed: () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Home())),
     ),
     title: Text(title),
     centerTitle: true,
@@ -118,9 +114,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => Navigator.pop(context),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 15),
                         primary: Colors.blue,
@@ -166,9 +160,7 @@ Widget homeDrawer(BuildContext context) {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100)),
                   ),
-                  onPressed: () {
-                    print("PUSHED");
-                  },
+                  onPressed: () => print("PUSHED"),
                   child: Icon(
                     Icons.person,
                     size: 50,
@@ -292,9 +284,7 @@ Widget homeDrawer(BuildContext context) {
                                 children: [
                                   Expanded(
                                     child: OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
+                                      onPressed: () => Navigator.pop(context),
                                       style: OutlinedButton.styleFrom(
                                         padding:
                                         EdgeInsets.symmetric(vertical: 15),
@@ -317,9 +307,7 @@ Widget homeDrawer(BuildContext context) {
                                   ),
                                   Expanded(
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
+                                      onPressed: () => Navigator.pop(context),
                                       style: ElevatedButton.styleFrom(
                                         padding:
                                         EdgeInsets.symmetric(vertical: 15),
@@ -391,9 +379,7 @@ Widget homeDrawer(BuildContext context) {
                                 children: [
                                   Expanded(
                                     child: OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
+                                      onPressed: () => Navigator.pop(context),
                                       style: OutlinedButton.styleFrom(
                                         padding:
                                         EdgeInsets.symmetric(vertical: 15),

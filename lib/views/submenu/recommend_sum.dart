@@ -118,13 +118,10 @@ class _RecommendSumState extends State<RecommendSum> {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 50),
                       child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
+                        onPressed: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => InsertCargoInfo()));
-                          print("다시 추천받기");
-                        },
+                                  builder: (context) => InsertCargoInfo())),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -347,17 +344,14 @@ class _RecommendSumState extends State<RecommendSum> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Recommend()));
-          print("화물차 부르기");
-        },
+        onPressed: () => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Recommend())),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+              borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,
