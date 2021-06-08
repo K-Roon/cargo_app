@@ -88,8 +88,8 @@ class _PaymentListState extends State<PaymentList> {
             primary: Colors.blue,
             alignment: Alignment.center,
             elevation: 0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
           ),
           child: Container(
               height: 80,
@@ -108,85 +108,79 @@ class _PaymentListState extends State<PaymentList> {
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Column(
         children: [
-          Form(
-            child: Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: [
-                TableRow(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: TextFormField(
-                        decoration: TextInputDeco.payment("소유주 이름"),
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        controller: hasNamePersonal,
-                        keyboardType: TextInputType.text,
-                      ),
+          Table(
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: [
+              TableRow(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextField(
+                      decoration: TextInputDeco.payment("소유주 이름"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.next,
+                      controller: hasNamePersonal,
+                      keyboardType: TextInputType.text,
                     ),
-                    Container(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Form(
-            child: Padding(
-              padding: EdgeInsets.all(5),
-              child: TextFormField(
-                obscureText: true,
-                decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-                textInputAction: TextInputAction.next,
-                controller: cardNoPersonal,
-                keyboardType: TextInputType.text,
-              ),
-            ),
-          ),
-          Form(
-            child: Column(
-              children: [
-                Table(
-                  children: [
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: TextFormField(
-                            decoration: TextInputDeco.payment("유효기간(MM/YY)"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: validPersonal,
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: TextFormField(
-                            decoration: TextInputDeco.payment("생년월일(YYMMDD)"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: birthDayPersonal,
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: cardPwPersonal,
-                    keyboardType: TextInputType.text,
                   ),
-                ),
-              ],
+                  Container(),
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: TextField(
+              obscureText: true,
+              decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+              textInputAction: TextInputAction.next,
+              controller: cardNoPersonal,
+              keyboardType: TextInputType.text,
             ),
+          ),
+          Column(
+            children: [
+              Table(
+                children: [
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextField(
+                          decoration: TextInputDeco.payment("유효기간(MM/YY)"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: validPersonal,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextField(
+                          decoration: TextInputDeco.payment("생년월일(YYMMDD)"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: birthDayPersonal,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextField(
+                  obscureText: true,
+                  decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
+                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                  textInputAction: TextInputAction.next,
+                  controller: cardPwPersonal,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -198,86 +192,79 @@ class _PaymentListState extends State<PaymentList> {
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       child: Column(
         children: [
-          Form(
-            child: Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: [
-                TableRow(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: TextFormField(
-                        decoration: TextInputDeco.payment("소유주 이름"),
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        controller: hasNameBiz,
-                        keyboardType: TextInputType.text,
-                      ),
+          Table(
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: [
+              TableRow(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: TextField(
+                      decoration: TextInputDeco.payment("소유주 이름"),
+                      style: TextStyle(color: Colors.blue, fontSize: 16),
+                      textInputAction: TextInputAction.next,
+                      controller: hasNameBiz,
+                      keyboardType: TextInputType.text,
                     ),
-                    Container(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Form(
-            child: Padding(
-              padding: EdgeInsets.all(5),
-              child: TextFormField(
-                obscureText: true,
-                decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-                textInputAction: TextInputAction.next,
-                controller: cardNoBiz,
-                keyboardType: TextInputType.text,
-              ),
-            ),
-          ),
-          Form(
-            child: Column(
-              children: [
-                Table(
-                  children: [
-                    TableRow(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: TextFormField(
-                            decoration:
-                                TextInputDeco.payment("유효기간(MM/YY)"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: validBiz,
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: TextFormField(
-                            decoration: TextInputDeco.payment("사업자번호"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: bizNumBiz,
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                    textInputAction: TextInputAction.next,
-                    controller: cardPwBiz,
-                    keyboardType: TextInputType.text,
                   ),
-                ),
-              ],
+                  Container(),
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.all(5),
+            child: TextField(
+              obscureText: true,
+              decoration: TextInputDeco.payment("카드번호(****-****-****-****)"),
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+              textInputAction: TextInputAction.next,
+              controller: cardNoBiz,
+              keyboardType: TextInputType.text,
             ),
+          ),
+          Column(
+            children: [
+              Table(
+                children: [
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextField(
+                          decoration: TextInputDeco.payment("유효기간(MM/YY)"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: validBiz,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5),
+                        child: TextField(
+                          decoration: TextInputDeco.payment("사업자번호"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: bizNumBiz,
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: TextField(
+                  obscureText: true,
+                  decoration: TextInputDeco.payment("카드 비밀번호 앞 2자리"),
+                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                  textInputAction: TextInputAction.next,
+                  controller: cardPwBiz,
+                  keyboardType: TextInputType.text,
+                ),
+              ),
+            ],
           ),
         ],
       ),

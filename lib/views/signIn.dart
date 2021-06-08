@@ -27,10 +27,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final signinFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isAvailable = false;
   Color loginButtonBackground = Color(0xff8d9699);
+  bool passwordObscure = true;
 
   void timeOut() {
     showErrorAlertDialog(
@@ -152,48 +152,50 @@ class _SignInState extends State<SignIn> {
                             Container(height: 50),
 
                             ///아이디 및 비밀번호 입력 창(폼)
-                            Form(
-                              key: signinFormKey,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    decoration:
-                                        TextInputDeco.defaultValue("아이디"),
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 16),
-                                    textInputAction: TextInputAction.next,
-                                    controller: idController,
-                                  ),
-                                  Container(height: 15),
-                                  TextFormField(
-                                    obscureText: true,
-                                    textInputAction: TextInputAction.go,
-                                    controller: passwordController,
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 16),
-                                    decoration: InputDecoration(
-                                        hintText: "비밀번호",
-                                        hintStyle:
-                                            TextStyle(color: Colors.black26),
-                                        focusColor: Colors.blue,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 0.0, horizontal: 20.0),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.blue),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.black26),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        )),
-                                    onEditingComplete: (() => signIn()),
-                                  ),
-                                ],
-                              ),
+                            Column(
+                              children: [
+                                TextField(
+                                  decoration:
+                                      TextInputDeco.defaultValue("아이디"),
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 16),
+                                  textInputAction: TextInputAction.next,
+                                  controller: idController,
+                                ),
+                                Container(height: 15),
+                                TextField(
+                                  obscureText: passwordObscure,
+                                  textInputAction: TextInputAction.go,
+                                  controller: passwordController,
+                                  style: TextStyle(
+                                      color: Colors.blue, fontSize: 16),
+                                  decoration: InputDecoration(
+                                      suffixIcon: TextButton(
+                                        child: Icon(Icons.remove_red_eye),
+                                        onPressed: () => passwordObscure =
+                                            !passwordObscure,
+                                      ),
+                                      hintText: "비밀번호",
+                                      hintStyle:
+                                          TextStyle(color: Colors.black26),
+                                      focusColor: Colors.blue,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 0.0, horizontal: 20.0),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.blue),
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.black26),
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                      )),
+                                  onEditingComplete: (() => signIn()),
+                                ),
+                              ],
                             ),
 
                             Container(height: 10),
@@ -232,7 +234,7 @@ class _SignInState extends State<SignIn> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SignUp_Step1()));
+                                                SignUpStep1()));
                                   },
                                 ),
                               ],
@@ -241,9 +243,8 @@ class _SignInState extends State<SignIn> {
                             Container(height: 10),
 
                             GestureDetector(
-                                onTap: () {
-                                  print("카카오톡으로 로그인");
-                                },
+                                onTap: () =>
+                                    showErrorAlertDialog(context, "지원되지 않습니다."),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   decoration: BoxDecoration(
@@ -268,9 +269,8 @@ class _SignInState extends State<SignIn> {
 
                             ///네이버로 로그인
                             GestureDetector(
-                                onTap: () {
-                                  print("네이버로 로그인");
-                                },
+                                onTap: () =>
+                                    showErrorAlertDialog(context, "지원되지 않습니다."),
                                 child: Container(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   decoration: BoxDecoration(

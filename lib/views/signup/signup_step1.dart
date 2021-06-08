@@ -1,29 +1,25 @@
-import 'package:cargo_app/helper/purpose_helper.dart';
 import 'package:cargo_app/views/signup/signup_policy_biz.dart';
 import 'package:cargo_app/views/signup/signup_policy_personal.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// ignore: camel_case_types
-class SignUp_Step1 extends StatefulWidget {
-  SignUp_Step1();
+/// 개인회원으로 가입할 것인지 법인회원으로 가입할 것인지 결정하는 화면입니다.
+class SignUpStep1 extends StatefulWidget {
+  SignUpStep1();
 
   @override
-  _SignUp_Step1State createState() => _SignUp_Step1State();
+  _SignUpStep1State createState() => _SignUpStep1State();
 }
 
-// ignore: camel_case_types
-class _SignUp_Step1State extends State<SignUp_Step1> {
-  bool isLoading = false;
-
-  _SignUp_Step1State();
+class _SignUpStep1State extends State<SignUpStep1> {
+  _SignUpStep1State();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom(context, ""),
-      //resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

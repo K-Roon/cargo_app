@@ -44,10 +44,6 @@ AppBar appBarSub(BuildContext context, String title) {
   );
 }
 
-TextStyle simpleTextStyle() {
-  return TextStyle(color: Colors.black, fontSize: 16);
-}
-
 TextStyle btnTxtStyle({Color color}) {
   return TextStyle(color: color != null ? color : Colors.black, fontSize: 16);
 }
@@ -185,58 +181,33 @@ Widget homeDrawer(BuildContext context) {
               ListTile(
                 title:
                 Text('화물차 부르기', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(
+                onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InsertCargoInfo()));
-                },
+                          builder: (context) => InsertCargoInfo())),
               ),
               ListTile(
                 title:
                 Text('화물차 추천받기', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Recommend()));
-                },
+                onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Recommend())),
               ),
               ListTile(
                 title:
                 Text('내 운송 조회', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Mydeliver()));
-                },
+                onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyDelivery())),
               ),
               ListTile(
                 title:
                 Text('내 정보 관리', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyInfo()));
-                },
+                onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyInfo())),
               ),
               ListTile(
                 title: Text('공지사항', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Notice()));
-                },
+                onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Notice())),
               ),
               ListTile(
                 title: Text('고객센터', style: txtStyleFlexible(Colors.white, 20)),
@@ -457,10 +428,8 @@ Widget paymentTool(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaymentList()));
-          },
+          onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaymentList())),
           child: Text(
             "결제 수단 등록",
             style: TextStyle(color: Colors.grey),
@@ -468,11 +437,8 @@ Widget paymentTool(BuildContext context) {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            print("결제 수단 등록 버튼누름");
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaymentList()));
-          },
+          onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PaymentList())),
           child: Text(
             "등록",
             style: TextStyle(color: Colors.blue),

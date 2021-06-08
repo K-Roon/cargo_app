@@ -1,14 +1,15 @@
 import 'package:cargo_app/views/home.dart';
 import 'package:flutter/material.dart';
 
-class Mydeliver extends StatefulWidget {
-  const Mydeliver({Key key}) : super(key: key);
+/// 나의 운송이력 등을 확인해볼 수 있습니다.
+class MyDelivery extends StatefulWidget {
+  const MyDelivery({Key key}) : super(key: key);
 
   @override
-  _MydeliverState createState() => _MydeliverState();
+  _MyDeliveryState createState() => _MyDeliveryState();
 }
 
-class _MydeliverState extends State<Mydeliver> {
+class _MyDeliveryState extends State<MyDelivery> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,7 +22,7 @@ class _MydeliverState extends State<Mydeliver> {
               color: Colors.black,
             ),
             onPressed: () => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Home())),
+                context, MaterialPageRoute(builder: (context) => Home())),
           ),
           title: Text("내 운송 관리"),
           centerTitle: true,

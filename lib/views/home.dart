@@ -20,9 +20,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:intl/intl.dart';
 
-final TextEditingController startArea = new TextEditingController();
-final TextEditingController endArea = new TextEditingController();
-
 Future<Position> getLocation() async {
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low);
@@ -40,7 +37,6 @@ class _HomeState extends State<Home> {
   final _scaffoldState = GlobalKey<ScaffoldState>();
   int count = 1;
   bool isLoading = false;
-  bool isAvailable = false;
   Completer<GoogleMapController> _controller = Completer();
 
   @override
@@ -218,10 +214,8 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeDeparture(true)));
-            },
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HomeDeparture(true))),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
               width: MediaQuery.of(context).size.width,
@@ -238,12 +232,8 @@ class _HomeState extends State<Home> {
             )),
         MarginBar.marginBar(context),
         GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeDeparture(false)));
-            },
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HomeDeparture(false))),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
               width: MediaQuery.of(context).size.width,

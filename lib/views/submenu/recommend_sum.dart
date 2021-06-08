@@ -4,6 +4,7 @@ import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// 추천 값에 따라서 차량을 추천하는(??)화면입니다.
 class RecommendSum extends StatefulWidget {
   const RecommendSum(this.killogram, {Key key}) : super(key: key);
   final double killogram;
@@ -119,9 +120,9 @@ class _RecommendSumState extends State<RecommendSum> {
                       padding: EdgeInsets.symmetric(horizontal: 50),
                       child: OutlinedButton(
                         onPressed: () => Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => InsertCargoInfo())),
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => InsertCargoInfo())),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -345,13 +346,12 @@ class _RecommendSumState extends State<RecommendSum> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () => Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Recommend())),
+            context, MaterialPageRoute(builder: (context) => Recommend())),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,
