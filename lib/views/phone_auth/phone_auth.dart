@@ -5,11 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// * 휴대전화 인증을 위하여 전화번호를 입력받는 화면입니다.
+///
+/// * 이 화면이 표시되려면 인증하려는 목적([purpose])이 반드시 필요합니다.
+///
+/// * 만약 신규 회원가입을 위해 휴대전화 번호를 인증하려는것이 목적이라면,
+/// 개인정보를 마케팅에 사용하는 것에 대하여 동의를 하였는지,
+/// 하지 않았는지를 반드시 [bool] 값으로 포함시켜 호출하십시오.
 class PhoneAuth extends StatefulWidget {
   final String purpose;
   final bool marketing;
 
-  ///test
   PhoneAuth(this.purpose, {this.marketing});
 
   @override
@@ -20,7 +26,6 @@ class PhoneAuth extends StatefulWidget {
 TextEditingController phoneNum = new TextEditingController();
 
 class _PhoneAuthState extends State<PhoneAuth> {
-  final phoneFormKey = GlobalKey<FormState>();
   bool isLoading = false;
 
   final String purpose;
@@ -29,10 +34,6 @@ class _PhoneAuthState extends State<PhoneAuth> {
   _PhoneAuthState(this.purpose, {this.marketing});
 
   FirebaseAuth _auth = FirebaseAuth.instance;
-
-  submit() async {
-    if (phoneFormKey.currentState.validate()) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +56,13 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   Container(
                     height: 50,
                   ),
-                  Form(
-                    key: phoneFormKey,
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: TextInputDeco.defaultValue("전화번호"),
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                      textInputAction: TextInputAction.next,
-                      controller: phoneNum,
-                      onEditingComplete: (() => getOTP()),
-                    ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: TextInputDeco.defaultValue("전화번호"),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    textInputAction: TextInputAction.next,
+                    controller: phoneNum,
+                    onEditingComplete: (() => getOTP()),
                   ),
                 ],
               ),
@@ -73,15 +71,13 @@ class _PhoneAuthState extends State<PhoneAuth> {
       floatingActionButton: isLoading
           ? Container()
           : ElevatedButton(
-              onPressed: () {
-                getOTP();
-              },
+              onPressed: () => getOTP(),
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue,
                 alignment: Alignment.center,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(0))),
+                    borderRadius: BorderRadius.circular(0)),
               ),
               child: Container(
                   height: 80,

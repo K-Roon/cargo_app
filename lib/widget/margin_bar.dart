@@ -9,6 +9,7 @@ class MarginBar {
       height: 0.5,
     );
   }
+
   static Container marginBarGrey(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 0),

@@ -13,11 +13,13 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 final TextEditingController startArea = new TextEditingController();
 final TextEditingController endArea = new TextEditingController();
+
 Future<Position> getLocation() async {
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low);
   return position;
 }
+
 class HomeDeparture extends StatefulWidget {
   final bool isDeparture;
 
@@ -33,8 +35,6 @@ class _HomeDepartureState extends State<HomeDeparture> {
   int count = 1;
   final bool isDeparture;
   bool isLoading = false;
-  bool isAvailable = false;
-  int point = 0;
   double _panelHeightOpen = 0;
 
   final List<Tab> myTabs = <Tab>[
@@ -53,7 +53,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
   Future permissionLocation() async {
     if (await Permission.locationWhenInUse.request().isGranted) {
       findMyLocation();
-    } else if (count == 1){
+    } else if (count == 1) {
       showErrorAlertDialog(
           context,
           "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
@@ -68,8 +68,10 @@ class _HomeDepartureState extends State<HomeDeparture> {
     final GoogleMapController controller = await _controller.future;
     await getLocation().then((value) {
       print("위치찾기..");
-      controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(value.latitude, value.longitude), zoom: 16,)));
+      controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(value.latitude, value.longitude),
+        zoom: 16,
+      )));
     });
   }
 
@@ -93,9 +95,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
         automaticallyImplyLeading: false,
         leading: new FloatingActionButton(
           heroTag: "OpenDrawer",
-          onPressed: () {
-            scaffoldState.currentState.openDrawer();
-          },
+          onPressed: () => scaffoldState.currentState.openDrawer(),
           backgroundColor: Colors.white,
           elevation: 0.0,
           hoverElevation: 0.0,
@@ -109,9 +109,7 @@ class _HomeDepartureState extends State<HomeDeparture> {
             children: [
               new FloatingActionButton(
                 heroTag: "getPosition",
-                onPressed: () {
-                  permissionLocation();
-                },
+                onPressed: () => permissionLocation(),
                 backgroundColor: Colors.white,
                 elevation: 0.0,
                 hoverElevation: 0.0,
@@ -177,36 +175,34 @@ class _HomeDepartureState extends State<HomeDeparture> {
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Form(
-                child: Material(
-                  elevation: 20,
-                  shadowColor: Colors.black54,
-                  borderRadius: BorderRadius.circular(10),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: isDeparture ? "출발지 주소 검색" : "도착지 주소 검색",
-                        prefixIcon: Icon(Icons.search,
-                            size: 20, color: Colors.blueAccent),
-                        hintStyle: TextStyle(color: Colors.black26),
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 0.0, horizontal: 20.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black26, width: 0.0),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black26, width: 0.0),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black26, width: 0.0),
-                          borderRadius: BorderRadius.circular(10),
-                        )),
-                  ),
+              child: Material(
+                elevation: 20,
+                shadowColor: Colors.black54,
+                borderRadius: BorderRadius.circular(10),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: isDeparture ? "출발지 주소 검색" : "도착지 주소 검색",
+                      prefixIcon: Icon(Icons.search,
+                          size: 20, color: Colors.blueAccent),
+                      hintStyle: TextStyle(color: Colors.black26),
+                      fillColor: Colors.white,
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black26, width: 0.0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black26, width: 0.0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black26, width: 0.0),
+                        borderRadius: BorderRadius.circular(10),
+                      )),
                 ),
               ),
             ),

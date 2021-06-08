@@ -18,16 +18,11 @@ class ChangeMyEmail extends StatefulWidget {
 TextEditingController email = new TextEditingController();
 
 class _ChangeMyEmailState extends State<ChangeMyEmail> {
-  final phoneFormKey = GlobalKey<FormState>();
   bool isLoading = false;
 
   final String myEmail;
 
   _ChangeMyEmailState(this.myEmail);
-
-  submit() async {
-    if (phoneFormKey.currentState.validate()) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,27 +59,24 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
                   TableRow(
                     children: [
                       Text("새 이메일 주소"),
-                      Form(
-                        key: phoneFormKey,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              hintText: this.myEmail,
-                              hintStyle: TextStyle(color: Colors.black26),
-                              focusColor: Colors.blue,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: -5, horizontal: 3.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black26),
-                                borderRadius: BorderRadius.circular(5),
-                              )),
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          controller: email,
-                        ),
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: this.myEmail,
+                            hintStyle: TextStyle(color: Colors.black26),
+                            focusColor: Colors.blue,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: -5, horizontal: 3.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black26),
+                              borderRadius: BorderRadius.circular(5),
+                            )),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: email,
                       ),
                     ],
                   ),
@@ -94,15 +86,12 @@ class _ChangeMyEmailState extends State<ChangeMyEmail> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          changeIt();
-        },
+        onPressed: () => changeIt(),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

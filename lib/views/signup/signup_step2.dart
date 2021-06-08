@@ -22,7 +22,6 @@ class SignUpStep2 extends StatefulWidget {
 }
 
 class _SignUpStep2State extends State<SignUpStep2> {
-  final registerFormKey = GlobalKey<FormState>();
   final String phone;
   final String purpose;
   final bool marketing;
@@ -31,17 +30,8 @@ class _SignUpStep2State extends State<SignUpStep2> {
   TextEditingController email = new TextEditingController();
 
   bool isLoading = false;
-  bool isAvailable = false;
 
   _SignUpStep2State(this.phone, this.purpose, this.marketing);
-
-  signIn() async {
-    if (idController.text.isEmpty) {
-      showErrorAlertDialog(context, "ID를 입력해주세요");
-    } else if (passwordController.text.isEmpty) {
-      showErrorAlertDialog(context, "비밀번호를 입력해주세요");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,64 +56,61 @@ class _SignUpStep2State extends State<SignUpStep2> {
                     Container(
                       height: 10,
                     ),
-                    Form(
-                      key: registerFormKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "이름",
-                            style: mediumTextStyle(),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            decoration: TextInputDeco.defaultValue("이름"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: name,
-                            keyboardType: TextInputType.text,
-                          ),
-                          Container(
-                            height: 15,
-                          ),
-                          Text(
-                            "아이디",
-                            style: mediumTextStyle(),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            decoration: TextInputDeco.defaultValue("아이디"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.next,
-                            controller: identify,
-                            keyboardType: TextInputType.text,
-                          ),
-                          Container(
-                            height: 15,
-                          ),
-                          Text(
-                            "이메일 주소",
-                            style: mediumTextStyle(),
-                            textAlign: TextAlign.left,
-                          ),
-                          Container(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            decoration: TextInputDeco.defaultValue("이메일 주소"),
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
-                            textInputAction: TextInputAction.go,
-                            controller: email,
-                            keyboardType: TextInputType.emailAddress,
-                          )
-                        ],
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "이름",
+                          style: mediumTextStyle(),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: TextInputDeco.defaultValue("이름"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: name,
+                          keyboardType: TextInputType.text,
+                        ),
+                        Container(
+                          height: 15,
+                        ),
+                        Text(
+                          "아이디",
+                          style: mediumTextStyle(),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: TextInputDeco.defaultValue("아이디"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          controller: identify,
+                          keyboardType: TextInputType.text,
+                        ),
+                        Container(
+                          height: 15,
+                        ),
+                        Text(
+                          "이메일 주소",
+                          style: mediumTextStyle(),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: TextInputDeco.defaultValue("이메일 주소"),
+                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          textInputAction: TextInputAction.go,
+                          controller: email,
+                          keyboardType: TextInputType.emailAddress,
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -131,15 +118,12 @@ class _SignUpStep2State extends State<SignUpStep2> {
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          confirm(this.purpose);
-        },
+        onPressed: () => confirm(this.purpose),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,
