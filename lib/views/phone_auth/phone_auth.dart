@@ -26,7 +26,6 @@ class PhoneAuth extends StatefulWidget {
 TextEditingController phoneNum = new TextEditingController();
 
 class _PhoneAuthState extends State<PhoneAuth> {
-  final phoneFormKey = GlobalKey<FormState>();
   bool isLoading = false;
 
   final String purpose;
@@ -35,10 +34,6 @@ class _PhoneAuthState extends State<PhoneAuth> {
   _PhoneAuthState(this.purpose, {this.marketing});
 
   FirebaseAuth _auth = FirebaseAuth.instance;
-
-  submit() async {
-    if (phoneFormKey.currentState.validate()) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +56,13 @@ class _PhoneAuthState extends State<PhoneAuth> {
                   Container(
                     height: 50,
                   ),
-                  Form(
-                    key: phoneFormKey,
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: TextInputDeco.defaultValue("전화번호"),
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                      textInputAction: TextInputAction.next,
-                      controller: phoneNum,
-                      onEditingComplete: (() => getOTP()),
-                    ),
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: TextInputDeco.defaultValue("전화번호"),
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                    textInputAction: TextInputAction.next,
+                    controller: phoneNum,
+                    onEditingComplete: (() => getOTP()),
                   ),
                 ],
               ),

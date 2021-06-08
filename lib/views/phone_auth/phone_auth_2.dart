@@ -38,7 +38,6 @@ class PhoneAuth2 extends StatefulWidget {
 TextEditingController txtControllerOtpNum = new TextEditingController();
 
 class _PhoneAuth2State extends State<PhoneAuth2> {
-  final otpFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   final String purpose2;
   final String getPhoneNum;
@@ -139,18 +138,15 @@ class _PhoneAuth2State extends State<PhoneAuth2> {
                       Container(
                         height: 30,
                       ),
-                      Form(
-                        key: otpFormKey,
-                        child: TextFormField(
-                          enabled: isWriteable,
-                          keyboardType: TextInputType.number,
-                          decoration: TextInputDeco.defaultCenter("예)000000"),
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          textAlign: TextAlign.center,
-                          controller: txtControllerOtpNum,
-                          onEditingComplete: (() => compelete()),
-                        ),
+                      TextField(
+                        enabled: isWriteable,
+                        keyboardType: TextInputType.number,
+                        decoration: TextInputDeco.defaultCenter("예)000000"),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        textAlign: TextAlign.center,
+                        controller: txtControllerOtpNum,
+                        onEditingComplete: (() => compelete()),
                       ),
                       Container(
                         height: 10,

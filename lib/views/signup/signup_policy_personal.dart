@@ -5,6 +5,7 @@ import 'package:cargo_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+///개인회원 이용약관 안내입니다.
 class SignUpPolicyPersonal extends StatefulWidget {
   const SignUpPolicyPersonal({Key key}) : super(key: key);
 
@@ -132,7 +133,7 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PhoneAuth(
-                      PurposeHelper.signUpPersonal,
+                          PurposeHelper.signUpPersonal,
                           marketing: marketingAgreement,
                         )));
           } else {
@@ -143,8 +144,7 @@ class _SignUpPolicyPersonalState extends State<SignUpPolicyPersonal> {
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

@@ -20,9 +20,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:intl/intl.dart';
 
-final TextEditingController startArea = new TextEditingController();
-final TextEditingController endArea = new TextEditingController();
-
 Future<Position> getLocation() async {
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low);
@@ -40,7 +37,6 @@ class _HomeState extends State<Home> {
   final _scaffoldState = GlobalKey<ScaffoldState>();
   int count = 1;
   bool isLoading = false;
-  bool isAvailable = false;
   Completer<GoogleMapController> _controller = Completer();
 
   @override
@@ -84,8 +80,9 @@ class _HomeState extends State<Home> {
     } else if (count == 1) {
       showErrorAlertDialog(
           context,
-          "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
-              "\n(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)");
+          "이런! (포그라운드)위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!\n" +
+              "(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)\n" +
+              "마음이 바뀌셨다면, 오른쪽 맨 위에 있는 버튼을 눌러 위치권한을 허용해주세요.");
       count++;
     } else {
       openAppSettings();
@@ -129,9 +126,7 @@ class _HomeState extends State<Home> {
           automaticallyImplyLeading: false,
           leading: new FloatingActionButton(
             heroTag: "OpenDrawer",
-            onPressed: () {
-              _scaffoldState.currentState.openDrawer();
-            },
+            onPressed: () => _scaffoldState.currentState.openDrawer(),
             backgroundColor: Colors.white,
             elevation: 0.0,
             hoverElevation: 0.0,
@@ -220,10 +215,8 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeDeparture(true)));
-            },
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HomeDeparture(true))),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
               width: MediaQuery.of(context).size.width,
@@ -240,12 +233,8 @@ class _HomeState extends State<Home> {
             )),
         MarginBar.marginBar(context),
         GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeDeparture(false)));
-            },
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HomeDeparture(false))),
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 12),
               width: MediaQuery.of(context).size.width,

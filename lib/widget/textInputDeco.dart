@@ -17,22 +17,6 @@ class TextInputDeco {
         ));
   }
 
-  static InputDecoration defaultPassword(String hintText) {
-    return InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black26),
-        focusColor: Colors.blue,
-        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26),
-          borderRadius: BorderRadius.circular(10),
-        ));
-  }
-
   static InputDecoration payment(String hintText) {
     return InputDecoration(
         hintText: hintText,
@@ -69,19 +53,20 @@ class TextInputDeco {
 
   static InputDecoration radiusHard(String hintText, {Icon icon}) {
     return InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black26),
-        focusColor: Colors.blue,
-        suffixIcon: icon,
-        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black26),
-          borderRadius: BorderRadius.circular(5),
-        ),);
+      hintText: hintText,
+      hintStyle: TextStyle(color: Colors.black26),
+      focusColor: Colors.blue,
+      suffixIcon: icon,
+      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black26),
+        borderRadius: BorderRadius.circular(5),
+      ),
+    );
   }
 
   static InputDecoration defaultCenter(String hintText) {
@@ -129,6 +114,4 @@ class TextInputDeco {
           borderRadius: BorderRadius.circular(0),
         ));
   }
-
-
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cargo_app/helper/helperfunctions.dart';
 import 'package:cargo_app/services/auth.dart';
 import 'package:cargo_app/services/database.dart';
@@ -25,8 +23,8 @@ class SignUpStep3 extends StatefulWidget {
       this.marketing);
 
   @override
-  _SignUpStep3State createState() => _SignUpStep3State(this.purpose,
-      this.name, this.id, this.email, this.phoneNumber, this.marketing);
+  _SignUpStep3State createState() => _SignUpStep3State(this.purpose, this.name,
+      this.id, this.email, this.phoneNumber, this.marketing);
 }
 
 class _SignUpStep3State extends State<SignUpStep3> {
@@ -37,7 +35,6 @@ class _SignUpStep3State extends State<SignUpStep3> {
   final String phoneNumber;
   final bool marketing;
 
-  final pwRegisterFormKey = GlobalKey<FormState>();
   TextEditingController pw = new TextEditingController();
   TextEditingController pwConfirm = new TextEditingController();
 
@@ -47,24 +44,9 @@ class _SignUpStep3State extends State<SignUpStep3> {
   _SignUpStep3State(this.purpose, this.name, this.id, this.email,
       this.phoneNumber, this.marketing);
 
-  static const _chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  Random _rnd = Random();
-
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-
   HelperFunctions helperFunctions = new HelperFunctions();
   AuthService authService = new AuthService();
   DatabaseMethods databaseMethods = new DatabaseMethods();
-
-  signIn() async {
-    if (idController.text.isEmpty) {
-      showErrorAlertDialog(context, "ID를 입력해주세요");
-    } else if (passwordController.text.isEmpty) {
-      showErrorAlertDialog(context, "비밀번호를 입력해주세요");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,55 +69,49 @@ class _SignUpStep3State extends State<SignUpStep3> {
                   Container(
                     height: 10,
                   ),
-                  Form(
-                    key: pwRegisterFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "비밀번호 입력",
-                          style: mediumTextStyle(),
-                          textAlign: TextAlign.left,
-                        ),
-                        Container(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          obscureText: true,
-                          decoration: TextInputDeco.defaultValue("비밀번호"),
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          controller: pw,
-                          keyboardType: TextInputType.text,
-                        ),
-                        Container(
-                          height: 15,
-                        ),
-                        TextFormField(
-                          obscureText: true,
-                          decoration: TextInputDeco.defaultValue("비밀번호 확인"),
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          controller: pwConfirm,
-                          keyboardType: TextInputType.text,
-                        ),
-                      ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "비밀번호 입력",
+                        style: mediumTextStyle(),
+                        textAlign: TextAlign.left,
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                      TextField(
+                        obscureText: true,
+                        decoration: TextInputDeco.defaultValue("비밀번호"),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: pw,
+                        keyboardType: TextInputType.text,
+                      ),
+                      Container(
+                        height: 15,
+                      ),
+                      TextField(
+                        obscureText: true,
+                        decoration: TextInputDeco.defaultValue("비밀번호 확인"),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: pwConfirm,
+                        keyboardType: TextInputType.text,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          confirm();
-        },
+        onPressed: () => confirm(),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,
@@ -219,10 +195,8 @@ class _SignUpStep3State extends State<SignUpStep3> {
                 actionsPadding: EdgeInsets.all(10),
                 actions: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Home()));
-                    },
+                    onTap: () => Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Home())),
                     child: Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
