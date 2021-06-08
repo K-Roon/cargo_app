@@ -1,13 +1,13 @@
 import 'package:cargo_app/helper/constants.dart';
 import 'package:cargo_app/services/database.dart';
+import 'package:cargo_app/views/submenu/change_my_info_email.dart';
 import 'package:cargo_app/views/submenu/change_my_info_phone.dart';
 import 'package:cargo_app/widget/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'change_my_info_email.dart';
-
+/// 나의 개인정보와 마케팅에 대한 동의를 변경할 수 있는 화면입니다.
 class MyInfo extends StatefulWidget {
   const MyInfo({Key key}) : super(key: key);
 
@@ -18,11 +18,11 @@ class MyInfo extends StatefulWidget {
 class _MyInfoState extends State<MyInfo> {
   @override
   void initState() {
-    updateMyInfo();
+    getMyInfo();
     super.initState();
   }
 
-  void updateMyInfo() async {
+  void getMyInfo() async {
     QuerySnapshot querySnapshot =
         await DatabaseMethods().getUserInfoDB(Constants.myId.toString());
     setState(() {
@@ -35,6 +35,7 @@ class _MyInfoState extends State<MyInfo> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() => getMyInfo());
     return Scaffold(
       appBar: appBarSub(context, ""),
       body: SingleChildScrollView(
@@ -91,10 +92,7 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                print("ID");
-                              },
-                              child: Container()),
+                              onPressed: () => print("ID"), child: Container()),
                         ],
                       ),
                       TableRow(
@@ -112,15 +110,13 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ChangeMyEmail(
-                                            Constants.userEmail != ""
-                                                ? Constants.userEmail
-                                                : false)));
-                              },
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChangeMyEmail(
+                                          Constants.userEmail != ""
+                                              ? Constants.userEmail
+                                              : false))),
                               child: Icon(
                                 Icons.navigate_next_rounded,
                                 color: Colors.black,
@@ -142,15 +138,13 @@ class _MyInfoState extends State<MyInfo> {
                             style: TextStyle(color: Colors.black),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ChangeMyPhone(
-                                            Constants.userPhoneNum != ""
-                                                ? Constants.userPhoneNum
-                                                : "LOADING..")));
-                              },
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChangeMyPhone(
+                                          Constants.userPhoneNum != ""
+                                              ? Constants.userPhoneNum
+                                              : "LOADING.."))),
                               child: Icon(
                                 Icons.navigate_next_rounded,
                                 color: Colors.black,
@@ -211,7 +205,8 @@ class _MyInfoState extends State<MyInfo> {
                                 setState(() {
                                   Constants.receiveEmail = value;
                                   DatabaseMethods().changeNewInfoBool(
-                                      "marketing_Email", Constants.receiveEmail);
+                                      "marketing_Email",
+                                      Constants.receiveEmail);
                                 });
                               },
                             ),

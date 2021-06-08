@@ -17,16 +17,9 @@ class ChangeMyPhone extends StatefulWidget {
 TextEditingController phone = new TextEditingController();
 
 class _ChangeMyPhoneState extends State<ChangeMyPhone> {
-  final phoneFormKey = GlobalKey<FormState>();
-  bool isLoading = false;
-
   final String phoneNumber;
 
   _ChangeMyPhoneState(this.phoneNumber);
-
-  submit() async {
-    if (phoneFormKey.currentState.validate()) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,27 +56,24 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
                   TableRow(
                     children: [
                       Text("새 휴대폰 번호"),
-                      Form(
-                        key: phoneFormKey,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              hintText: this.phoneNumber,
-                              hintStyle: TextStyle(color: Colors.black26),
-                              focusColor: Colors.blue,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: -5, horizontal: 3.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black26),
-                                borderRadius: BorderRadius.circular(5),
-                              )),
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
-                          textInputAction: TextInputAction.next,
-                          controller: phone,
-                        ),
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: this.phoneNumber,
+                            hintStyle: TextStyle(color: Colors.black26),
+                            focusColor: Colors.blue,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: -5, horizontal: 3.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black26),
+                              borderRadius: BorderRadius.circular(5),
+                            )),
+                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        textInputAction: TextInputAction.next,
+                        controller: phone,
                       ),
                     ],
                   ),
@@ -93,15 +83,12 @@ class _ChangeMyPhoneState extends State<ChangeMyPhone> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          changeIt();
-        },
+        onPressed: () => changeIt(),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
           elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
         child: Container(
             height: 80,

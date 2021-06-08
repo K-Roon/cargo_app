@@ -10,7 +10,6 @@ class Notice extends StatefulWidget {
 }
 
 class _NoticeState extends State<Notice> {
-
   @override
   Widget build(BuildContext context) {
     TextEditingController searchBar = new TextEditingController();
@@ -29,13 +28,11 @@ class _NoticeState extends State<Notice> {
             Container(
               height: 50,
             ),
-            Form(
-              child: TextFormField(
-                decoration: TextInputDeco.search("검색"),
-                style: TextStyle(color: Colors.blue, fontSize: 16),
-                textInputAction: TextInputAction.search,
-                controller: searchBar,
-              ),
+            TextField(
+              decoration: TextInputDeco.search("검색"),
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+              textInputAction: TextInputAction.search,
+              controller: searchBar,
             ),
           ],
         ),

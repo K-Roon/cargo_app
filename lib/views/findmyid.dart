@@ -65,8 +65,7 @@ class _FindMyIdState extends State<FindMyId> {
                     padding: EdgeInsets.symmetric(vertical: 50),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                            width: 1, color: Colors.black38)),
+                        border: Border.all(width: 1, color: Colors.black38)),
                     width: MediaQuery.of(context).size.width,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
