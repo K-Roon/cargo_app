@@ -186,8 +186,8 @@ class _HomeDepartureState extends State<HomeDeparture> {
                           size: 20, color: Colors.blueAccent),
                       hintStyle: TextStyle(color: Colors.black26),
                       fillColor: Colors.white,
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 20.0),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.black26, width: 0.0),

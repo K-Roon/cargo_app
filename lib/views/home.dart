@@ -80,8 +80,9 @@ class _HomeState extends State<Home> {
     } else if (count == 1) {
       showErrorAlertDialog(
           context,
-          "이런! 위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!" +
-              "\n(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)");
+          "이런! (포그라운드)위치권한을 허락해주지 않으면 위치를 찾을 수 없어요!\n" +
+              "(※이 앱은 백그라운드에서 위치를 절대로 추적하지 않습니다)\n" +
+              "마음이 바뀌셨다면, 오른쪽 맨 위에 있는 버튼을 눌러 위치권한을 허용해주세요.");
       count++;
     } else {
       openAppSettings();
