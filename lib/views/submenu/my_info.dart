@@ -35,7 +35,6 @@ class _MyInfoState extends State<MyInfo> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() => getMyInfo());
     return Scaffold(
       appBar: appBarSub(context, ""),
       body: SingleChildScrollView(
