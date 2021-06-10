@@ -346,7 +346,7 @@ class _RecommendSumState extends State<RecommendSum> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Recommend())),
+            context, MaterialPageRoute(builder: (context) => InsertCargoInfo())),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
