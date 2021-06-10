@@ -34,8 +34,7 @@ AppBar appBarSub(BuildContext context, String title) {
         Icons.home_rounded,
         color: Colors.black,
       ),
-      onPressed: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home())),
+      onPressed: () => Navigator.pop(context)
     ),
     title: Text(title),
     centerTitle: true,
