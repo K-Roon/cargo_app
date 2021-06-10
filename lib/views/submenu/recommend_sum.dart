@@ -122,7 +122,7 @@ class _RecommendSumState extends State<RecommendSum> {
                         onPressed: () => Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => InsertCargoInfo())),
+                                builder: (context) => Recommend())),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
