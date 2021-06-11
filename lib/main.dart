@@ -25,9 +25,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    setState(() {
-      isLoading = true;
-    });
+    setState(()  => isLoading = true);
     getLoggedInState();
     super.initState();
   }
