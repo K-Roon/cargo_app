@@ -30,12 +30,11 @@ AppBar appBarCustom(BuildContext context, String title) {
 AppBar appBarSub(BuildContext context, String title) {
   return AppBar(
     leading: TextButton(
-      child: Icon(
-        Icons.home_rounded,
-        color: Colors.black,
-      ),
-      onPressed: () => Navigator.pop(context)
-    ),
+        child: Icon(
+          Icons.home_rounded,
+          color: Colors.black,
+        ),
+        onPressed: () => Navigator.pop(context)),
     title: Text(title),
     centerTitle: true,
     automaticallyImplyLeading: false,
@@ -64,7 +63,10 @@ TextStyle smallTextStyle() {
 }
 
 TextStyle smallBoldStyle({Color color}) {
-  return TextStyle(color: color != null ? color : Colors.black, fontSize: 12, fontWeight: FontWeight.bold);
+  return TextStyle(
+      color: color != null ? color : Colors.black,
+      fontSize: 12,
+      fontWeight: FontWeight.bold);
 }
 
 void showErrorAlertDialog(BuildContext context, String errorText) async {
@@ -75,12 +77,12 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
           elevation: 0.0,
           titlePadding: EdgeInsets.zero,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Container(
               decoration: BoxDecoration(
                   color: Colors.blue,
                   borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(10))),
+                      BorderRadius.vertical(top: Radius.circular(10))),
               padding: EdgeInsets.all(15),
               alignment: Alignment.center,
               child: Text(
@@ -103,8 +105,7 @@ void showErrorAlertDialog(BuildContext context, String errorText) async {
                 height: 15,
               ),
               Row(
-                mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
@@ -175,238 +176,253 @@ Widget homeDrawer(BuildContext context) {
             borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              ListTile(
-                title:
-                Text('화물차 부르기', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => InsertCargoInfo())),
-              ),
-              ListTile(
-                title:
-                Text('화물차 추천받기', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Recommend())),
-              ),
-              ListTile(
-                title:
-                Text('내 운송 조회', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyDelivery())),
-              ),
-              ListTile(
-                title:
-                Text('내 정보 관리', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MyInfo())),
-              ),
-              ListTile(
-                title: Text('공지사항', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Notice())),
-              ),
-              ListTile(
-                title: Text('고객센터', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  Navigator.pop(context);
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          elevation: 0.0,
-                          titlePadding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          title: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(10))),
-                              padding: EdgeInsets.all(15),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "안내",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          contentPadding: EdgeInsets.all(15),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "1:1 고객센터로 연결합니다.",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 15),
-                              ),
-                              Container(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
+              Column(
+                children: [
+                  ListTile(
+                    title: Text('화물차 부르기',
+                        style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InsertCargoInfo())),
+                  ),
+                  ListTile(
+                    title: Text('화물차 추천받기',
+                        style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Recommend())),
+                  ),
+                  ListTile(
+                    title: Text('내 운송 조회',
+                        style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyDelivery())),
+                  ),
+                  ListTile(
+                    title: Text('내 정보 관리',
+                        style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyInfo())),
+                  ),
+                  ListTile(
+                    title:
+                        Text('공지사항', style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Notice())),
+                  ),
+                  ListTile(
+                    title:
+                        Text('고객센터', style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () {
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              elevation: 0.0,
+                              titlePadding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              title: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(10))),
+                                  padding: EdgeInsets.all(15),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "안내",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              contentPadding: EdgeInsets.all(15),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      style: OutlinedButton.styleFrom(
-                                        padding:
-                                        EdgeInsets.symmetric(vertical: 15),
-                                        alignment: Alignment.center,
-                                        primary: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        side: BorderSide(
-                                            width: 1, color: Colors.blue),
-                                      ),
-                                      child: Text(
-                                        "취소",
-                                        style: TextStyle(fontSize: 15),
-                                      ),
-                                    ),
+                                  Text(
+                                    "1:1 고객센터로 연결합니다.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15),
                                   ),
                                   Container(
-                                    width: 10,
+                                    height: 15,
                                   ),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      style: ElevatedButton.styleFrom(
-                                        padding:
-                                        EdgeInsets.symmetric(vertical: 15),
-                                        primary: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        side: BorderSide(
-                                            width: 1, color: Colors.blue),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: OutlinedButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          style: OutlinedButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            alignment: Alignment.center,
+                                            primary: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            side: BorderSide(
+                                                width: 1, color: Colors.blue),
+                                          ),
+                                          child: Text(
+                                            "취소",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
                                       ),
-                                      child: Text(
-                                        "1:1 상담",
-                                        style: TextStyle(fontSize: 15),
+                                      Container(
+                                        width: 10,
                                       ),
-                                    ),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            primary: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            side: BorderSide(
+                                                width: 0, color: Colors.blue),
+                                          ),
+                                          child: Text(
+                                            "1:1 상담",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      });
-                },
+                            );
+                          });
+                    },
+                  ),
+                ],
               ),
-              SizedBox(),
-              ListTile(
-                title: Text('로그아웃', style: txtStyleFlexible(Colors.white, 20)),
-                onTap: () {
-                  Navigator.pop(context);
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          elevation: 0.0,
-                          titlePadding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          title: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(10))),
-                              padding: EdgeInsets.all(15),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "안내",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          contentPadding: EdgeInsets.all(15),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "접속중인 기기에서 로그아웃 하시겠습니까?",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 15),
-                              ),
-                              Container(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
+              Container(height: 100,),
+              Column(
+                children: [
+                  ListTile(
+                    title:
+                        Text('로그아웃', style: txtStyleFlexible(Colors.white, 20)),
+                    onTap: () {
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              elevation: 0.0,
+                              titlePadding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              title: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(10))),
+                                  padding: EdgeInsets.all(15),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "안내",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              contentPadding: EdgeInsets.all(15),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      style: OutlinedButton.styleFrom(
-                                        padding:
-                                        EdgeInsets.symmetric(vertical: 15),
-                                        alignment: Alignment.center,
-                                        primary: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        side: BorderSide(
-                                            width: 1, color: Colors.blue),
-                                      ),
-                                      child: Text(
-                                        "취소",
-                                        style: TextStyle(fontSize: 15),
-                                      ),
-                                    ),
+                                  Text(
+                                    "접속중인 기기에서 로그아웃 하시겠습니까?",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15),
                                   ),
                                   Container(
-                                    width: 10,
+                                    height: 15,
                                   ),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        AuthService().signOut();
-                                        HelperFunctions
-                                            .saveUserLoggedInSharedPreference(
-                                            false);
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SignIn()));
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding:
-                                        EdgeInsets.symmetric(vertical: 15),
-                                        primary: Colors.blue,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(5)),
-                                        side: BorderSide(
-                                            width: 1, color: Colors.blue),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: OutlinedButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          style: OutlinedButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            alignment: Alignment.center,
+                                            primary: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            side: BorderSide(
+                                                width: 1, color: Colors.blue),
+                                          ),
+                                          child: Text(
+                                            "취소",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
                                       ),
-                                      child: Text(
-                                        "로그아웃",
-                                        style: TextStyle(fontSize: 15),
+                                      Container(
+                                        width: 10,
                                       ),
-                                    ),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            AuthService().signOut();
+                                            HelperFunctions
+                                                .saveUserLoggedInSharedPreference(
+                                                    false);
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignIn()));
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            primary: Colors.blue,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(5)),
+                                            side: BorderSide(
+                                                width: 0, color: Colors.blue),
+                                          ),
+                                          child: Text(
+                                            "로그아웃",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                        );
-                      });
-                },
-              ),
+                            );
+                          });
+                    },
+                  ),
+                ],
+              )
             ],
           ),
         ),
@@ -427,8 +443,8 @@ Widget paymentTool(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-          onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaymentList())),
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PaymentList())),
           child: Text(
             "결제 수단 등록",
             style: TextStyle(color: Colors.grey),
@@ -436,8 +452,8 @@ Widget paymentTool(BuildContext context) {
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PaymentList())),
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => PaymentList())),
           child: Text(
             "등록",
             style: TextStyle(color: Colors.blue),

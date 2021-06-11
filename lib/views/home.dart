@@ -126,7 +126,9 @@ class _HomeState extends State<Home> {
           automaticallyImplyLeading: false,
           leading: new FloatingActionButton(
             heroTag: "OpenDrawer",
-            onPressed: () => _scaffoldState.currentState.openDrawer(),
+            onPressed: () {
+              _scaffoldState.currentState.openDrawer();
+            },
             backgroundColor: Colors.white,
             elevation: 0.0,
             hoverElevation: 0.0,
@@ -175,7 +177,6 @@ class _HomeState extends State<Home> {
                       _controller.complete(controller);
                     },
                   ),
-
                   ///슬라이드 바 표시
                   slidingUpPage()
                 ],
