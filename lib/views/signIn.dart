@@ -123,201 +123,196 @@ class _SignInState extends State<SignIn> {
             ? Container(
                 child: Center(child: CircularProgressIndicator()),
               )
-            : SingleChildScrollView(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          children: [
-                            Container(height: 50),
+            : Stack(
+              alignment: AlignmentDirectional.bottomCenter,
+              children: <Widget>[
+                Column(children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        Container(height: 50),
 
-                            ///화물선생 로고
-                            Center(
-                              child: Column(
+                        ///화물선생 로고
+                        Center(
+                          child: Column(
+                            children: [
+                              Text("스마트한 화물 배차의 시작"),
+                              Text(
+                                "화물선생",
+                                style: TextStyle(
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        Container(height: 50),
+
+                        ///아이디 및 비밀번호 입력 창(폼)
+                        Column(
+                          children: [
+                            TextField(
+                              decoration: TextInputDeco.defaultValue("아이디"),
+                              style: TextStyle(
+                                  color: Colors.blue, fontSize: 16),
+                              textInputAction: TextInputAction.next,
+                              controller: idController,
+                            ),
+                            Container(height: 15),
+                            TextField(
+                              obscureText: passwordObscure,
+                              textInputAction: TextInputAction.go,
+                              controller: passwordController,
+                              style: TextStyle(
+                                  color: Colors.blue, fontSize: 16),
+                              decoration: InputDecoration(
+                                  suffixIcon: TextButton(
+                                    child: Icon(Icons.remove_red_eye),
+                                    onPressed: () =>
+                                        passwordObscure = !passwordObscure,
+                                  ),
+                                  hintText: "비밀번호",
+                                  hintStyle:
+                                      TextStyle(color: Colors.black26),
+                                  focusColor: Colors.blue,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 0.0, horizontal: 20.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.blue),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black26),
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                              onEditingComplete: (() => signIn()),
+                            ),
+                          ],
+                        ),
+
+                        Container(height: 10),
+
+                        ///(가로정렬)아이디 및 비밀번호 찾기, 회원가입
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              child: Text("아이디 찾기"),
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PhoneAuth(
+                                          PurposeHelper.findMyID))),
+                            ),
+                            Text(" | ",
+                                style: TextStyle(color: Colors.black26)),
+                            TextButton(
+                              child: Text("비밀번호 찾기"),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PhoneAuth(
+                                            PurposeHelper.findMyPW)));
+                              },
+                            ),
+                            Text(" | ",
+                                style: TextStyle(color: Colors.black26)),
+                            TextButton(
+                              child: Text("회원가입 하기"),
+                              onPressed: () {
+                                print("Join");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SignUpStep1()));
+                              },
+                            ),
+                          ],
+                        ),
+
+                        Container(height: 10),
+
+                        GestureDetector(
+                            onTap: () =>
+                                showErrorAlertDialog(context, "지원되지 않습니다."),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      width: 1, color: Colors.black26)),
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("스마트한 화물 배차의 시작"),
+                                  Icon(CupertinoIcons.chat_bubble),
+                                  Container(width: 5),
                                   Text(
-                                    "화물선생",
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
+                                    "카카오톡으로 로그인",
+                                    style: btnTxtStyle(),
                                   )
                                 ],
                               ),
-                            ),
+                            )),
 
-                            Container(height: 50),
+                        Container(height: 20),
 
-                            ///아이디 및 비밀번호 입력 창(폼)
-                            Column(
-                              children: [
-                                TextField(
-                                  decoration:
-                                      TextInputDeco.defaultValue("아이디"),
-                                  style: TextStyle(
-                                      color: Colors.blue, fontSize: 16),
-                                  textInputAction: TextInputAction.next,
-                                  controller: idController,
-                                ),
-                                Container(height: 15),
-                                TextField(
-                                  obscureText: passwordObscure,
-                                  textInputAction: TextInputAction.go,
-                                  controller: passwordController,
-                                  style: TextStyle(
-                                      color: Colors.blue, fontSize: 16),
-                                  decoration: InputDecoration(
-                                      suffixIcon: TextButton(
-                                        child: Icon(Icons.remove_red_eye),
-                                        onPressed: () => passwordObscure =
-                                            !passwordObscure,
-                                      ),
-                                      hintText: "비밀번호",
-                                      hintStyle:
-                                          TextStyle(color: Colors.black26),
-                                      focusColor: Colors.blue,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 20.0),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black26),
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                      )),
-                                  onEditingComplete: (() => signIn()),
-                                ),
-                              ],
-                            ),
-
-                            Container(height: 10),
-
-                            ///(가로정렬)아이디 및 비밀번호 찾기, 회원가입
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  child: Text("아이디 찾기"),
-                                  onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PhoneAuth(
-                                              PurposeHelper.findMyID))),
-                                ),
-                                Text(" | ",
-                                    style: TextStyle(color: Colors.black26)),
-                                TextButton(
-                                  child: Text("비밀번호 찾기"),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PhoneAuth(
-                                                PurposeHelper.findMyPW)));
-                                  },
-                                ),
-                                Text(" | ",
-                                    style: TextStyle(color: Colors.black26)),
-                                TextButton(
-                                  child: Text("회원가입 하기"),
-                                  onPressed: () {
-                                    print("Join");
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignUpStep1()));
-                                  },
-                                ),
-                              ],
-                            ),
-
-                            Container(height: 10),
-
-                            GestureDetector(
-                                onTap: () =>
-                                    showErrorAlertDialog(context, "지원되지 않습니다."),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 12),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          width: 1, color: Colors.black26)),
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(CupertinoIcons.chat_bubble),
-                                      Container(width: 5),
-                                      Text(
-                                        "카카오톡으로 로그인",
-                                        style: btnTxtStyle(),
-                                      )
-                                    ],
-                                  ),
-                                )),
-
-                            Container(height: 20),
-
-                            ///네이버로 로그인
-                            GestureDetector(
-                                onTap: () =>
-                                    showErrorAlertDialog(context, "지원되지 않습니다."),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 12),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          width: 1, color: Colors.black26)),
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(CupertinoIcons.chat_bubble),
-                                      Container(width: 5),
-                                      Text(
-                                        "네이버로 로그인",
-                                        style: btnTxtStyle(),
-                                      )
-                                    ],
-                                  ),
-                                )),
-                            Container(height: 50),
-                          ],
-                        ),
-                      ),
-                    ]),
-              ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: isLoading
-            ? Container()
-            : ElevatedButton(
-                onPressed: () {
-                  signIn();
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: loginButtonBackground,
-                  alignment: Alignment.center,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0)),
-                ),
-                child: Container(
-                    height: 80,
+                        ///네이버로 로그인
+                        GestureDetector(
+                            onTap: () =>
+                                showErrorAlertDialog(context, "지원되지 않습니다."),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      width: 1, color: Colors.black26)),
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(CupertinoIcons.chat_bubble),
+                                  Container(width: 5),
+                                  Text(
+                                    "네이버로 로그인",
+                                    style: btnTxtStyle(),
+                                  )
+                                ],
+                              ),
+                            )),
+                        Container(height: 50),
+                      ],
+                    ),
+                  ),
+                ]),
+                ElevatedButton(
+                  onPressed: () {
+                    signIn();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: loginButtonBackground,
                     alignment: Alignment.center,
-                    child: Text(
-                      "로그인",
-                      style: biggerTextStyle(),
-                    )),
-              ),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0)),
+                  ),
+                  child: Container(
+                      height: 80,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "로그인",
+                        style: biggerTextStyle(),
+                      )),
+                ),
+              ],
+            ),
       ),
     );
   }
