@@ -294,7 +294,7 @@ Widget homeDrawer(BuildContext context) {
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
                                             side: BorderSide(
-                                                width: 1, color: Colors.blue),
+                                                width: 0, color: Colors.blue),
                                           ),
                                           child: Text(
                                             "1:1 상담",
@@ -403,9 +403,9 @@ Widget homeDrawer(BuildContext context) {
                                             primary: Colors.blue,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(5)),
+                                                BorderRadius.circular(5)),
                                             side: BorderSide(
-                                                width: 1, color: Colors.blue),
+                                                width: 0, color: Colors.blue),
                                           ),
                                           child: Text(
                                             "로그아웃",
