@@ -215,7 +215,7 @@ class _RecommendSumState extends State<RecommendSum> {
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(1.0)),
+            borderRadius: BorderRadius.all(Radius.circular(2.0)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,7 +224,7 @@ class _RecommendSumState extends State<RecommendSum> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.black38,
-                  borderRadius: BorderRadius.all(Radius.circular(1.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(2.0)),
                 ),
               ),
               Text(carName,

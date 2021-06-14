@@ -127,60 +127,15 @@ class _RecommendState extends State<Recommend> {
                   ),
                   Text("사이즈를 입력하세요."),
                   MarginBar.bold(context),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text("가로     "),
-                    Container(
-                        width: 200,
-                        child: TextField(
-                          controller: boxHorizontal,
-                          decoration: TextInputDeco.square(""),
-                        )),
-                    Text("  cm")
-                  ]),
+                  _row("가로", boxHorizontal, "cm"),
                   MarginBar.marginBar(context),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text("세로     "),
-                    Container(
-                        width: 200,
-                        child: TextField(
-                          controller: boxVertical,
-                          decoration: TextInputDeco.square(""),
-                        )),
-                    Text("  cm")
-                  ]),
+                  _row("세로", boxVertical, "cm"),
                   MarginBar.marginBar(context),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text("높이     "),
-                    Container(
-                        width: 200,
-                        child: TextField(
-                          controller: boxHeight,
-                          decoration: TextInputDeco.square(""),
-                        )),
-                    Text("  cm")
-                  ]),
+                  _row("높이", boxHeight, "cm"),
                   MarginBar.marginBar(context),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text("개당     \n무게     "),
-                    Container(
-                        width: 200,
-                        child: TextField(
-                          controller: boxPerWeight,
-                          decoration: TextInputDeco.square(""),
-                        )),
-                    Text("  kg")
-                  ]),
+                  _row("개당\n무게", boxPerWeight, "kg"),
                   MarginBar.marginBar(context),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text("개수     "),
-                    Container(
-                        width: 200,
-                        child: TextField(
-                          controller: boxCount,
-                          decoration: TextInputDeco.square(""),
-                        )),
-                    Text("  박스/파렛트/벌")
-                  ]),
+                  _row("개수", boxCount, "박스/파렛트/벌"),
                   MarginBar.marginBar(context),
                 ],
               ),
@@ -242,5 +197,19 @@ class _RecommendState extends State<Recommend> {
             )),
       ),
     );
+  }
+
+  Row _row(
+      String text, TextEditingController textEditingController, String unit) {
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Text("$text     "),
+      Container(
+          width: 200,
+          child: TextField(
+            controller: textEditingController,
+            decoration: TextInputDeco.square(""),
+          )),
+      Text("  $unit")
+    ]);
   }
 }
