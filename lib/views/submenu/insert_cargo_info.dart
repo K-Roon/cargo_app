@@ -63,10 +63,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                 icon: const Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
+                style: const TextStyle(color: Colors.black),
                 underline: Container(
                   height: 2,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.grey,
                 ),
                 onChanged: (String newValue) {
                   setState(() {
@@ -103,10 +103,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                 icon: const Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
+                style: const TextStyle(color: Colors.black),
                 underline: Container(
                   height: 2,
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.grey,
                 ),
                 onChanged: (String newValue) {
                   setState(() {
@@ -138,10 +138,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.black),
                         underline: Container(
                           height: 2,
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.grey,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -172,10 +172,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.black),
                         underline: Container(
                           height: 2,
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.grey,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -210,10 +210,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.black),
                         underline: Container(
                           height: 2,
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.grey,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -257,10 +257,10 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
-                        style: const TextStyle(color: Colors.deepPurple),
+                        style: const TextStyle(color: Colors.black),
                         underline: Container(
                           height: 2,
-                          color: Colors.deepPurpleAccent,
+                          color: Colors.grey,
                         ),
                         onChanged: (String newValue) {
                           setState(() {
@@ -299,7 +299,7 @@ class _InsertCargoInfoState extends State<InsertCargoInfo> {
               ),
               Container(height: 10),
               GestureDetector(
-                onTap: () => print("무야호"),
+                onTap: () => print("사진을 찾습니다"),
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   decoration: BoxDecoration(

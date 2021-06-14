@@ -6,38 +6,38 @@ import 'package:flutter/material.dart';
 
 /// 추천 값에 따라서 차량을 추천하는(??)화면입니다.
 class RecommendSum extends StatefulWidget {
-  const RecommendSum(this.killogram, {Key key}) : super(key: key);
-  final double killogram;
+  const RecommendSum(this.kilogram, {Key key}) : super(key: key);
+  final double kilogram;
 
   @override
-  _RecommendSumState createState() => _RecommendSumState(this.killogram);
+  _RecommendSumState createState() => _RecommendSumState(this.kilogram);
 }
 
 class _RecommendSumState extends State<RecommendSum> {
-  final double killogram;
+  final double kilogram;
 
-  _RecommendSumState(this.killogram);
+  _RecommendSumState(this.kilogram);
 
-  String recommendCargo(killogram) {
-    if (killogram >= 15000)
+  String recommendCargo(kilogram) {
+    if (kilogram >= 15000)
       return "25톤 트럭";
-    else if (killogram >= 11000)
+    else if (kilogram >= 11000)
       return "15톤 트럭";
-    else if (killogram >= 8000)
+    else if (kilogram >= 8000)
       return "11톤 트럭";
-    else if (killogram >= 5000)
+    else if (kilogram >= 5000)
       return "8톤 트럭";
-    else if (killogram >= 3500)
+    else if (kilogram >= 3500)
       return "5톤 트럭";
-    else if (killogram >= 2500)
+    else if (kilogram >= 2500)
       return "3.5톤 트럭";
-    else if (killogram >= 1400)
+    else if (kilogram >= 1400)
       return "2.5톤 트럭";
-    else if (killogram >= 1000)
+    else if (kilogram >= 1000)
       return "1.4톤 트럭";
-    else if (killogram >= 500)
+    else if (kilogram >= 500)
       return "1톤 트럭";
-    else if (killogram >= 0)
+    else if (kilogram >= 0)
       return "0.5톤 트럭";
     else
       return "트럭 2대 사용";
@@ -78,7 +78,7 @@ class _RecommendSumState extends State<RecommendSum> {
                           color: Colors.white, height: 1.2, fontSize: 18),
                     ),
                     Text(
-                      recommendCargo(killogram),
+                      recommendCargo(kilogram),
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -157,180 +157,21 @@ class _RecommendSumState extends State<RecommendSum> {
                               color: Colors.grey[200],
                               style: BorderStyle.solid)),
                       children: [
-                        TableRow(children: [
-                          Container(
-                              margin: EdgeInsets.symmetric(vertical: 15),
-                              child: Text("차량", textAlign: TextAlign.center)),
-                          Text("최대 적재(가로)", textAlign: TextAlign.center),
-                          Text("최대 적재(세로)", textAlign: TextAlign.center),
-                          Text("최대 적재(높이)", textAlign: TextAlign.center),
-                          Text("최대 적재무게(kg)", textAlign: TextAlign.center),
-                        ], decoration: BoxDecoration(color: Colors.grey[200])),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("0.5톤 다마스",
-                                    textAlign: TextAlign.center)),
-                            Text("110", textAlign: TextAlign.center),
-                            Text("160", textAlign: TextAlign.center),
-                            Text("110", textAlign: TextAlign.center),
-                            Text("300", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("0.5톤 라보",
-                                    textAlign: TextAlign.center)),
-                            Text("130", textAlign: TextAlign.center),
-                            Text("210", textAlign: TextAlign.center),
-                            Text("120", textAlign: TextAlign.center),
-                            Text("500", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("1톤", textAlign: TextAlign.center)),
-                            Text("160", textAlign: TextAlign.center),
-                            Text("270", textAlign: TextAlign.center),
-                            Text("170", textAlign: TextAlign.center),
-                            Text("1100", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("1.4톤", textAlign: TextAlign.center)),
-                            Text("170", textAlign: TextAlign.center),
-                            Text("320", textAlign: TextAlign.center),
-                            Text("170", textAlign: TextAlign.center),
-                            Text("1500", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("2.5톤", textAlign: TextAlign.center)),
-                            Text("180", textAlign: TextAlign.center),
-                            Text("430", textAlign: TextAlign.center),
-                            Text("200", textAlign: TextAlign.center),
-                            Text("2700", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("3.5톤", textAlign: TextAlign.center)),
-                            Text("200", textAlign: TextAlign.center),
-                            Text("480", textAlign: TextAlign.center),
-                            Text("200", textAlign: TextAlign.center),
-                            Text("3800", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("5톤", textAlign: TextAlign.center)),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("620", textAlign: TextAlign.center),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("5500", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("5톤 플러스",
-                                    textAlign: TextAlign.center)),
-                            Text("235", textAlign: TextAlign.center),
-                            Text("720", textAlign: TextAlign.center),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("5500", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("5톤 플러스 축 카고",
-                                    textAlign: TextAlign.center)),
-                            Text("235", textAlign: TextAlign.center),
-                            Text("720", textAlign: TextAlign.center),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("8000", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("5톤 플러스 축 윙/탑",
-                                    textAlign: TextAlign.center)),
-                            Text("240", textAlign: TextAlign.center),
-                            Text("780", textAlign: TextAlign.center),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("8000", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child: Text("8톤", textAlign: TextAlign.center)),
-                            Text("240", textAlign: TextAlign.center),
-                            Text("940", textAlign: TextAlign.center),
-                            Text("230", textAlign: TextAlign.center),
-                            Text("8800", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("11톤", textAlign: TextAlign.center)),
-                            Text("240", textAlign: TextAlign.center),
-                            Text("960", textAlign: TextAlign.center),
-                            Text("250", textAlign: TextAlign.center),
-                            Text("12100", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("18톤", textAlign: TextAlign.center)),
-                            Text("240", textAlign: TextAlign.center),
-                            Text("1020", textAlign: TextAlign.center),
-                            Text("250", textAlign: TextAlign.center),
-                            Text("19100", textAlign: TextAlign.center),
-                          ],
-                        ),
-                        TableRow(
-                          children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                child:
-                                    Text("25톤", textAlign: TextAlign.center)),
-                            Text("240", textAlign: TextAlign.center),
-                            Text("1020", textAlign: TextAlign.center),
-                            Text("250", textAlign: TextAlign.center),
-                            Text("27500", textAlign: TextAlign.center),
-                          ],
-                        ),
+                        _tableRow("carName", 0, 0, 0, 0, isTitle: true),
+                        _tableRow("0.5톤 다마스", 110, 160, 110, 300),
+                        _tableRow("0.5톤 라보", 130, 210, 120, 500),
+                        _tableRow("1톤", 160, 270, 170, 1100),
+                        _tableRow("1.4톤", 10, 320, 170, 1500),
+                        _tableRow("2.5톤", 180, 430, 200, 2700),
+                        _tableRow("3.5톤", 200, 480, 200, 3800),
+                        _tableRow("5톤", 230, 620, 230, 5500),
+                        _tableRow("5톤 플러스", 235, 720, 230, 5500),
+                        _tableRow("5톤 플러스 축 카고", 235, 720, 230, 8000),
+                        _tableRow("5톤 플러스 축 윙/탑", 240, 780, 230, 8000),
+                        _tableRow("8톤", 240, 940, 230, 8800),
+                        _tableRow("11톤", 240, 960, 250, 12100),
+                        _tableRow("18톤", 240, 1020, 250, 19100),
+                        _tableRow("25톤", 240, 1020, 250, 27500)
                       ],
                     ),
                     Container(
@@ -345,8 +186,8 @@ class _RecommendSumState extends State<RecommendSum> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ElevatedButton(
-        onPressed: () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => InsertCargoInfo())),
+        onPressed: () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => InsertCargoInfo())),
         style: ElevatedButton.styleFrom(
           primary: Colors.blue,
           alignment: Alignment.center,
@@ -365,7 +206,7 @@ class _RecommendSumState extends State<RecommendSum> {
   }
 
   Widget _buildCarouselItem(BuildContext context, String carName,
-      String maxWeight, int maxHorizonal, int maxVertical, int maxHeight) {
+      String maxWeight, int maxHorizontal, int maxVertical, int maxHeight) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.0),
       child: Material(
@@ -374,7 +215,7 @@ class _RecommendSumState extends State<RecommendSum> {
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(1.0)),
+            borderRadius: BorderRadius.all(Radius.circular(2.0)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,7 +224,7 @@ class _RecommendSumState extends State<RecommendSum> {
                 height: 150,
                 decoration: BoxDecoration(
                   color: Colors.black38,
-                  borderRadius: BorderRadius.all(Radius.circular(1.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(2.0)),
                 ),
               ),
               Text(carName,
@@ -405,7 +246,7 @@ class _RecommendSumState extends State<RecommendSum> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
               Text(
-                  "적재함 가로: $maxHorizonal\n적재함 세로: $maxVertical\n적재함 높이: $maxHeight\n",
+                  "적재함 가로: $maxHorizontal\n적재함 세로: $maxVertical\n적재함 높이: $maxHeight\n",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 13,
@@ -416,5 +257,34 @@ class _RecommendSumState extends State<RecommendSum> {
         ),
       ),
     );
+  }
+
+  TableRow _tableRow(String carName, int maxHorizontal, int maxVertical,
+      int maxHeight, int maxWeight,
+      {bool isTitle}) {
+    isTitle != null ? isTitle = true : isTitle = false;
+    if (isTitle) {
+      return TableRow(children: [
+        Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: Text("차량", textAlign: TextAlign.center)),
+        Text("최대 적재(가로)", textAlign: TextAlign.center),
+        Text("최대 적재(세로)", textAlign: TextAlign.center),
+        Text("최대 적재(높이)", textAlign: TextAlign.center),
+        Text("최대 적재무게(kg)", textAlign: TextAlign.center),
+      ], decoration: BoxDecoration(color: Colors.grey[200]));
+    } else {
+      return TableRow(
+        children: [
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Text(carName, textAlign: TextAlign.center)),
+          Text(maxHorizontal.toString(), textAlign: TextAlign.center),
+          Text(maxVertical.toString(), textAlign: TextAlign.center),
+          Text(maxHeight.toString(), textAlign: TextAlign.center),
+          Text(maxWeight.toString(), textAlign: TextAlign.center),
+        ],
+      );
+    }
   }
 }
